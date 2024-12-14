@@ -25,6 +25,7 @@ abstract class Routes {
   static const FAQ = _Paths.FAQ;
   static const ARTICLES = _Paths.ARTICLES;
   static const YTPLAYER = _Paths.YTPLAYER;
+  static const SCAN_DETAIL = _Paths.SCAN_DETAIL;
 }
 
 abstract class _Paths {
@@ -51,4 +52,5 @@ abstract class _Paths {
   static const FAQ = '/faq';
   static const ARTICLES = '/articles';
   static const YTPLAYER = '/ytplayer';
+  static const SCAN_DETAIL = '/scan-detail';
 }

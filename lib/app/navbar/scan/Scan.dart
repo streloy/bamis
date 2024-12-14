@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:bamis/app/navbar/scan/ScanController.dart';
@@ -5,7 +6,9 @@ import 'package:bamis/utils/ApiURL.dart';
 import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Scan extends StatefulWidget {
   const Scan({super.key});
@@ -17,10 +20,24 @@ class Scan extends StatefulWidget {
 class _ScanState extends State<Scan> {
   final controller = Get.put(ScanController());
 
+  var file;
   File ? selectedFile;
+  var cropList = [];
+  var cropValue = "";
+  var token = "";
+  var lang = Get.locale?.languageCode;
+  bool isLoading = false;
+
+
+  @override
+  void initState() {
+    getAnalysiscCroplist();
+  }
+
   Future selectImageFromGallery() async{
     final returnImage = await ImagePicker().pickImage(source: ImageSource.gallery);
     setState(() {
+      file = returnImage;
       selectedFile = File(returnImage!.path);
     });
   }
@@ -28,10 +45,44 @@ class _ScanState extends State<Scan> {
   Future selectImageFromCamera() async{
     final returnImage = await ImagePicker().pickImage(source: ImageSource.camera);
     setState(() {
+      file = returnImage;
       selectedFile = File(returnImage!.path);
     });
   }
 
+  Future getAnalysiscCroplist() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    token = sharedPreferences.getString("TOKEN")!;
+
+    Map<String, String> requestHeaders = {
+      'Authorization': token.toString(),
+      'Accept-Language': lang.toString()
+    };
+
+    var url = "${ApiURL.analysis_croplist}";
+    var response = await http.get(Uri.parse(url), headers: requestHeaders);
+    dynamic decode = jsonDecode(response.body);
+
+    setState(() {
+      cropList = decode['result'];
+      cropValue = cropList[0]['name_short'];
+    });
+  }
+
+  Future detectImageAndPest() async {
+    setState(() { isLoading = true; });
+    var url = "${ApiURL.analysis_image}";
+    var request = await http.MultipartRequest('POST', Uri.parse(url));
+    request.files.add( await http.MultipartFile.fromPath('image', selectedFile!.path));
+    request.fields['crop'] = cropValue;
+    request.headers['Authorization'] = token.toString();
+    request.headers['Accept-Language'] = lang.toString();
+
+    var response = await request.send();
+    var res = await http.Response.fromStream(response);
+    dynamic decode = jsonDecode(res.body);
+    setState(() { isLoading = false; });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +99,16 @@ class _ScanState extends State<Scan> {
           children: [
             Container(
               child: DropdownButtonFormField(
-                value: controller.cropValue.value,
+                value: cropValue,
                 onChanged: (dynamic? value) {
-                  controller.changeCrop(value);
+                  setState(() {
+                    cropValue = value;
+                  });
                 },
-                items: controller.cropList.map<DropdownMenuItem<dynamic>>((dynamic value) {
+                items: cropList.map<DropdownMenuItem<dynamic>>((dynamic value) {
                   return DropdownMenuItem<String>(
-                    value: value['id'],
-                    child: Text(value['district_name_en']),
+                    value: value['name_short'],
+                    child: Text(value['name']),
                   );
                 }).toList(),
                 decoration: InputDecoration(
@@ -66,15 +119,34 @@ class _ScanState extends State<Scan> {
             ),
             Flexible(
               fit: FlexFit.tight,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16)
-                ),
-                margin: EdgeInsets.symmetric(vertical: 16),
-                child: selectedFile != null ?
-                  ClipRRect( borderRadius: BorderRadius.circular(16), child: Image.file(selectedFile!, fit: BoxFit.cover)) :
-                  Container( padding: EdgeInsets.all(16), decoration: BoxDecoration(border: Border.all(color: AppColors().app_primary), borderRadius: BorderRadius.circular(16), ) ,child: Center(child: Text("No photo selected, Please select or capture one phone!", textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700))))
-              ),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16)
+                      ),
+                      margin: EdgeInsets.symmetric(vertical: 16),
+                      child: selectedFile != null ?
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.file(selectedFile!, fit: BoxFit.cover),
+                      ) :
+                      Container( padding: EdgeInsets.all(16), decoration: BoxDecoration(border: Border.all(color: AppColors().app_primary), borderRadius: BorderRadius.circular(16), ) ,child: Center(child: Text("No photo selected, Please select or capture one phone!", textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700))))
+                  ),
+
+                  isLoading != false ?
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(color: Colors.white),
+                      SizedBox(height: 8),
+                      Text("Please wait...", style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w700))
+                    ],
+                  ) : SizedBox(height: 0)
+                ],
+              )
             ),
             
             selectedFile != null ?
@@ -86,7 +158,7 @@ class _ScanState extends State<Scan> {
                   color: AppColors().app_primary
               ),
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: () { detectImageAndPest(); },
                   child: Text("Detect Pest or Disease", style: TextStyle(color: AppColors().app_natural_white))
               ),
             ) : SizedBox(height: 16),

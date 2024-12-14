@@ -34,6 +34,8 @@ import '../modules/pdfview/bindings/pdfview_binding.dart';
 import '../modules/pdfview/views/pdfview_view.dart';
 import '../modules/pest_disease_alerts/bindings/pest_disease_alerts_binding.dart';
 import '../modules/pest_disease_alerts/views/pest_disease_alerts_view.dart';
+import '../modules/scan_detail/bindings/scan_detail_binding.dart';
+import '../modules/scan_detail/views/scan_detail_view.dart';
 import '../modules/task_reminder/bindings/task_reminder_binding.dart';
 import '../modules/task_reminder/views/task_reminder_view.dart';
 import '../modules/weather_alert/bindings/weather_alert_binding.dart';
@@ -162,6 +164,11 @@ class AppPages {
       name: _Paths.YTPLAYER,
       page: () => const YtplayerView(),
       binding: YtplayerBinding(),
+    ),
+    GetPage(
+      name: _Paths.SCAN_DETAIL,
+      page: () => const ScanDetailView(),
+      binding: ScanDetailBinding(),
     ),
   ];
 }

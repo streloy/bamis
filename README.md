@@ -1,4 +1,4 @@
-# bamis
+# Bamis
 
 A new Flutter project.
 

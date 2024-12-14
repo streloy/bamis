@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/ApiURL.dart';
 import 'package:http/http.dart' as http;
@@ -10,7 +11,7 @@ import 'package:http/http.dart' as http;
 class ScanController extends GetxController {
   File ? selectedFile;
   var selectedImage = "".obs;
-  var cropValue = "12".obs;
+  var cropValue = "".obs;
   var cropList = [].obs;
 
   @override
@@ -18,16 +19,25 @@ class ScanController extends GetxController {
     // TODO: implement onInit
     super.onInit();
 
-    getLocationList();
+    //getAnalysiscCroplist();
   }
 
-  Future getLocationList() async {
-    var url = "${ApiURL.bulltin_location}";
-    var response = await http.get(Uri.parse(url));
-    dynamic decode = jsonDecode(response.body);
+  Future getAnalysiscCroplist() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("TOKEN");
+    var lang = Get.locale?.languageCode;
 
+    Map<String, String> requestHeaders = {
+      'Authorization': token.toString(),
+      'Accept-Language': lang.toString()
+    };
+
+    var url = "${ApiURL.analysis_croplist}";
+    var response = await http.get(Uri.parse(url), headers: requestHeaders);
+    dynamic decode = jsonDecode(response.body);
+    print(decode);
     cropList.value = decode['result'];
-    cropValue.value = cropList.value[0]['id'];
+    cropValue.value = cropList.value[0]['name_short'];
   }
 
   changeCrop(crop) {

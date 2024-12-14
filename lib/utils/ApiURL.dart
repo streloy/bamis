@@ -50,6 +50,10 @@ class ApiURL {
   // Important Video
   static String important_video_list = '${base_url_api}Importantvideo/videos';
 
+  // Pest & Disease Detection Using Camera
+  static String analysis_croplist = '${base_url_api}analysis/croplist';
+  static String analysis_image = '${base_url_api}analysis/image';
+
   //
   static String placeholder_auth = "https://bamisapp.bdservers.site/assets/auth/profile.jpg";
   static String placeholder_community_cover = "https://bamisapp.bdservers.site/assets/community/default.png";
