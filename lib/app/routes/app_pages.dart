@@ -32,6 +32,8 @@ import '../modules/notifications/bindings/notifications_binding.dart';
 import '../modules/notifications/views/notifications_view.dart';
 import '../modules/pdfview/bindings/pdfview_binding.dart';
 import '../modules/pdfview/views/pdfview_view.dart';
+import '../modules/pest_disease_alert_detail/bindings/pest_disease_alert_detail_binding.dart';
+import '../modules/pest_disease_alert_detail/views/pest_disease_alert_detail_view.dart';
 import '../modules/pest_disease_alerts/bindings/pest_disease_alerts_binding.dart';
 import '../modules/pest_disease_alerts/views/pest_disease_alerts_view.dart';
 import '../modules/scan_detail/bindings/scan_detail_binding.dart';
@@ -169,6 +171,11 @@ class AppPages {
       name: _Paths.SCAN_DETAIL,
       page: () => const ScanDetailView(),
       binding: ScanDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.PEST_DISEASE_ALERT_DETAIL,
+      page: () => const PestDiseaseAlertDetailView(),
+      binding: PestDiseaseAlertDetailBinding(),
     ),
   ];
 }

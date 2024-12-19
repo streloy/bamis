@@ -1,23 +1,61 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../../utils/ApiURL.dart';
+import '../../pest_disease_alert_detail/bindings/pest_disease_alert_detail_binding.dart';
 
 class PestDiseaseAlertsController extends GetxController {
   //TODO: Implement PestDiseaseAlertsController
 
-  final count = 0.obs;
+  var cropValue = "".obs;
+  var cropList = [].obs;
+  var diseaseList = [].obs;
+
+  var token = "";
+  var lang = Get.locale?.languageCode;
+
   @override
   void onInit() {
+    getInitialData();
+
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  Future getInitialData() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    token = sharedPreferences.getString("TOKEN")!;
+
+    Map<String, String> requestHeaders = {
+      'Authorization': token.toString(),
+      'Accept-Language': lang.toString()
+    };
+
+    var url = "${ApiURL.disease_crops}";
+    var response = await http.get(Uri.parse(url), headers: requestHeaders);
+    dynamic decode = jsonDecode(response.body);
+    cropList.value = decode['result'];
+    cropValue.value = cropList[0]['value'];
+    changeCrop(cropValue.value);
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  Future changeCrop(item) async{
+    print(item);
+    Map<String, String> requestHeaders = {
+      'Authorization': token.toString(),
+      'Accept-Language': lang.toString()
+    };
+
+    var url = "${ApiURL.disease_diseases}?crop=${item}";
+    var response = await http.get(Uri.parse(url), headers: requestHeaders);
+    dynamic decode = jsonDecode(response.body);
+    diseaseList.value = decode['result'];
   }
 
-  void increment() => count.value++;
+  Future openDetailPage(item) async {
+    Get.toNamed("pest-disease-alert-detail", arguments: item);
+  }
+
 }

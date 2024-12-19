@@ -26,6 +26,7 @@ abstract class Routes {
   static const ARTICLES = _Paths.ARTICLES;
   static const YTPLAYER = _Paths.YTPLAYER;
   static const SCAN_DETAIL = _Paths.SCAN_DETAIL;
+  static const PEST_DISEASE_ALERT_DETAIL = _Paths.PEST_DISEASE_ALERT_DETAIL;
 }
 
 abstract class _Paths {
@@ -53,4 +54,5 @@ abstract class _Paths {
   static const ARTICLES = '/articles';
   static const YTPLAYER = '/ytplayer';
   static const SCAN_DETAIL = '/scan-detail';
+  static const PEST_DISEASE_ALERT_DETAIL = '/pest-disease-alert-detail';
 }

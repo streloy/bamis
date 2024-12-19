@@ -54,6 +54,11 @@ class ApiURL {
   static String analysis_croplist = '${base_url_api}analysis/croplist';
   static String analysis_image = '${base_url_api}analysis/image';
 
+  // Pest & Disease Alert
+  static String disease_crops = '${base_url_api}disease/crops';
+  static String disease_stages = '${base_url_api}disease/stages';
+  static String disease_diseases = '${base_url_api}disease/diseases';
+
   //
   static String placeholder_auth = "https://bamisapp.bdservers.site/assets/auth/profile.jpg";
   static String placeholder_community_cover = "https://bamisapp.bdservers.site/assets/community/default.png";

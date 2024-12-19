@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:bamis/app/modules/scan_detail/bindings/scan_detail_binding.dart';
+import 'package:bamis/app/modules/scan_detail/views/scan_detail_view.dart';
 import 'package:bamis/app/navbar/scan/ScanController.dart';
 import 'package:bamis/utils/ApiURL.dart';
 import 'package:bamis/utils/AppColors.dart';
@@ -82,6 +84,22 @@ class _ScanState extends State<Scan> {
     var res = await http.Response.fromStream(response);
     dynamic decode = jsonDecode(res.body);
     setState(() { isLoading = false; });
+
+    print(res.statusCode);
+    if(res.statusCode != 200) {
+      showDialog(
+          context: context,
+          builder: (context)=> AlertDialog(
+            title: Text("Warning!"),
+            content: Text(decode['message']),
+            actions: <Widget>[ TextButton( child: Text('OK'), onPressed: () { Navigator.of(context).pop(); }, ), ],
+          )
+      );
+    } else {
+      print(decode);
+      Get.to(ScanDetailView(), binding: ScanDetailBinding(), arguments: decode, transition: Transition.rightToLeft);
+    }
+
   }
 
   @override
@@ -89,7 +107,7 @@ class _ScanState extends State<Scan> {
     return Scaffold(
       appBar: AppBar(
         // leading: Icon(Icons.pest_control),
-        title: Text("Pest & Disease Detection"),
+        title: Text("title".tr),
         titleSpacing: 0,
       ),
       body: Padding(
@@ -112,7 +130,7 @@ class _ScanState extends State<Scan> {
                   );
                 }).toList(),
                 decoration: InputDecoration(
-                  labelText: "Select Crop",
+                  labelText: "select_crop".tr,
                   border: OutlineInputBorder()
                 ),
               ),
@@ -120,7 +138,8 @@ class _ScanState extends State<Scan> {
             Flexible(
               fit: FlexFit.tight,
               child: Stack(
-                alignment: Alignment.center,
+                alignment: AlignmentDirectional.center,
+                fit: StackFit.expand,
                 children: [
                   Container(
                       decoration: BoxDecoration(
@@ -132,18 +151,25 @@ class _ScanState extends State<Scan> {
                         borderRadius: BorderRadius.circular(16),
                         child: Image.file(selectedFile!, fit: BoxFit.cover),
                       ) :
-                      Container( padding: EdgeInsets.all(16), decoration: BoxDecoration(border: Border.all(color: AppColors().app_primary), borderRadius: BorderRadius.circular(16), ) ,child: Center(child: Text("No photo selected, Please select or capture one phone!", textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700))))
+                      Container( padding: EdgeInsets.all(16), decoration: BoxDecoration(border: Border.all(color: AppColors().app_primary), borderRadius: BorderRadius.circular(16), ) ,child: Center(child: Text("select_photo".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700))))
                   ),
 
                   isLoading != false ?
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CircularProgressIndicator(color: Colors.white),
-                      SizedBox(height: 8),
-                      Text("Please wait...", style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w700))
-                    ],
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: Colors.black54,
+                    ),
+                    margin: EdgeInsets.symmetric(vertical: 16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        CircularProgressIndicator(color: Colors.white),
+                        SizedBox(height: 8),
+                        Text("wait".tr, style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w700))
+                      ],
+                    ),
                   ) : SizedBox(height: 0)
                 ],
               )
@@ -159,7 +185,7 @@ class _ScanState extends State<Scan> {
               ),
               child: TextButton(
                   onPressed: () { detectImageAndPest(); },
-                  child: Text("Detect Pest or Disease", style: TextStyle(color: AppColors().app_natural_white))
+                  child: Text("detect_disease_pest".tr, style: TextStyle(color: AppColors().app_natural_white))
               ),
             ) : SizedBox(height: 16),
             

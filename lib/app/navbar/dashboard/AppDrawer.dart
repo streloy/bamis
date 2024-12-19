@@ -20,8 +20,14 @@ class _AppDrawerState extends State<AppDrawer> {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            currentAccountPicture: CircleAvatar(
-              child: ClipOval(
+            currentAccountPicture: Container(
+              padding: EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: AppColors().app_natural_white
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(200),
                 child: Image.network(widget.photo, fit: BoxFit.cover),
               ),
             ),
