@@ -7,22 +7,19 @@ import 'package:http/http.dart' as http;
 
 import '../../../../utils/ApiURL.dart';
 
-class CropAdviosryStageDetailController extends GetxController {
-  //TODO: Implement CropAdviosryStageDetailController
+class CropDiseaseController extends GetxController {
+  //TODO: Implement CropDiseaseController
 
-  late dynamic item;
-  var stagedetail = [].obs;
+  var crops = [].obs;
 
   @override
   void onInit() {
     super.onInit();
 
-    item = Get.arguments;
-    getMyCropStageDetail(item);
+    getMasterInfo();
   }
 
-  Future getMyCropStageDetail(dynamic item) async {
-    print(item);
+  Future getMasterInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = await prefs.getString("TOKEN");
     var lang = Get.locale?.languageCode;
@@ -31,16 +28,12 @@ class CropAdviosryStageDetailController extends GetxController {
       'Authorization': token.toString(),
       'Accept-Language': lang.toString()
     };
-    print(item);
-    print("${ApiURL.mycrops_mycropstagedetail}?cid=${item['cropId']}&stage=${item['en']}");
 
-    var response = await http.get(Uri.parse("${ApiURL.mycrops_mycropstagedetail}?cid=${item['cropId']}&stage=${item['en']}"), headers: requestHeaders);
+    var response = await http.get(Uri.parse("${ApiURL.mycrops_crops}"), headers: requestHeaders);
     dynamic decode = jsonDecode(response.body);
-    print(decode);
     if(response.statusCode != 200) {
       Fluttertoast.showToast(msg: decode['message'], toastLength: Toast.LENGTH_LONG);
     }
-    stagedetail.value = decode['result'];
+    crops.value = decode['result'];
   }
-
 }

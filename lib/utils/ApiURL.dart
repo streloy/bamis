@@ -69,7 +69,8 @@ class ApiURL {
   static String mycrops_crops = '${base_url_api}mycrop/crops';
   static String mycrops_locations = '${base_url_api}mycrop/locations';
   static String mycrops_mycropstage = '${base_url_api}mycrop/mycropstage';
-  static String mycrops_mycropstagedetail = '${base_url_api}mycrop/mycropstagedetail';
+  static String mycrops_mycropstagedetail_adviusory = '${base_url_api}mycrop/my_crop_stage_detail_advisory';
+  static String mycrops_mycropstagedetail_disease = '${base_url_api}mycrop/my_crop_stage_detail_disease';
 
   //
   static String placeholder_auth = "https://bamisapp.bdservers.site/assets/auth/profile.jpg";

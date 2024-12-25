@@ -31,6 +31,9 @@ abstract class Routes {
   static const MYCROP_ADD = _Paths.MYCROP_ADD;
   static const CROP_ADVIOSRY_STAGES = _Paths.CROP_ADVIOSRY_STAGES;
   static const CROP_ADVIOSRY_STAGE_DETAIL = _Paths.CROP_ADVIOSRY_STAGE_DETAIL;
+  static const CROP_DISEASE = _Paths.CROP_DISEASE;
+  static const CROP_DISEASE_STAGES = _Paths.CROP_DISEASE_STAGES;
+  static const CROP_DISEASE_STAGES_DETAIL = _Paths.CROP_DISEASE_STAGES_DETAIL;
 }
 
 abstract class _Paths {
@@ -63,4 +66,7 @@ abstract class _Paths {
   static const MYCROP_ADD = '/mycrop-add';
   static const CROP_ADVIOSRY_STAGES = '/crop-adviosry-stages';
   static const CROP_ADVIOSRY_STAGE_DETAIL = '/crop-adviosry-stage-detail';
+  static const CROP_DISEASE = '/crop-disease';
+  static const CROP_DISEASE_STAGES = '/crop-disease-stages';
+  static const CROP_DISEASE_STAGES_DETAIL = '/crop-disease-stages-detail';
 }

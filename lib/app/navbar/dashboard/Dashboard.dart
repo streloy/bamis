@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../../utils/ApiURL.dart';
 import '../../modules/crop_adviosry_stage_detail/bindings/crop_adviosry_stage_detail_binding.dart';
@@ -399,55 +400,54 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                 Obx(()=> Container(
                     height: 170,
                     width: double.infinity,
-                    child: ListView.builder(
-
-                        scrollDirection: Axis.horizontal,
-                        itemCount: controller.mycropsstage.value.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          dynamic item = controller.mycropsstage.value[index];
-                          return GestureDetector(
-                            onTap: () { Get.to(()=> CropAdviosryStageDetailView(), binding: CropAdviosryStageDetailBinding(), arguments: item, transition: Transition.rightToLeft); },
-                            child: Container(
-                              width: 300,
-                              padding: EdgeInsets.all(16),
-                              margin: EdgeInsets.only(right: 16),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                color: controller.getStageCardColor(item['current_status'])
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ListTile(
-                                    title: Text(toBeginningOfSentenceCase("${item['name']}"), style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20, color: AppColors().app_primary),),
-                                    subtitle: Text(toBeginningOfSentenceCase("${item['crop_name']}"), style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14, color: AppColors().app_primary)),
-                                    trailing: Container(
-                                      child: Image.network("${item['image']}", height: 64, fit: BoxFit.contain,),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(16),
-                                        border: Border.all(color: Colors.white, width: 6)
-                                      ),
-                                    ),
-                                    horizontalTitleGap: 0,
-                                    minVerticalPadding: 0,
-                                    minTileHeight: 0,
-                                    minLeadingWidth: 0,
-                                    contentPadding: EdgeInsets.all(0),
-                                  ),
-                                  SizedBox(height: 16),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text("dashboard_stage_status".tr + ": ${item['current_status']}", style: TextStyle(color: AppColors().app_primary)),
-                                      Text("dashboard_plantation".tr + ": ${item['plantationDate']}", style: TextStyle(color: AppColors().app_primary)),
-                                      Text("dashboard_stage_duration".tr + ": ${item['stage_start']} - ${item['stage_end']}", style: TextStyle(color: AppColors().app_primary)),
-                                    ],
-                                  )
-                                ],
-                              )
+                    child: ScrollablePositionedList.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: controller.mycropsstage.value.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        dynamic item = controller.mycropsstage.value[index];
+                        return GestureDetector(
+                          onTap: () { Get.to(()=> CropAdviosryStageDetailView(), binding: CropAdviosryStageDetailBinding(), arguments: item, transition: Transition.rightToLeft); },
+                          child: Container(
+                            width: 300,
+                            padding: EdgeInsets.all(16),
+                            margin: EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: controller.getStageCardColor(item['current_status'])
                             ),
-                          );
-                        })
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ListTile(
+                                  title: Text(toBeginningOfSentenceCase("${item['name']}"), style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20, color: AppColors().app_primary),),
+                                  subtitle: Text(toBeginningOfSentenceCase("${item['crop_name']}"), style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14, color: AppColors().app_primary)),
+                                  trailing: Container(
+                                    child: Image.network("${item['image']}", height: 64, fit: BoxFit.contain,),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(16),
+                                      border: Border.all(color: Colors.white, width: 6)
+                                    ),
+                                  ),
+                                  horizontalTitleGap: 0,
+                                  minVerticalPadding: 0,
+                                  minTileHeight: 0,
+                                  minLeadingWidth: 0,
+                                  contentPadding: EdgeInsets.all(0),
+                                ),
+                                SizedBox(height: 16),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("dashboard_stage_status".tr + ": ${item['current_status']}", style: TextStyle(color: AppColors().app_primary)),
+                                    Text("dashboard_plantation".tr + ": ${item['plantationDate']}", style: TextStyle(color: AppColors().app_primary)),
+                                    Text("dashboard_stage_duration".tr + ": ${item['stage_start']} - ${item['stage_end']}", style: TextStyle(color: AppColors().app_primary)),
+                                  ],
+                                )
+                              ],
+                            )
+                          ),
+                        );
+                      })
                 )),
 
                 const SizedBox(height: 16),

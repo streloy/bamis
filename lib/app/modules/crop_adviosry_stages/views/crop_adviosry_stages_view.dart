@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:intl/intl.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../../../../utils/AppColors.dart';
 import '../bindings/crop_adviosry_stages_binding.dart';
 import '../controllers/crop_adviosry_stages_controller.dart';
 
 class CropAdviosryStagesView extends GetView<CropAdviosryStagesController> {
   const CropAdviosryStagesView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +40,7 @@ class CropAdviosryStagesView extends GetView<CropAdviosryStagesController> {
                 flex: 1,
                 child: Obx(()=> Padding(
                   padding: EdgeInsets.all(16),
-                  child: ListView.builder(
+                  child: ScrollablePositionedList.builder(
                     itemCount: controller.mycropsstage.value.length,
                     itemBuilder: (context, index) {
                       dynamic item = controller.mycropsstage.value[index];

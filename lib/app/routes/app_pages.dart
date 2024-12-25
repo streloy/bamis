@@ -20,6 +20,12 @@ import '../modules/crop_adviosry_stages/bindings/crop_adviosry_stages_binding.da
 import '../modules/crop_adviosry_stages/views/crop_adviosry_stages_view.dart';
 import '../modules/crop_advisory/bindings/crop_advisory_binding.dart';
 import '../modules/crop_advisory/views/crop_advisory_view.dart';
+import '../modules/crop_disease/bindings/crop_disease_binding.dart';
+import '../modules/crop_disease/views/crop_disease_view.dart';
+import '../modules/crop_disease_stages/bindings/crop_disease_stages_binding.dart';
+import '../modules/crop_disease_stages/views/crop_disease_stages_view.dart';
+import '../modules/crop_disease_stages_detail/bindings/crop_disease_stages_detail_binding.dart';
+import '../modules/crop_disease_stages_detail/views/crop_disease_stages_detail_view.dart';
 import '../modules/elibrary/bindings/elibrary_binding.dart';
 import '../modules/elibrary/views/elibrary_view.dart';
 import '../modules/faq/bindings/faq_binding.dart';
@@ -204,6 +210,21 @@ class AppPages {
       name: _Paths.CROP_ADVIOSRY_STAGE_DETAIL,
       page: () => const CropAdviosryStageDetailView(),
       binding: CropAdviosryStageDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.CROP_DISEASE,
+      page: () => const CropDiseaseView(),
+      binding: CropDiseaseBinding(),
+    ),
+    GetPage(
+      name: _Paths.CROP_DISEASE_STAGES,
+      page: () => const CropDiseaseStagesView(),
+      binding: CropDiseaseStagesBinding(),
+    ),
+    GetPage(
+      name: _Paths.CROP_DISEASE_STAGES_DETAIL,
+      page: () => const CropDiseaseStagesDetailView(),
+      binding: CropDiseaseStagesDetailBinding(),
     ),
   ];
 }

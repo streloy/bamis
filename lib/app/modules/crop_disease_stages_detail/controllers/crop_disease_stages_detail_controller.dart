@@ -1,30 +1,27 @@
 import 'dart:convert';
-import 'dart:ui';
 
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
+
 import '../../../../utils/ApiURL.dart';
 
-class CropAdviosryStagesController extends GetxController {
-  //TODO: Implement CropAdviosryStagesController
+class CropDiseaseStagesDetailController extends GetxController {
+  //TODO: Implement CropDiseaseStagesDetailController
 
-  var mycropsstage = [].obs;
   late dynamic item;
-
+  var stagedetail = [].obs;
 
   @override
   void onInit() {
     super.onInit();
 
     item = Get.arguments;
-    getMyCropStage(item);
+    getMyCropStageDetail(item);
   }
 
-  Future getMyCropStage(dynamic item) async {
+  Future getMyCropStageDetail(dynamic item) async {
     print(item);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = await prefs.getString("TOKEN");
@@ -34,24 +31,16 @@ class CropAdviosryStagesController extends GetxController {
       'Authorization': token.toString(),
       'Accept-Language': lang.toString()
     };
-    var response = await http.get(Uri.parse("${ApiURL.mycrops_mycropstage}?id=${item['id']}"), headers: requestHeaders);
+
+    var response = await http.get(Uri.parse("${ApiURL.mycrops_mycropstagedetail_disease}?cid=${item['cropId']}&stage=${item['en']}"), headers: requestHeaders);
     dynamic decode = jsonDecode(response.body);
+    print(decode);
     if(response.statusCode != 200) {
       Fluttertoast.showToast(msg: decode['message'], toastLength: Toast.LENGTH_LONG);
     }
-    mycropsstage.value = decode['result'];
+    stagedetail.value = decode['result'];
+    print(stagedetail.value);
   }
 
-  Color getStageCardColor(String item) {
-    if(item == 'completed') {
-      return Color(0xFFE1FFDF);
-    } else if(item == 'ongoing') {
-      return Color(0xFFFFF3BB);
-    } else if(item == 'upcoming') {
-      return Color(0xFFB2B2B2);
-    } else {
-      return Color(0xFFB2B2B2);
-    }
-  }
 
 }

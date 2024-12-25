@@ -9,12 +9,11 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import '../../../../utils/ApiURL.dart';
 
-class CropAdviosryStagesController extends GetxController {
-  //TODO: Implement CropAdviosryStagesController
+class CropDiseaseStagesController extends GetxController {
+  //TODO: Implement CropDiseaseStagesController
 
   var mycropsstage = [].obs;
   late dynamic item;
-
 
   @override
   void onInit() {

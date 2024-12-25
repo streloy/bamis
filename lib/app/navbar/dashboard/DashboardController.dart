@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:ui';
 import 'package:bamis/utils/ApiURL.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
@@ -33,7 +35,7 @@ class DashboardController extends GetxController {
     {
       "name": "dashboard_pest_disease",
       "image": "pest_disease_alert.png",
-      "page": "pest-disease-alerts"
+      "page": "crop-disease"
     },
     {
       "name": "dashboard_task_reminder",
@@ -72,8 +74,6 @@ class DashboardController extends GetxController {
   var notificationValue = "".obs;
   var cLocationUpazila = "".obs;
   var cLocationDistrict = "".obs;
-
-
 
   @override
   void onInit() {
