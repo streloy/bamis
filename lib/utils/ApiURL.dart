@@ -46,6 +46,7 @@ class ApiURL {
   static String bulltin_location = '${base_url_api}bulletin/location';
   static String bulltin_category = '${base_url_api}bulletin/category';
   static String bulltin_list = '${base_url_api}bulletin/list';
+  static String bulltin_dashboard = '${base_url_api}bulletin/dashboard';
 
   // Important Video
   static String important_video_list = '${base_url_api}Importantvideo/videos';
@@ -58,6 +59,17 @@ class ApiURL {
   static String disease_crops = '${base_url_api}disease/crops';
   static String disease_stages = '${base_url_api}disease/stages';
   static String disease_diseases = '${base_url_api}disease/diseases';
+
+  // Notifications
+  static String notification_notifications = '${base_url_api}notification/notifications';
+  static String notification_updateseen = '${base_url_api}notification/updateseen';
+
+  // Mycrops
+  static String mycrops_croplist = '${base_url_api}mycrop/croplist';
+  static String mycrops_crops = '${base_url_api}mycrop/crops';
+  static String mycrops_locations = '${base_url_api}mycrop/locations';
+  static String mycrops_mycropstage = '${base_url_api}mycrop/mycropstage';
+  static String mycrops_mycropstagedetail = '${base_url_api}mycrop/mycropstagedetail';
 
   //
   static String placeholder_auth = "https://bamisapp.bdservers.site/assets/auth/profile.jpg";

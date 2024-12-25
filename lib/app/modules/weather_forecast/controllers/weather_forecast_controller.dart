@@ -51,7 +51,6 @@ class WeatherForecastController extends GetxController {
           item['district'], item['upazila'], item['location']);
       locations.add(modelLocation);
     });
-    print(locations);
   }
 
   Future getForecast(locationId) async {

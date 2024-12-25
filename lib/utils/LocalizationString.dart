@@ -18,7 +18,7 @@ class LocalizationString extends Translations {
       'dashboard_humidity': 'Humidity',
       'dashboard_wind': 'Wind Speed',
       'dashboard_take_a_look': 'Take a look',
-      'dashboard_my_crops': 'My Crops',
+      'dashboard_my_crops': 'MY CROPS',
       'dashboard_view_all': 'View All',
       'dashboard_weather_forecast': 'Weather\nForecast',
       'dashboard_weather_alert': 'Weather\nAlert',
@@ -29,6 +29,11 @@ class LocalizationString extends Translations {
       'dashboard_advisory_bulletin': 'Advisory\nBulletin',
       'dashboard_online_library': 'Online\nLibrary',
       'dashboard_farm_metrics': 'Farm\nMetrics',
+      'dashboard_stage_status': 'Stage Status',
+      'dashboard_plantation': 'Plantation',
+      'dashboard_stage_duration': 'Stage Duration',
+      'dashboard_no_crops_found': 'You did not add any crops yet!',
+      'dashboard_special_bulletin': 'Special Bulletin',
 
       'weather_alert': 'Weather Alert',
       'flood_forecast': 'Flood Forecast',
@@ -74,7 +79,13 @@ class LocalizationString extends Translations {
       'symptoms_short': "Symptoms Short",
       'treatment_chemical': "Treatment Chemical",
       'treatment_organic': "Treatment Organic",
-      'trigger': "Trigger"
+      'trigger': "Trigger",
+
+      'add_mycrop_title': "Add New Crop",
+      'add_mycrop_select_crop': "Select Crop",
+      'add_mycrop_select_location': "Select Location",
+      'add_mycrop_select_plantation_date': "Select Plantation Date",
+      'add_mycrop_submit': "Add New Crop",
     },
     'bn_BD': {
       'title': 'বামিস',
@@ -91,7 +102,7 @@ class LocalizationString extends Translations {
       'dashboard_wind': 'বাতাসের গতি',
       'dashboard_take_a_look': 'একবার দেখে নিন',
       'dashboard_my_crops': 'আমার ফসল',
-      'dashboard_view_all': 'সকল সিস্টেম দেখুন',
+      'dashboard_view_all': 'সবগুলো দেখুন',
       'dashboard_weather_forecast': 'আবহাওয়া\nপূর্বাভাস',
       'dashboard_weather_alert': 'আবহাওয়া\nসতর্কবার্তা',
       'dashboard_flood_forecast': 'বন্যা\nপূর্বাভাস',
@@ -101,6 +112,11 @@ class LocalizationString extends Translations {
       'dashboard_advisory_bulletin': 'এডভাইজারি\nবুলেটিন',
       'dashboard_online_library': 'অনলাইন\nলাইব্রেরি',
       'dashboard_farm_metrics': 'ফার্ম\nমেট্রিক্স',
+      'dashboard_stage_status': 'ধাপের অবস্থা',
+      'dashboard_plantation': 'রোপন',
+      'dashboard_stage_duration': 'ধাপের মেয়াদ',
+      'dashboard_no_crops_found': 'আপনি এখনও কোন ফসল যুক্ত করেন নাই!',
+      'dashboard_special_bulletin': 'বিশেষ বুলেটিন',
 
       'weather_alert': 'আবহাওয়া সতর্কবার্তা',
       'flood_forecast': 'বন্যা পূর্বাভাস',
@@ -146,7 +162,14 @@ class LocalizationString extends Translations {
       'symptoms_short': "সংক্ষিপ্ত উপসর্গ",
       'treatment_chemical': "রাসায়নিক চিকিত্সা",
       'treatment_organic': "জৈব চিকিত্সা",
-      'trigger': "কিভাবে ছড়ায়"
+      'trigger': "কিভাবে ছড়ায়",
+
+      'add_mycrop_title': "নতুন ফসল যুক্ত করুণ",
+      'add_mycrop_select_crop': "ফসল নির্বাচন করুণ",
+      'add_mycrop_select_location': "স্থান নির্বাচন করুণ",
+      'add_mycrop_select_plantation_date': "ফসল লাগানোর তারিখ নির্বাচন করুণ",
+      'add_mycrop_submit': "নতুন ফসল যুক্ত করুণ",
+
     }
   };
 }

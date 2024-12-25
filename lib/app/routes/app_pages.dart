@@ -14,6 +14,10 @@ import '../modules/community_post_detail/bindings/community_post_detail_binding.
 import '../modules/community_post_detail/views/community_post_detail_view.dart';
 import '../modules/contact_us/bindings/contact_us_binding.dart';
 import '../modules/contact_us/views/contact_us_view.dart';
+import '../modules/crop_adviosry_stage_detail/bindings/crop_adviosry_stage_detail_binding.dart';
+import '../modules/crop_adviosry_stage_detail/views/crop_adviosry_stage_detail_view.dart';
+import '../modules/crop_adviosry_stages/bindings/crop_adviosry_stages_binding.dart';
+import '../modules/crop_adviosry_stages/views/crop_adviosry_stages_view.dart';
 import '../modules/crop_advisory/bindings/crop_advisory_binding.dart';
 import '../modules/crop_advisory/views/crop_advisory_view.dart';
 import '../modules/elibrary/bindings/elibrary_binding.dart';
@@ -28,6 +32,10 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/important_video/bindings/important_video_binding.dart';
 import '../modules/important_video/views/important_video_view.dart';
+import '../modules/mycrop/bindings/mycrop_binding.dart';
+import '../modules/mycrop/views/mycrop_view.dart';
+import '../modules/mycrop_add/bindings/mycrop_add_binding.dart';
+import '../modules/mycrop_add/views/mycrop_add_view.dart';
 import '../modules/notifications/bindings/notifications_binding.dart';
 import '../modules/notifications/views/notifications_view.dart';
 import '../modules/pdfview/bindings/pdfview_binding.dart';
@@ -176,6 +184,26 @@ class AppPages {
       name: _Paths.PEST_DISEASE_ALERT_DETAIL,
       page: () => const PestDiseaseAlertDetailView(),
       binding: PestDiseaseAlertDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.MYCROP,
+      page: () => const MycropView(),
+      binding: MycropBinding(),
+    ),
+    GetPage(
+      name: _Paths.MYCROP_ADD,
+      page: () => const MycropAddView(),
+      binding: MycropAddBinding(),
+    ),
+    GetPage(
+      name: _Paths.CROP_ADVIOSRY_STAGES,
+      page: () => const CropAdviosryStagesView(),
+      binding: CropAdviosryStagesBinding(),
+    ),
+    GetPage(
+      name: _Paths.CROP_ADVIOSRY_STAGE_DETAIL,
+      page: () => const CropAdviosryStageDetailView(),
+      binding: CropAdviosryStageDetailBinding(),
     ),
   ];
 }

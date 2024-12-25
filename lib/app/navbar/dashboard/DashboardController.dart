@@ -1,11 +1,11 @@
 import 'dart:convert';
-
+import 'dart:ui';
 import 'package:bamis/utils/ApiURL.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:fluttertoast/fluttertoast.dart';
 
 class DashboardController extends GetxController {
 
@@ -65,13 +65,25 @@ class DashboardController extends GetxController {
   var currentLocationId = "".obs;
   var currentLocationName = "".obs;
   dynamic forecast = [].obs;
+  dynamic notification = [].obs;
+  var mycrops = [].obs;
+  dynamic mycropsstage = [].obs;
+  dynamic bulletins = [].obs;
+  var notificationValue = "".obs;
   var cLocationUpazila = "".obs;
   var cLocationDistrict = "".obs;
+
+
 
   @override
   void onInit() {
     getTime();
     getSharedPrefData();
+  }
+
+  Future onRefresh() async {
+    await getTime();
+    await getSharedPrefData();
   }
 
   getTime() {
@@ -103,8 +115,79 @@ class DashboardController extends GetxController {
     photo.value = ApiURL.base_url_image + (await prefs.getString("PHOTO"))!;
 
     getForecast(currentLocationId.value);
+    getNotifications(prefs);
+    getMyCrops(prefs);
+    getBulletins(prefs);
   }
 
+  Future getNotifications(SharedPreferences prefs) async {
+    var token = await prefs.getString("TOKEN");
+    var lang = Get.locale?.languageCode;
+
+    Map<String, String> requestHeaders = {
+      'Authorization': token.toString(),
+      'Accept-Language': lang.toString()
+    };
+
+    var response = await http.get(Uri.parse(ApiURL.mycrops_crops), headers: requestHeaders);
+    dynamic decode = jsonDecode(response.body);
+    notification.value = decode['result'];
+    var seen = 0;
+    decode['result'].forEach((item){
+      if(item['seen'] == "1") {
+        seen = seen + 1;
+      }
+    });
+    var unseen = decode['result'].length - seen;
+    notificationValue.value = "${unseen}";
+  }
+
+  Future getMyCrops(SharedPreferences prefs) async {
+    var token = await prefs.getString("TOKEN");
+    var lang = Get.locale?.languageCode;
+
+    Map<String, String> requestHeaders = {
+      'Authorization': token.toString(),
+      'Accept-Language': lang.toString()
+    };
+    var response = await http.get(Uri.parse(ApiURL.mycrops_crops), headers: requestHeaders);
+    dynamic decode = jsonDecode(response.body);
+    mycrops.value = decode['result'];
+    getMyCropStage(mycrops.value[0]);
+  }
+
+  Future getMyCropStage(dynamic item) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = await prefs.getString("TOKEN");
+    var lang = Get.locale?.languageCode;
+
+    Map<String, String> requestHeaders = {
+      'Authorization': token.toString(),
+      'Accept-Language': lang.toString()
+    };
+    var response = await http.get(Uri.parse("${ApiURL.mycrops_mycropstage}?id=${item['id']}"), headers: requestHeaders);
+    dynamic decode = jsonDecode(response.body);
+    if(response.statusCode != 200) {
+      Fluttertoast.showToast(msg: decode['message'], toastLength: Toast.LENGTH_LONG);
+    }
+    mycropsstage.value = decode['result'];
+  }
+
+  Future getBulletins(SharedPreferences prefs) async {
+    var token = await prefs.getString("TOKEN");
+    var lang = Get.locale?.languageCode;
+
+    Map<String, String> requestHeaders = {
+      'Authorization': token.toString(),
+      'Accept-Language': lang.toString()
+    };
+    var response = await http.get(Uri.parse("${ApiURL.bulltin_dashboard}"), headers: requestHeaders);
+    dynamic decode = jsonDecode(response.body);
+    if(response.statusCode != 200) {
+      Fluttertoast.showToast(msg: decode['message'], toastLength: Toast.LENGTH_LONG);
+    }
+    bulletins.value = decode['result'];
+  }
 
   Future getForecast(locationId) async {
     var response = await http.get(Uri.parse(ApiURL.currentforecast + "?location=$locationId"));
@@ -112,8 +195,20 @@ class DashboardController extends GetxController {
     forecast.value = decode['result'];
   }
 
-  gotoNotificationPage() {
-    Get.toNamed('notifications');
+  Future gotoNotificationPage() async{
+    await Get.toNamed('notifications');
+  }
+
+  Color getStageCardColor(String item) {
+    if(item == 'completed') {
+      return Color(0xFFE1FFDF);
+    } else if(item == 'ongoing') {
+      return Color(0xFFFFF3BB);
+    } else if(item == 'upcoming') {
+      return Color(0xFFB2B2B2);
+    } else {
+      return Color(0xFFB2B2B2);
+    }
   }
 
 }

@@ -16,19 +16,19 @@ class FirebaseService {
     await _firebaseMessaging.requestPermission();
     final fcmToken = await _firebaseMessaging.getToken();
 
-    // print(fcmToken);
+    print(fcmToken);
     prefs.setString("FCM", fcmToken.toString());
 
     FirebaseMessaging.instance.getInitialMessage().then((message) {
-      // print('PUSH MESSAGE');
-      // print(message?.notification?.title);
-      // print(message?.notification?.body);
+      print('PUSH MESSAGE');
+      print(message?.notification?.title);
+      print(message?.notification?.body);
     });
 
     FirebaseMessaging.onMessage.listen((message) {
-      // print('PUSH LISTEN');
-      // print(message.notification!.title);
-      // print(message.notification!.body);
+      print('PUSH LISTEN');
+      print(message.notification!.title);
+      print(message.notification!.body);
     });
   }
 

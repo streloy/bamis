@@ -14,7 +14,7 @@ class AppTheme {
         appBarTheme: AppBarTheme(
           backgroundColor: appColor.app_primary,
           foregroundColor: appColor.app_natural_white,
-        )
+        ),
     );
   }
 }

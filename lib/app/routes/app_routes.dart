@@ -27,6 +27,10 @@ abstract class Routes {
   static const YTPLAYER = _Paths.YTPLAYER;
   static const SCAN_DETAIL = _Paths.SCAN_DETAIL;
   static const PEST_DISEASE_ALERT_DETAIL = _Paths.PEST_DISEASE_ALERT_DETAIL;
+  static const MYCROP = _Paths.MYCROP;
+  static const MYCROP_ADD = _Paths.MYCROP_ADD;
+  static const CROP_ADVIOSRY_STAGES = _Paths.CROP_ADVIOSRY_STAGES;
+  static const CROP_ADVIOSRY_STAGE_DETAIL = _Paths.CROP_ADVIOSRY_STAGE_DETAIL;
 }
 
 abstract class _Paths {
@@ -55,4 +59,8 @@ abstract class _Paths {
   static const YTPLAYER = '/ytplayer';
   static const SCAN_DETAIL = '/scan-detail';
   static const PEST_DISEASE_ALERT_DETAIL = '/pest-disease-alert-detail';
+  static const MYCROP = '/mycrop';
+  static const MYCROP_ADD = '/mycrop-add';
+  static const CROP_ADVIOSRY_STAGES = '/crop-adviosry-stages';
+  static const CROP_ADVIOSRY_STAGE_DETAIL = '/crop-adviosry-stage-detail';
 }
