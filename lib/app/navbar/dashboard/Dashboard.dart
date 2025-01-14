@@ -1,13 +1,22 @@
+import 'package:bamis/app/modules/all_module/bindings/all_module_binding.dart';
+import 'package:bamis/app/modules/all_module/views/all_module_view.dart';
+import 'package:bamis/app/modules/bulletins/bindings/bulletins_binding.dart';
+import 'package:bamis/app/modules/bulletins/views/bulletins_view.dart';
+import 'package:bamis/app/modules/crop_advisory/bindings/crop_advisory_binding.dart';
+import 'package:bamis/app/modules/crop_advisory/views/crop_advisory_view.dart';
 import 'package:bamis/app/modules/mycrop_add/bindings/mycrop_add_binding.dart';
 import 'package:bamis/app/modules/mycrop_add/views/mycrop_add_view.dart';
 import 'package:bamis/app/modules/notifications/bindings/notifications_binding.dart';
 import 'package:bamis/app/modules/notifications/views/notifications_view.dart';
+import 'package:bamis/app/modules/webview/bindings/webview_binding.dart';
+import 'package:bamis/app/modules/webview/views/webview_view.dart';
 import 'package:bamis/app/navbar/dashboard/AppDrawer.dart';
 import 'package:bamis/app/navbar/dashboard/DashboardController.dart';
 import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -35,7 +44,7 @@ class _DashboardState extends State<Dashboard> with RouteAware{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Obx(()=> AppDrawer(name: controller.fullname.value, photo: controller.photo.value, time: controller.initTime.value)),
+      drawer: Obx(()=> AppDrawer(name: controller.fullname.value, mobile: controller.mobile.value, photo: controller.photo.value, time: controller.initTime.value)),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
@@ -46,7 +55,7 @@ class _DashboardState extends State<Dashboard> with RouteAware{
               backgroundImage: NetworkImage(controller.photo.value),
               onBackgroundImageError: ((exception, stack) { }),
             ),
-            title: Text(controller.fullname.value, style: TextStyle(fontWeight: FontWeight.w700)),
+            title: Text(controller.fullname.value.isEmpty ? controller.mobile.value : controller.fullname.value, style: TextStyle(fontWeight: FontWeight.w700)),
             subtitle: Text(controller.initTime.value),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
@@ -59,11 +68,11 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                     child: Builder(
                       builder: (context) => IconButton(
                           onPressed: (){ Get.to(NotificationsView(), binding: NotificationsBinding(), transition: Transition.rightToLeft); },
-                          icon: Badge(
+                          icon: Obx(()=> Badge(
                             child: Icon(Icons.notifications_outlined),
                             isLabelVisible: true,
                             label: Text("${controller.notificationValue.value}"),
-                          ),
+                          )),
                           iconSize: 20
                       ),
                     )
@@ -130,8 +139,8 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                                       ),
                                       Column(
                                         children: [
-                                          Image.network( controller.forecast.value.length > 0 ? ApiURL.base_url_image + "assets/weather_icons/${controller.forecast.value[0]['icon']}" : ApiURL.placeholder_auth, height: 36),
-                                          Text(controller.forecast.value.length > 0 ? "${controller.forecast.value[0]['type']}" : "", style: TextStyle(color: Colors.white)),
+                                          Image.network( controller.forecast.value.length > 0 ? ApiURL.base_url_image + "assets/weather_icons/${controller.forecast.value[0]['icon']}" : ApiURL.placeholder_auth, height: 48),
+                                          // Text(controller.forecast.value.length > 0 ? "${controller.forecast.value[0]['type']}" : "", style: TextStyle(color: Colors.white)),
                                         ],
                                       ),
                                     ],
@@ -249,13 +258,16 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text( "dashboard_take_a_look".tr, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
-                    Container(
-                      padding: EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: AppColors().app_primary)
+                    GestureDetector(
+                      onTap: () { Get.to(()=> AllModuleView(), binding: AllModuleBinding(), arguments: controller.dashboardMenu, transition: Transition.rightToLeft); },
+                      child: Container(
+                        padding: EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: AppColors().app_primary)
+                        ),
+                        child: Text("dashboard_view_all".tr, style: TextStyle(color: AppColors().app_primary)),
                       ),
-                      child: Text("dashboard_view_all".tr, style: TextStyle(color: AppColors().app_primary)),
                     )
                   ],
                 ),
@@ -313,13 +325,16 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                       style:
                       TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                     ),
-                    Container(
-                      padding: EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: AppColors().app_primary)
+                    GestureDetector(
+                      onTap: () { Get.to(()=> CropAdvisoryView(), binding: CropAdvisoryBinding(), transition:  Transition.rightToLeft); },
+                      child: Container(
+                        padding: EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: AppColors().app_primary)
+                        ),
+                        child: Text("dashboard_view_all".tr, style: TextStyle(color: AppColors().app_primary)),
                       ),
-                      child: Text("dashboard_view_all".tr, style: TextStyle(color: AppColors().app_primary)),
                     )
                   ],
                 ),
@@ -387,7 +402,7 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                           ),
                           child: Row(
                             children: [
-                              Container( padding: EdgeInsets.only(left: 8, right: 8), child: Text("Apni kono fosol jukto korenni. :)", style: TextStyle(fontSize: 16)))
+                              Container( padding: EdgeInsets.only(left: 8, right: 8), child: Text("dashboard_mycrops_promo".tr, style: TextStyle(fontSize: 16)))
                             ],
                           ),
                         ) : Text("")
@@ -397,71 +412,84 @@ class _DashboardState extends State<Dashboard> with RouteAware{
 
                 SizedBox(height: 16),
 
-                Obx(()=> Container(
+                Obx(()=> controller.mycrops.value.length > 0 ?
+                Container(
                     height: 170,
                     width: double.infinity,
                     child: ScrollablePositionedList.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: controller.mycropsstage.value.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        dynamic item = controller.mycropsstage.value[index];
-                        return GestureDetector(
-                          onTap: () { Get.to(()=> CropAdviosryStageDetailView(), binding: CropAdviosryStageDetailBinding(), arguments: item, transition: Transition.rightToLeft); },
-                          child: Container(
-                            width: 300,
-                            padding: EdgeInsets.all(16),
-                            margin: EdgeInsets.only(right: 16),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              color: controller.getStageCardColor(item['current_status'])
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ListTile(
-                                  title: Text(toBeginningOfSentenceCase("${item['name']}"), style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20, color: AppColors().app_primary),),
-                                  subtitle: Text(toBeginningOfSentenceCase("${item['crop_name']}"), style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14, color: AppColors().app_primary)),
-                                  trailing: Container(
-                                    child: Image.network("${item['image']}", height: 64, fit: BoxFit.contain,),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(16),
-                                      border: Border.all(color: Colors.white, width: 6)
-                                    ),
-                                  ),
-                                  horizontalTitleGap: 0,
-                                  minVerticalPadding: 0,
-                                  minTileHeight: 0,
-                                  minLeadingWidth: 0,
-                                  contentPadding: EdgeInsets.all(0),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: controller.mycropsstage.value.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          dynamic item = controller.mycropsstage.value[index];
+                          return GestureDetector(
+                            onTap: () {
+                              if(item['current_status'] != 'upcoming') {
+                                Get.to(()=> CropAdviosryStageDetailView(), binding: CropAdviosryStageDetailBinding(), arguments: item, transition: Transition.rightToLeft);
+                              } else {
+                                Fluttertoast.showToast(msg: "Thsi is stage is started yet. Please wait till this stage will appear.");
+                              }
+                            },
+                            child: Container(
+                                width: 300,
+                                padding: EdgeInsets.all(16),
+                                margin: EdgeInsets.only(right: 16),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16),
+                                    color: controller.getStageCardColor(item['current_status'])
                                 ),
-                                SizedBox(height: 16),
-                                Column(
+                                child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("dashboard_stage_status".tr + ": ${item['current_status']}", style: TextStyle(color: AppColors().app_primary)),
-                                    Text("dashboard_plantation".tr + ": ${item['plantationDate']}", style: TextStyle(color: AppColors().app_primary)),
-                                    Text("dashboard_stage_duration".tr + ": ${item['stage_start']} - ${item['stage_end']}", style: TextStyle(color: AppColors().app_primary)),
+                                    ListTile(
+                                      title: Text(toBeginningOfSentenceCase("${item['name']}"), style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20, color: AppColors().app_primary),),
+                                      subtitle: Text(toBeginningOfSentenceCase("${item['crop_name']}"), style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14, color: AppColors().app_primary)),
+                                      trailing: Container(
+                                        child: Image.network("${item['image']}", height: 64, fit: BoxFit.contain,),
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(16),
+                                            border: Border.all(color: Colors.white, width: 6)
+                                        ),
+                                      ),
+                                      horizontalTitleGap: 0,
+                                      minVerticalPadding: 0,
+                                      minTileHeight: 0,
+                                      minLeadingWidth: 0,
+                                      contentPadding: EdgeInsets.all(0),
+                                    ),
+                                    SizedBox(height: 16),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("dashboard_stage_status".tr + ": ${item['current_status']}", style: TextStyle(color: AppColors().app_primary)),
+                                        Text("dashboard_plantation".tr + ": ${item['plantationDate']}", style: TextStyle(color: AppColors().app_primary)),
+                                        Text("dashboard_stage_duration".tr + ": ${item['stage_start']} - ${item['stage_end']}", style: TextStyle(color: AppColors().app_primary)),
+                                      ],
+                                    )
                                   ],
                                 )
-                              ],
-                            )
-                          ),
-                        );
-                      })
-                )),
+                            ),
+                          );
+                        })
+                ) : SizedBox(height: 0)
+                ),
 
                 const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("dashboard_special_bulletin".tr, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700) ),
-                    Container(
-                      padding: EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: AppColors().app_primary)
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(()=> BulletinsView(), binding: BulletinsBinding(), transition: Transition.rightToLeft);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: AppColors().app_primary)
+                        ),
+                        child: Text("dashboard_view_all".tr, style: TextStyle(color: AppColors().app_primary)),
                       ),
-                      child: Text("dashboard_view_all".tr, style: TextStyle(color: AppColors().app_primary)),
                     )
                   ],
                 ),
@@ -490,7 +518,7 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                                   Text("${item['title']}", maxLines: 3),
                                   SizedBox(height: 16),
                                   GestureDetector(
-                                    onTap: (){ },
+                                    onTap: (){ Get.to(()=> WebviewView(), binding: WebviewBinding(), arguments: item, transition: Transition.rightToLeft ); },
                                     child: Text("Learn more >", style: TextStyle(fontWeight: FontWeight.w700, color: Color(0xFFB22222)),),
                                   )
                                 ],

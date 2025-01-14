@@ -34,6 +34,10 @@ abstract class Routes {
   static const CROP_DISEASE = _Paths.CROP_DISEASE;
   static const CROP_DISEASE_STAGES = _Paths.CROP_DISEASE_STAGES;
   static const CROP_DISEASE_STAGES_DETAIL = _Paths.CROP_DISEASE_STAGES_DETAIL;
+  static const ALL_MODULE = _Paths.ALL_MODULE;
+  static const COMMUNITY_POST_ADD = _Paths.COMMUNITY_POST_ADD;
+  static const COMMUNITY_POST_MY = _Paths.COMMUNITY_POST_MY;
+  static const TASK_REMINDER_DETAIL = _Paths.TASK_REMINDER_DETAIL;
 }
 
 abstract class _Paths {
@@ -69,4 +73,8 @@ abstract class _Paths {
   static const CROP_DISEASE = '/crop-disease';
   static const CROP_DISEASE_STAGES = '/crop-disease-stages';
   static const CROP_DISEASE_STAGES_DETAIL = '/crop-disease-stages-detail';
+  static const ALL_MODULE = '/all-module';
+  static const COMMUNITY_POST_ADD = '/community-post-add';
+  static const COMMUNITY_POST_MY = '/community-post-my';
+  static const TASK_REMINDER_DETAIL = '/task-reminder-detail';
 }

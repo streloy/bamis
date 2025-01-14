@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/all_module/bindings/all_module_binding.dart';
+import '../modules/all_module/views/all_module_view.dart';
 import '../modules/articles/bindings/articles_binding.dart';
 import '../modules/articles/views/articles_view.dart';
 import '../modules/bulletin_district/bindings/bulletin_district_binding.dart';
@@ -10,8 +12,12 @@ import '../modules/bulletin_special/bindings/bulletin_special_binding.dart';
 import '../modules/bulletin_special/views/bulletin_special_view.dart';
 import '../modules/bulletins/bindings/bulletins_binding.dart';
 import '../modules/bulletins/views/bulletins_view.dart';
+import '../modules/community_post_add/bindings/community_post_add_binding.dart';
+import '../modules/community_post_add/views/community_post_add_view.dart';
 import '../modules/community_post_detail/bindings/community_post_detail_binding.dart';
 import '../modules/community_post_detail/views/community_post_detail_view.dart';
+import '../modules/community_post_my/bindings/community_post_my_binding.dart';
+import '../modules/community_post_my/views/community_post_my_view.dart';
 import '../modules/contact_us/bindings/contact_us_binding.dart';
 import '../modules/contact_us/views/contact_us_view.dart';
 import '../modules/crop_adviosry_stage_detail/bindings/crop_adviosry_stage_detail_binding.dart';
@@ -54,6 +60,8 @@ import '../modules/scan_detail/bindings/scan_detail_binding.dart';
 import '../modules/scan_detail/views/scan_detail_view.dart';
 import '../modules/task_reminder/bindings/task_reminder_binding.dart';
 import '../modules/task_reminder/views/task_reminder_view.dart';
+import '../modules/task_reminder_detail/bindings/task_reminder_detail_binding.dart';
+import '../modules/task_reminder_detail/views/task_reminder_detail_view.dart';
 import '../modules/weather_alert/bindings/weather_alert_binding.dart';
 import '../modules/weather_alert/views/weather_alert_view.dart';
 import '../modules/weather_forecast/bindings/weather_forecast_binding.dart';
@@ -225,6 +233,26 @@ class AppPages {
       name: _Paths.CROP_DISEASE_STAGES_DETAIL,
       page: () => const CropDiseaseStagesDetailView(),
       binding: CropDiseaseStagesDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.ALL_MODULE,
+      page: () => const AllModuleView(),
+      binding: AllModuleBinding(),
+    ),
+    GetPage(
+      name: _Paths.COMMUNITY_POST_ADD,
+      page: () => CommunityPostAddView(),
+      binding: CommunityPostAddBinding(),
+    ),
+    GetPage(
+      name: _Paths.COMMUNITY_POST_MY,
+      page: () => const CommunityPostMyView(),
+      binding: CommunityPostMyBinding(),
+    ),
+    GetPage(
+      name: _Paths.TASK_REMINDER_DETAIL,
+      page: () => const TaskReminderDetailView(),
+      binding: TaskReminderDetailBinding(),
     ),
   ];
 }

@@ -19,6 +19,7 @@ class BulletinSpecialController extends GetxController {
 
     dynamic decode = Get.arguments;
     title.value = decode['name_bn'];
+    print(decode);
 
     getBulletinList();
   }
@@ -33,6 +34,7 @@ class BulletinSpecialController extends GetxController {
     var response2 = await http.get(Uri.parse(url2));
     dynamic decode2 = jsonDecode(response2.body);
     bulletinListArchive.value = decode2['result'];
+
   }
 
 

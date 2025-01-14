@@ -1,6 +1,7 @@
 import 'package:bamis/app/modules/crop_adviosry_stage_detail/bindings/crop_adviosry_stage_detail_binding.dart';
 import 'package:bamis/app/modules/crop_adviosry_stage_detail/views/crop_adviosry_stage_detail_view.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:get/get.dart';
 
@@ -17,7 +18,7 @@ class CropAdviosryStagesView extends GetView<CropAdviosryStagesController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Crop Stages'),
+        title: Text("mycrop_advisory_stage_title".tr),
         titleSpacing: 0,
       ),
         body: Column(
@@ -29,7 +30,7 @@ class CropAdviosryStagesView extends GetView<CropAdviosryStagesController> {
                 direction: Axis.horizontal,
                 children: [
                   Flexible(
-                    child: Text("Stage-by-stage recommendation for ${controller.item['crop_name']}", style: TextStyle(fontSize: 18, color: AppColors().app_primary)),
+                    child: Text("mycrop_advisory_stage_promo".tr + " - ${controller.item['crop_name']}", style: TextStyle(fontSize: 18, color: AppColors().app_primary)),
                     flex: 1,
                   ),
                 ],
@@ -45,7 +46,13 @@ class CropAdviosryStagesView extends GetView<CropAdviosryStagesController> {
                     itemBuilder: (context, index) {
                       dynamic item = controller.mycropsstage.value[index];
                       return GestureDetector(
-                        onTap: () { Get.to(()=> CropAdviosryStageDetailView(), binding: CropAdviosryStageDetailBinding(), arguments: item, transition: Transition.rightToLeft); },
+                        onTap: () {
+                          if(item['current_status'] != 'upcoming') {
+                            Get.to(()=> CropAdviosryStageDetailView(), binding: CropAdviosryStageDetailBinding(), arguments: item, transition: Transition.rightToLeft);
+                          } else {
+                            Fluttertoast.showToast(msg: "Thsi is stage is started yet. Please wait till this stage will appear.");
+                          }
+                        },
                         child: Container(
                             width: double.infinity,
                             padding: EdgeInsets.all(16),

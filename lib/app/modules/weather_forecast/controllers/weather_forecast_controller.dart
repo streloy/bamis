@@ -54,7 +54,15 @@ class WeatherForecastController extends GetxController {
   }
 
   Future getForecast(locationId) async {
-    var response = await http.get(Uri.parse(ApiURL.dailyforecast + "?location=$locationId"));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = await prefs.getString("TOKEN");
+    var lang = Get.locale?.languageCode;
+
+    Map<String, String> requestHeaders = {
+      'Authorization': token.toString(),
+      'Accept-Language': lang.toString()
+    };
+    var response = await http.get(Uri.parse(ApiURL.dailyforecast + "?location=$locationId"), headers: requestHeaders);
     dynamic decode = jsonDecode(response.body);
     forecast.value = decode['result'];
     return decode['result'];

@@ -1,12 +1,20 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:bamis/app/modules/webview/bindings/webview_binding.dart';
+import 'package:bamis/app/modules/webview/views/webview_view.dart';
 import 'package:bamis/utils/ApiURL.dart';
 import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../auth/mobile/Mobile.dart';
 
 class AppDrawer extends StatefulWidget {
   // const AppDrawer({super.key});
-  final String name, photo, time;
-  AppDrawer({required this.name, required this.photo, required this.time});
+  final String name, mobile, photo, time;
+  AppDrawer({required this.name, required this.mobile, required this.photo, required this.time});
 
   @override
   State<AppDrawer> createState() => _AppDrawerState();
@@ -31,33 +39,71 @@ class _AppDrawerState extends State<AppDrawer> {
                 child: Image.network(widget.photo, fit: BoxFit.cover),
               ),
             ),
-            accountName: Text(widget.name),
+            accountName: Text( widget.name.isEmpty ? widget.mobile : widget.name ),
             accountEmail: Text(widget.time),
             decoration: BoxDecoration(
               color: AppColors().app_primary
             ),
           ),
-          ListTile(
-            leading: Icon(Icons.description_outlined),
-            title: Text("Save Articles"),
-            onTap: () { print("Save Articles"); },
-          ),
+
           ListTile(
             leading: Icon(Icons.video_file_outlined),
-            title: Text("Important Videos"),
+            title: Text("dashboard_sidebar_important_video".tr),
             onTap: () { Get.toNamed('important-video'); },
           ),
-          ListTile(
-            leading: Icon(Icons.support_agent_outlined),
-            title: Text("Contact Us"),
+          GestureDetector(
+            onTap: () {
+              var item = {
+                "title": "dashboard_sidebar_contact_us".tr,
+                "url": ApiURL.sidebar_contact_us
+              };
+              Get.to(()=> WebviewView(), binding: WebviewBinding(), arguments: item, transition: Transition.rightToLeft);
+            },
+            child: ListTile(
+              leading: Icon(Icons.support_agent_outlined),
+              title: Text("dashboard_sidebar_contact_us".tr),
+            ),
           ),
-          ListTile(
-            leading: Icon(Icons.forum_outlined),
-            title: Text("FAQ"),
+          GestureDetector(
+            onTap: () {
+              var item = {
+                "title": "dashboard_sidebar_faq".tr,
+                "url": ApiURL.sidebar_faq
+              };
+              Get.to(()=> WebviewView(), binding: WebviewBinding(), arguments: item, transition: Transition.rightToLeft);
+            },
+            child: ListTile(
+              leading: Icon(Icons.forum_outlined),
+              title: Text("dashboard_sidebar_faq".tr),
+            ),
           ),
-          ListTile(
-            leading: Icon(Icons.photo_outlined),
-            title: Text("Photo Gallery"),
+          Divider(),
+          GestureDetector(
+            onTap: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              var response = await http.post(ApiURL.fcm, headers: { HttpHeaders.authorizationHeader: '${prefs.getString('TOKEN')}' } );
+              dynamic decode = jsonDecode(response.body) ;
+
+              Get.defaultDialog(
+                  title: "Alert",
+                  middleText: decode['message'],
+                  textCancel: 'OK',
+                  onCancel: () async {
+                    await prefs.remove("TOKEN");
+                    await prefs.remove("ID");
+                    await prefs.remove("NAME");
+                    await prefs.remove("EMAIL");
+                    await prefs.remove("MOBILE");
+                    await prefs.remove("ADDRESS");
+                    await prefs.remove("PHOTO");
+                    Get.offAll(Mobile(), transition: Transition.upToDown);
+                  }
+              );
+            },
+            child: ListTile(
+              leading: Icon(Icons.logout_outlined),
+              title: Text("dashboard_sidebar_logout".tr),
+            ),
           )
         ],
       ),

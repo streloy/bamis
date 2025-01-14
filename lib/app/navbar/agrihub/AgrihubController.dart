@@ -24,6 +24,10 @@ class AgrihubController extends GetxController with GetSingleTickerProviderState
     getCropType();
   }
 
+  Future<void> refresh({bool value = false}) async {
+    await getCropType();
+  }
+
   Future getCropType() async {
     var response = await http.post(ApiURL.agrihub_crop_type);
     dynamic decode = jsonDecode(response.body);
@@ -35,6 +39,11 @@ class AgrihubController extends GetxController with GetSingleTickerProviderState
     var response = await http.post(Uri.parse("${ApiURL.agrihub_crop_name}${type}"));
     dynamic decode = jsonDecode(response.body);
     tabOneCropName.value = decode['result'];
+    if(tabOneCropName.value.length > 0) {
+      tabOneCropNameValue.value = tabOneCropName.value[0]['crop_name'];
+    } else {
+      tabOneCropNameValue.value = "";
+    }
   }
 
   Future getCropVariety(String name) async {
@@ -42,6 +51,15 @@ class AgrihubController extends GetxController with GetSingleTickerProviderState
     var response = await http.post(Uri.parse("${ApiURL.agrihub_crop_variety}${name}"));
     dynamic decode = jsonDecode(response.body);
     tabOneCropVariety.value = decode['result'];
+    print(decode);
+
+    if(tabOneCropVariety.value.length > 0) {
+      tabOneCropVarietyValue.value = tabOneCropVariety.value[0]['crop_variety'];
+    } else {
+      tabOneCropVarietyValue.value = "";
+    }
+    print("CROP VARIETY");
+    print(decode);
   }
 
   setCropVariety(String name) {
@@ -49,10 +67,13 @@ class AgrihubController extends GetxController with GetSingleTickerProviderState
   }
 
   getTips() {
-    print("VARIETY VALUE: ${tabOneCropVarietyValue.value}");
+
+
     if(tabOneCropVarietyValue.value.isNotEmpty) {
       var genurl = "${ApiURL.agrihub_webview}${tabOneCropVarietyValue.value}";
-      Get.toNamed('webview', parameters: {"title": tabOneCropVarietyValue.value, "url": genurl}, );
+      Get.toNamed('webview', arguments: {"title": tabOneCropVarietyValue.value, "url": genurl}, );
+    } else {
+      Get.snackbar("Warning", "Something went wrong!");
     }
   }
 

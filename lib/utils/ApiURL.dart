@@ -41,6 +41,8 @@ class ApiURL {
   static String community_postdetail = '${base_url_api}community/postdetail';
   static String community_postcomments = '${base_url_api}community/postcomments';
   static String community_postcommentsubmit = '${base_url_api}community/submitpostcomments';
+  static String community_postadd = '${base_url_api}community/addpost';
+  static String community_mypost = '${base_url_api}community/mypost';
 
   // Bulletin
   static String bulltin_location = '${base_url_api}bulletin/location';
@@ -69,8 +71,13 @@ class ApiURL {
   static String mycrops_crops = '${base_url_api}mycrop/crops';
   static String mycrops_locations = '${base_url_api}mycrop/locations';
   static String mycrops_mycropstage = '${base_url_api}mycrop/mycropstage';
-  static String mycrops_mycropstagedetail_adviusory = '${base_url_api}mycrop/my_crop_stage_detail_advisory';
+  static String mycrops_mycropstagedetail_advisory = '${base_url_api}mycrop/my_crop_stage_detail_advisory';
   static String mycrops_mycropstagedetail_disease = '${base_url_api}mycrop/my_crop_stage_detail_disease';
+  static String mycrops_taskreminder = '${base_url_api}mycrop/taskreminder';
+
+  // Sidebar
+  static String sidebar_contact_us = '${base_url}sidebar/contact_us';
+  static String sidebar_faq = '${base_url}sidebar/faq';
 
   //
   static String placeholder_auth = "https://bamisapp.bdservers.site/assets/auth/profile.jpg";

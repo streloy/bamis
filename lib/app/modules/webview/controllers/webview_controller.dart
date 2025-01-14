@@ -17,7 +17,8 @@ class WebviewController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    dynamic decode = Get.parameters;
+
+    dynamic decode = Get.arguments;
     title.value = decode['title'];
 
     webViewController

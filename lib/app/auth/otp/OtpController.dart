@@ -55,16 +55,12 @@ class OtpController extends GetxController {
           textCancel: 'Ok'
       );
     }
-
-    print("SAIM LOGIN CHECK");
     var params = jsonEncode({
       "mobile": "${mobile}",
       "otp": '${otp1.text}${otp2.text}${otp3.text}${otp4.text}',
       "device": "android"
     });
-    print(params);
     var response = await http.post(ApiURL.otpcheck, body: params);
-    print(response);
     dynamic decode = jsonDecode(response.body) ;
     if(response.statusCode != 200) {
       return Get.defaultDialog(

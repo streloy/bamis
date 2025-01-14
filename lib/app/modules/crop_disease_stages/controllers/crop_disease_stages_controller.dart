@@ -24,7 +24,6 @@ class CropDiseaseStagesController extends GetxController {
   }
 
   Future getMyCropStage(dynamic item) async {
-    print(item);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = await prefs.getString("TOKEN");
     var lang = Get.locale?.languageCode;

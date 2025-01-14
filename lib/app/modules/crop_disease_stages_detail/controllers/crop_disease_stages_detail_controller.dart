@@ -22,7 +22,6 @@ class CropDiseaseStagesDetailController extends GetxController {
   }
 
   Future getMyCropStageDetail(dynamic item) async {
-    print(item);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = await prefs.getString("TOKEN");
     var lang = Get.locale?.languageCode;
@@ -32,7 +31,7 @@ class CropDiseaseStagesDetailController extends GetxController {
       'Accept-Language': lang.toString()
     };
 
-    var response = await http.get(Uri.parse("${ApiURL.mycrops_mycropstagedetail_disease}?cid=${item['cropId']}&stage=${item['en']}"), headers: requestHeaders);
+    var response = await http.get(Uri.parse("${ApiURL.mycrops_mycropstagedetail_disease}?cid=${item['cropId']}&stage=${item['stageOrder']}"), headers: requestHeaders);
     dynamic decode = jsonDecode(response.body);
     print(decode);
     if(response.statusCode != 200) {

@@ -1,23 +1,52 @@
+import 'dart:convert';
+import 'dart:ui';
+
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import '../../../../utils/ApiURL.dart';
 
 class TaskReminderController extends GetxController {
   //TODO: Implement TaskReminderController
 
-  final count = 0.obs;
+  var tasks = [].obs;
+
   @override
   void onInit() {
     super.onInit();
+
+    getMasterInfo();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  Future getMasterInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = await prefs.getString("TOKEN");
+    var lang = Get.locale?.languageCode;
+
+    Map<String, String> requestHeaders = {
+      'Authorization': token.toString(),
+      'Accept-Language': lang.toString()
+    };
+
+    var response = await http.get(Uri.parse("${ApiURL.mycrops_taskreminder}"), headers: requestHeaders);
+    dynamic decode = jsonDecode(response.body);
+    if(response.statusCode != 200) {
+      Get.snackbar("Warning", decode['message']);
+    }
+    tasks.value = decode['result'];
+    print(decode);
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  Color getCardColor(String item) {
+    if(item == 'advice') {
+      return Color(0xFFE1FFDF);
+    } else if(item == 'procedure') {
+      return Color(0xFFFFF3BB);
+    } else if(item == 'hint') {
+      return Color(0xFFFFEBD8);
+    } else {
+      return Color(0xFFB2B2B2);
+    }
   }
 
-  void increment() => count.value++;
 }

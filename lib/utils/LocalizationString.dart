@@ -24,7 +24,8 @@ class LocalizationString extends Translations {
       'dashboard_weather_alert': 'Weather\nAlert',
       'dashboard_flood_forecast': 'Flood\nForecast',
       'dashboard_crop_advisory': 'Crop\nAdvisory',
-      'dashboard_pest_disease': 'Pest & Disease\nAlert',
+      'dashboard_pest_disease': 'Disease\nAlert',
+      'dashboard_pest_disease_information': 'Disease\nInformation',
       'dashboard_task_reminder': 'Task\nReminder',
       'dashboard_advisory_bulletin': 'Advisory\nBulletin',
       'dashboard_online_library': 'Online\nLibrary',
@@ -34,9 +35,29 @@ class LocalizationString extends Translations {
       'dashboard_stage_duration': 'Stage Duration',
       'dashboard_no_crops_found': 'You did not add any crops yet!',
       'dashboard_special_bulletin': 'Special Bulletin',
+      'dashboard_mycrops_promo': "You didn't add any crops yet!",
+      'dashboard_time_good_morning': "Good Morning",
+      'dashboard_time_good_noon': "Good Noon",
+      'dashboard_time_good_afternoon': "Good Afternook",
+      'dashboard_time_good_evening': "Good Evening",
+      'dashboard_time_good_night': "Good Night",
+      'dashboard_sidebar_important_video': "Important Videos",
+      'dashboard_sidebar_contact_us': "Contact Us",
+      'dashboard_sidebar_faq': "FAQ",
+      'dashboard_sidebar_logout': "Logout",
+
+      'weather_forecast': 'Weather Forecast',
+      'wf_title': 'Weather Forecast',
+      'wf_subtitle': 'Weather forecast for next 10 days',
+      'wf_temp': 'Temparature',
+      'wf_rf': 'Rainfall',
+      'wf_rh': 'Humidity',
+      'wf_wind': 'Wind Speed',
 
       'weather_alert': 'Weather Alert',
       'flood_forecast': 'Flood Forecast',
+
+      'all_application': "All Application",
 
       'profile': 'Profile',
       'profile_title': 'Profile',
@@ -86,6 +107,21 @@ class LocalizationString extends Translations {
       'add_mycrop_select_location': "Select Location",
       'add_mycrop_select_plantation_date': "Select Plantation Date",
       'add_mycrop_submit': "Add New Crop",
+
+      'crop_advisory_title': "Crop Advisory",
+      'crop_advisory_promo': "Select particular crop to get specific advisory",
+      'crop_advisory_stage_title': "Crop Stages",
+      'crop_advisory_stage_promo': "Stage-by-stage recommendation for",
+      'crop_disease_title': "Crop Disease",
+      'crop_disease_promo': "Select particular crop to get specific disease advisory",
+      'crop_disease_stage_title': "Crop Disease",
+      'crop_disease_stage_promo': "Stage-by-stage recommendation for",
+
+      'community_title': "Community",
+      'community_promot': "Welcome to BAMIS community",
+      'community_post_add_title': "Add new community post",
+
+      'agrihub_get_cultivation_tips': "Get Cultivation Tips"
     },
     'bn_BD': {
       'title': 'বামিস',
@@ -107,7 +143,8 @@ class LocalizationString extends Translations {
       'dashboard_weather_alert': 'আবহাওয়া\nসতর্কবার্তা',
       'dashboard_flood_forecast': 'বন্যা\nপূর্বাভাস',
       'dashboard_crop_advisory': 'ফসল\nপরামর্শ',
-      'dashboard_pest_disease': 'কীটপতঙ্গ ও রোগের\nসতর্কতা',
+      'dashboard_pest_disease': 'রোগের\nসতর্কতা',
+      'dashboard_pest_disease_information': 'রোগের\nতথ্য',
       'dashboard_task_reminder': 'টাস্ক\nরিমাইন্ডার',
       'dashboard_advisory_bulletin': 'এডভাইজারি\nবুলেটিন',
       'dashboard_online_library': 'অনলাইন\nলাইব্রেরি',
@@ -117,9 +154,30 @@ class LocalizationString extends Translations {
       'dashboard_stage_duration': 'ধাপের মেয়াদ',
       'dashboard_no_crops_found': 'আপনি এখনও কোন ফসল যুক্ত করেন নাই!',
       'dashboard_special_bulletin': 'বিশেষ বুলেটিন',
+      'dashboard_mycrops_promo': "আপনি এখনও কোনো ফসল যোগ করেননি!",
+      'dashboard_time_good_morning': "শুভ সকাল",
+      'dashboard_time_good_noon': "শুভ দুপুর",
+      'dashboard_time_good_afternoon': "শুভ বিকাল",
+      'dashboard_time_good_evening': "শুভ সন্ধা",
+      'dashboard_time_good_night': "শুভ রাত্রি",
+      'dashboard_sidebar_important_video': "গুরুত্বপূর্ণ ভিডিও",
+      'dashboard_sidebar_contact_us': "যোগাযোগ করুণ",
+      'dashboard_sidebar_faq': "এফএকিউ ",
+      'dashboard_sidebar_logout': "লগ আউট",
+
+
+      'weather_forecast': 'আবহাওয়া পূর্বাভাস',
+      'wf_title': 'আবহাওয়া পূর্বাভাস',
+      'wf_subtitle': 'পরবর্তী ১০ দিনের আবহাওয়া পূর্বাভাস',
+      'wf_temp': 'তাপমাত্রা',
+      'wf_rf': 'বৃষ্টিপাত',
+      'wf_rh': 'আপেক্ষিক আর্দ্রতা',
+      'wf_wind': 'বাতাসের গতি',
 
       'weather_alert': 'আবহাওয়া সতর্কবার্তা',
       'flood_forecast': 'বন্যা পূর্বাভাস',
+
+      'all_application': "সকল এপ্লিকেশন",
 
       'profile': 'প্রোফাইল',
       'profile_title': 'প্রোফাইল',
@@ -170,6 +228,20 @@ class LocalizationString extends Translations {
       'add_mycrop_select_plantation_date': "ফসল লাগানোর তারিখ নির্বাচন করুণ",
       'add_mycrop_submit': "নতুন ফসল যুক্ত করুণ",
 
+      'mycrop_advisory_title': "ফসল পরামর্শ",
+      'mycrop_advisory_promo': "নির্দিষ্ট পরামর্শ পেতে নির্দিষ্ট ফসল নির্বাচন করুন",
+      'mycrop_advisory_stage_title': "ফসলের ধাপ অনুযায়ী পরামর্শ",
+      'mycrop_advisory_stage_promo': "প্রতিটি ধাপের জন্য পরামর্শ",
+      'mycrop_disease_title': "ফসলের রোগ",
+      'mycrop_disease_promo': "নির্দিষ্ট রোগের পরামর্শ পেতে নির্দিষ্ট ফসল নির্বাচন করুন",
+      'mycrop_disease_stage_title': "ফসলের ধাপ অনুযায়ী রোগের পরামর্শ",
+      'mycrop_disease_stage_promo': "প্রতিটি ধাপের জন্য ফসলের রোগের পরামর্শ",
+
+      'community_title': "জনসাধারণ",
+      'community_promot': "BAMIS কমিউনিটিতে স্বাগতম",
+      'community_post_add_title': "নতুন কমিউনিটি পোস্ট যুক্ত করুণ",
+
+      'agrihub_get_cultivation_tips': "চাষের পরামর্শ পেতে ক্লিক করুণ"
     }
   };
 }

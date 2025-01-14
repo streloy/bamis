@@ -28,7 +28,8 @@ class WeatherForecastView extends GetView<WeatherForecastController> {
               ),
             ],
           ),
-        )
+        ),
+        titleSpacing: 0,
       ),
       body: Padding(
         padding: EdgeInsets.all(12),
@@ -36,7 +37,7 @@ class WeatherForecastView extends GetView<WeatherForecastController> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Weather Forecast For Next ${controller.forecast.value.length} Days", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+            Obx(()=> Text("Weather Forecast For Next ${controller.forecast.value.length} Days", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500))),
             Expanded(
               child: Obx(()=> ListView.builder (
                 itemCount: controller.forecast.value.length,

@@ -13,27 +13,46 @@ class CropAdviosryStageDetailView extends GetView<CropAdviosryStageDetailControl
         title: Text(controller.item['name']),
         titleSpacing: 0,
       ),
-      body: Obx(()=> ListView.builder(
-        itemCount: controller.stagedetail.value.length,
-        itemBuilder: (context, index) {
-          dynamic item = controller.stagedetail.value[index];
-          return Padding(
+      body: Obx(()=> ListView(
+        children: [
+          controller.stagedetail.value.length == 0 ?
+          Padding(
             padding: EdgeInsets.all(16),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                    child: Image.network("${item['image']}", width: double.infinity)
-                ),
                 SizedBox(height: 16),
-                Text("${item['title']}", style: TextStyle(fontSize: 20)),
+                Text("Monitor your field!", style: TextStyle(fontSize: 20)),
                 SizedBox(height: 16),
-                Text("${item['description']}")
+                Text("No Advisory for your crop.")
               ],
             ),
-          );
-        },
+          ) :
+          ListView.builder(
+            physics: ScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: controller.stagedetail.value.length,
+            itemBuilder: (context, index) {
+              dynamic item = controller.stagedetail.value[index];
+              return Padding(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.network("${item['image']}", width: double.infinity)
+                    ),
+                    SizedBox(height: 16),
+                    Text("${item['title']}", style: TextStyle(fontSize: 20)),
+                    SizedBox(height: 16),
+                    Text("${item['description']}")
+                  ],
+                ),
+              );
+            },
+          )
+        ],
       )),
     );
   }

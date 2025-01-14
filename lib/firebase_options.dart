@@ -26,6 +26,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
+        return ios;
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for ios - '
           'you can reconfigure this by running the FlutterFire CLI again.',
@@ -57,6 +58,15 @@ class DefaultFirebaseOptions {
     appId: '1:240502408472:android:87bec3358e6bd16fb90a6d',
     messagingSenderId: '240502408472',
     projectId: 'bamis-app-28485',
-    storageBucket: 'bamis-app-28485.appspot.com',
+    storageBucket: 'bamis-app-28485.firebasestorage.app',
   );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyB_HbwFemqRIekGNO-ngnG2r57vyHSuMoY',
+    appId: '1:240502408472:ios:b51d20894c76a6c2b90a6d',
+    messagingSenderId: '240502408472',
+    projectId: 'bamis-app-28485',
+    storageBucket: 'bamis-app-28485.firebasestorage.app',
+  );
+
 }

@@ -201,22 +201,6 @@ class _ProfileState extends State<Profile> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
-                        // DropdownMenu(
-                        //   width: MediaQuery.of(context).size.width,
-                        //   enableFilter: false,
-                        //   enableSearch: false,
-                        //   requestFocusOnTap: true,
-                        //   hintText: "Select Type",
-                        //   dropdownMenuEntries:
-                        //   controller.typeList.map<DropdownMenuEntry<String>>((String item) {
-                        //     return DropdownMenuEntry(value: item, label: item);
-                        //   }).toList(),
-                        //   onSelected: (selectedItem) {
-                        //     controller.selectLanguage(selectedItem!);
-                        //   },
-                        // ),
-
                         Text("profile_language_select".tr),
                         SizedBox(height: 10),
                         Container(

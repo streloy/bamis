@@ -38,6 +38,11 @@ class DashboardController extends GetxController {
       "page": "crop-disease"
     },
     {
+      "name": "dashboard_pest_disease_information",
+      "image": "pest_disease_information.png",
+      "page": "pest-disease-alerts"
+    },
+    {
       "name": "dashboard_task_reminder",
       "image": "task_reminder.png",
       "page": "task-reminder"
@@ -52,15 +57,16 @@ class DashboardController extends GetxController {
       "image": "online_library.png",
       "page": "elibrary"
     },
-    {
-      "name": "dashboard_farm_metrics",
-      "image": "farm_metrics.png",
-      "page": "farm-metrics"
-    }
+    // {
+    //   "name": "dashboard_farm_metrics",
+    //   "image": "farm_metrics.png",
+    //   "page": "farm-metrics"
+    // }
   ];
 
   var initTime = "Good Morning".obs;
   late var fullname = "".obs;
+  late var mobile = "".obs;
   late var photo = "".obs;
 
   //weather
@@ -93,21 +99,22 @@ class DashboardController extends GetxController {
       hour = hour - 23;
     }
     if (hour >= 5 && hour < 12) {
-      initTime.value = "Good Morning";
+      initTime.value = "dashboard_time_good_morning".tr;
     } else if (hour >= 12 && hour < 15) {
-      initTime.value = "Good Noon";
+      initTime.value = "dashboard_time_good_noon".tr;
     } else if (hour >= 15 && hour < 17) {
-      initTime.value = "Good Afternoon";
+      initTime.value = "dashboard_time_good_afternoon".tr;
     } else if (hour >= 17 && hour < 19) {
-      initTime.value = "Good Evening";
+      initTime.value = "dashboard_time_good_evening".tr;
     } else {
-      initTime.value = "Good Night";
+      initTime.value = "dashboard_time_good_night".tr;
     }
   }
 
   Future getSharedPrefData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    fullname.value = (await prefs.getString("NAME"))!;
+    fullname.value = await prefs.getString("NAME") ?? "";
+    mobile.value = await prefs.getString("MOBILE") ?? "";
     currentLocationId.value = await prefs.getString("LOCATION_ID")!;
     currentLocationName.value = await prefs.getString("LOCATION_NAME")!;
     cLocationUpazila.value = await prefs.getString("LOCATION_UPAZILA")!;
@@ -129,17 +136,14 @@ class DashboardController extends GetxController {
       'Accept-Language': lang.toString()
     };
 
-    var response = await http.get(Uri.parse(ApiURL.mycrops_crops), headers: requestHeaders);
+    var response = await http.get(Uri.parse(ApiURL.notification_notifications), headers: requestHeaders);
     dynamic decode = jsonDecode(response.body);
     notification.value = decode['result'];
     var seen = 0;
-    decode['result'].forEach((item){
-      if(item['seen'] == "1") {
-        seen = seen + 1;
-      }
+    notification.value.forEach((item){
+      item['seen'] == "1" ? seen++ : seen = seen;
     });
-    var unseen = decode['result'].length - seen;
-    notificationValue.value = "${unseen}";
+    notificationValue.value = "${notification.value.length - seen}";
   }
 
   Future getMyCrops(SharedPreferences prefs) async {
@@ -153,7 +157,9 @@ class DashboardController extends GetxController {
     var response = await http.get(Uri.parse(ApiURL.mycrops_crops), headers: requestHeaders);
     dynamic decode = jsonDecode(response.body);
     mycrops.value = decode['result'];
-    getMyCropStage(mycrops.value[0]);
+    if(mycrops.value.length > 0) {
+      getMyCropStage(mycrops.value[0]);
+    }
   }
 
   Future getMyCropStage(dynamic item) async {
@@ -190,9 +196,19 @@ class DashboardController extends GetxController {
   }
 
   Future getForecast(locationId) async {
-    var response = await http.get(Uri.parse(ApiURL.currentforecast + "?location=$locationId"));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = await prefs.getString("TOKEN");
+    var lang = Get.locale?.languageCode;
+
+    Map<String, String> requestHeaders = {
+      'Authorization': token.toString(),
+      'Accept-Language': lang.toString()
+    };
+    var response = await http.get(Uri.parse(ApiURL.currentforecast + "?location=$locationId"), headers: requestHeaders);
     dynamic decode = jsonDecode(response.body);
     forecast.value = decode['result'];
+
+    print("${ApiURL.currentforecast}?location=${locationId}");
   }
 
   Future gotoNotificationPage() async{

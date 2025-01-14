@@ -12,12 +12,9 @@ class MobileController extends GetxController{
   final TextEditingController mobile = TextEditingController();
 
   gotoOTP() async {
-    var params = jsonEncode({
-      "mobile": "${mobile.value.text}"
-    });
+    var params = jsonEncode({ "mobile": "${mobile.value.text}" });
     var response = await http.post(ApiURL.mobile, body: params);
     dynamic decode = jsonDecode(response.body) ;
-    print(decode);
     if(response.statusCode != 200) {
       return Get.defaultDialog(
           title: "Alert",
@@ -29,10 +26,7 @@ class MobileController extends GetxController{
     }
   }
 
-
-
   Future loginClick() async{
-    print("SAIM LOGIN CHECK");
     var params = jsonEncode({
       "mobile": "${mobile.value.text}",
       "device": "android"
@@ -47,8 +41,6 @@ class MobileController extends GetxController{
           textCancel: 'Ok'
       );
     }
-
-
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.setString('TOKEN', decode['token']);

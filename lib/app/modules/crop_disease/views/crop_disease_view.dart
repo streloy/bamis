@@ -17,7 +17,7 @@ class CropDiseaseView extends GetView<CropDiseaseController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Crop Disease'),
+        title: Text("mycrop_disease_title".tr),
         titleSpacing: 0,
       ),
         body: Column(
@@ -28,7 +28,7 @@ class CropDiseaseView extends GetView<CropDiseaseController> {
                 direction: Axis.horizontal,
                 children: [
                   Flexible(
-                    child: Text("Select particular crop to get specific advisory", style: TextStyle(fontSize: 18, color: AppColors().app_primary)),
+                    child: Text("mycrop_disease_promo".tr, style: TextStyle(fontSize: 18, color: AppColors().app_primary)),
                     flex: 1,
                   ),
                   IconButton(
@@ -42,33 +42,48 @@ class CropDiseaseView extends GetView<CropDiseaseController> {
 
             Flexible(
                 flex: 1,
-                child: Obx(()=> Padding(
-                  padding: EdgeInsets.all(16),
-                  child: GridView.builder(
-                    itemCount: controller.crops.value.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisExtent: 200, mainAxisSpacing: 16, crossAxisSpacing: 16),
-                    itemBuilder: (context, index) {
-                      dynamic item = controller.crops.value[index];
-                      return GestureDetector(
-                        onTap: () { Get.to(()=> CropDiseaseStagesView(), binding: CropDiseaseStagesBinding(), arguments: item, transition: Transition.rightToLeft); },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: AppColors().app_primary_bg_dark
+                child: Obx(()=>
+                  controller.crops.value.length > 0 ?
+                  Padding(
+                    padding: EdgeInsets.all(16),
+                    child: GridView.builder(
+                      itemCount: controller.crops.value.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisExtent: 200, mainAxisSpacing: 16, crossAxisSpacing: 16),
+                      itemBuilder: (context, index) {
+                        dynamic item = controller.crops.value[index];
+                        return GestureDetector(
+                          onTap: () { Get.to(()=> CropDiseaseStagesView(), binding: CropDiseaseStagesBinding(), arguments: item, transition: Transition.rightToLeft); },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: AppColors().app_primary_bg_dark
+                            ),
+                            child: Column(
+                              children: [
+                                ClipRRect(
+                                  child: Image.network("${item['image']}", height: 140,),
+                                ),
+                                SizedBox(height: 8),
+                                Padding(padding: EdgeInsets.symmetric(horizontal: 12), child: Text("${item['name']}", maxLines: 2))
+                              ],
+                            ),
                           ),
-                          child: Column(
-                            children: [
-                              ClipRRect(
-                                child: Image.network("${item['image']}", height: 140,),
-                              ),
-                              SizedBox(height: 8),
-                              Padding(padding: EdgeInsets.symmetric(horizontal: 12), child: Text("${item['name']}", maxLines: 2))
-                            ],
-                          ),
+                        );
+                      },
+                    ),
+                  ) :
+                  Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                        decoration: BoxDecoration(
+                          color: AppColors().app_primary_bg_dark
                         ),
-                      );
-                    },
-                  ),
-                ))
+                        child: Text("You haven't added any crops yet. Please add your crops for getting disease alert.", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20))
+                      )
+                    ],
+                  )
+                )
             ),
           ],
         )

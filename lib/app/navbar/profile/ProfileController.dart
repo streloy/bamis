@@ -21,7 +21,13 @@ class ProfileController extends GetxController with GetSingleTickerProviderState
         middleText: decode['message'],
         textCancel: 'OK',
         onCancel: () async {
-          await prefs.clear();
+          await prefs.remove("TOKEN");
+          await prefs.remove("ID");
+          await prefs.remove("NAME");
+          await prefs.remove("EMAIL");
+          await prefs.remove("MOBILE");
+          await prefs.remove("ADDRESS");
+          await prefs.remove("PHOTO");
           Get.offAll(Mobile(), transition: Transition.upToDown);
         }
     );
@@ -79,8 +85,6 @@ class ProfileController extends GetxController with GetSingleTickerProviderState
       prefs.setString('EMAIL', emailController.text);
       prefs.setString('ADDRESS', addressController.text);
       name.value = nameController.text;
-
-      print(prefs.getString('NAME'));
     }
 
     return Get.defaultDialog(
