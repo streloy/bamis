@@ -37,15 +37,13 @@ class CommunityController extends GetxController {
     dynamic decode = jsonDecode(response.body);
     post.value.addAll(decode['result']);
     post_count.value = int.parse(decode['count']);
-
-    print(url);
-    // print(post.value.length);
-    //print(post.value);
-
   }
 
   openDetailViewPage(dynamic item) {
-    Get.to(CommunityPostDetailView(), binding: CommunityPostDetailBinding(), arguments: {"id": item['id'], "title": item['title'] }, transition: Transition.rightToLeft);
+    var result = Get.to(CommunityPostDetailView(), binding: CommunityPostDetailBinding(), arguments: {"id": item['id'], "title": item['title'] }, transition: Transition.rightToLeft);
+    if(result == 'update') {
+
+    }
   }
 
 }

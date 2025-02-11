@@ -38,7 +38,7 @@ class ProfileController extends GetxController with GetSingleTickerProviderState
   late var mobile = "".obs;
   late var email = "".obs;
   late var address = "".obs;
-  late var photo = "https://".obs;
+  late var photo = "${ApiURL.base_url_image}assets/auth/profile.jpg".obs;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();

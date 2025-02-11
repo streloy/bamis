@@ -181,7 +181,7 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                         ),
 
                         SizedBox(height: 12),
-                        Divider(height: 1, thickness: 1, color: Colors.white54),
+                        controller.isForecastLoading.value == true ? LinearProgressIndicator() : Divider(height: 1, thickness: 1, color: Colors.white54),
                         SizedBox(height: 16),
 
                         Row(
@@ -286,8 +286,8 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                             children: [
                               GestureDetector(
                                 onTap: () => {
-                                  Get.toNamed(
-                                      controller.dashboardMenu[index]['page'])
+                                  //Get.toNamed(controller.dashboardMenu[index]['page']);
+                                  controller.openModule(index)
                                 },
                                 child: Card(
                                   color: const Color.fromRGBO(225, 255, 225, 1),
@@ -326,7 +326,12 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                       TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                     ),
                     GestureDetector(
-                      onTap: () { Get.to(()=> CropAdvisoryView(), binding: CropAdvisoryBinding(), transition:  Transition.rightToLeft); },
+                      onTap: () {
+                        var a = Get.to(()=> CropAdvisoryView(), binding: CropAdvisoryBinding(), transition:  Transition.rightToLeft);
+                        if(a == 'update') {
+                          Get.snackbar("Mobile", "backbacadas asdasd").show();
+                        }
+                      },
                       child: Container(
                         padding: EdgeInsets.all(4),
                         decoration: BoxDecoration(
@@ -414,10 +419,11 @@ class _DashboardState extends State<Dashboard> with RouteAware{
 
                 Obx(()=> controller.mycrops.value.length > 0 ?
                 Container(
-                    height: 170,
+                    height: 180,
                     width: double.infinity,
                     child: ScrollablePositionedList.builder(
                         scrollDirection: Axis.horizontal,
+                        itemScrollController: controller.itemScrollController,
                         itemCount: controller.mycropsstage.value.length,
                         itemBuilder: (BuildContext context, int index) {
                           dynamic item = controller.mycropsstage.value[index];
@@ -426,7 +432,7 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                               if(item['current_status'] != 'upcoming') {
                                 Get.to(()=> CropAdviosryStageDetailView(), binding: CropAdviosryStageDetailBinding(), arguments: item, transition: Transition.rightToLeft);
                               } else {
-                                Fluttertoast.showToast(msg: "Thsi is stage is started yet. Please wait till this stage will appear.");
+                                Get.snackbar('dashboard_snack_one_title'.tr, 'dashboard_snack_one_message'.tr, colorText: AppColors().app_natural_white, backgroundColor: AppColors().app_primary, snackPosition: SnackPosition.BOTTOM, margin: EdgeInsets.only(left: 16, right: 16, bottom: 16));
                               }
                             },
                             child: Container(
@@ -435,7 +441,8 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                                 margin: EdgeInsets.only(right: 16),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(16),
-                                    color: controller.getStageCardColor(item['current_status'])
+                                    color: controller.getStageCardColor(item['current_status']),
+                                    border: Border.all(color: AppColors().app_primary)
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -508,8 +515,9 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                               padding: EdgeInsets.all(16),
                               margin: EdgeInsets.only(right: 16),
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16),
-                                  color: Color(0xFFFFEBD8)
+                                borderRadius: BorderRadius.circular(16),
+                                color: Color(0xFFFFEBD8),
+                                border: Border.all(color: Color(0xFFB22222))
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -519,7 +527,7 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                                   SizedBox(height: 16),
                                   GestureDetector(
                                     onTap: (){ Get.to(()=> WebviewView(), binding: WebviewBinding(), arguments: item, transition: Transition.rightToLeft ); },
-                                    child: Text("Learn more >", style: TextStyle(fontWeight: FontWeight.w700, color: Color(0xFFB22222)),),
+                                    child: Text("learn_more".tr, style: TextStyle(fontWeight: FontWeight.w700, color: Color(0xFFB22222)),),
                                   )
                                 ],
                               )

@@ -13,6 +13,12 @@ class MycropAddView extends GetView<MycropAddController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.back(result: 'update');
+          },
+        ),
         title: Text('add_mycrop_title'.tr),
         titleSpacing: 0,
       ),
@@ -48,7 +54,6 @@ class MycropAddView extends GetView<MycropAddController> {
                   return TextField(
                       controller: controller,
                       focusNode: focusNode,
-                      autofocus: true,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'add_mycrop_select_location'.tr,

@@ -21,53 +21,53 @@ class ElibraryView extends GetView<ElibraryController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      "Get necessary books and articles that help your farming",
-                      maxLines: 2,
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                  Ink(
-                    decoration: ShapeDecoration(
-                      color: AppColors().button_bg,
-                      shape: CircleBorder()
-                    ),
-                    child: IconButton(
-                      onPressed: (){},
-                      icon: Icon(Icons.search),
-                      color: AppColors().app_primary,
-                    ),
-                  )
-                ],
-              ),
+              // Row(
+              //   children: [
+              //     Expanded(
+              //       child: Text(
+              //         "Get necessary books and articles that help your farming",
+              //         maxLines: 2,
+              //         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              //       ),
+              //     ),
+              //     Ink(
+              //       decoration: ShapeDecoration(
+              //         color: AppColors().button_bg,
+              //         shape: CircleBorder()
+              //       ),
+              //       child: IconButton(
+              //         onPressed: (){},
+              //         icon: Icon(Icons.search),
+              //         color: AppColors().app_primary,
+              //       ),
+              //     )
+              //   ],
+              // ),
+              //
+              // SizedBox(height: 16),
 
-              SizedBox(height: 16),
+              // Container(
+              //   height: 50,
+              //   child: Obx(()=> ListView.builder(
+              //     shrinkWrap: true,
+              //     scrollDirection: Axis.horizontal,
+              //     itemCount: controller.tags.length,
+              //     itemBuilder: (context, index) {
+              //       return Container(
+              //         margin: EdgeInsets.only(right: 16),
+              //         padding: EdgeInsets.symmetric(horizontal: 16),
+              //         alignment: Alignment.center,
+              //         decoration: BoxDecoration(
+              //             color: AppColors().button_bg,
+              //             borderRadius: BorderRadius.circular(8)
+              //         ),
+              //         child: Text(controller.tags[index], style: TextStyle(fontSize: 20, color: AppColors().app_primary),),
+              //       );
+              //     },
+              //   ),),
+              // ),
 
-              Container(
-                height: 50,
-                child: Obx(()=> ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: controller.tags.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: EdgeInsets.only(right: 16),
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: AppColors().button_bg,
-                          borderRadius: BorderRadius.circular(8)
-                      ),
-                      child: Text(controller.tags[index], style: TextStyle(fontSize: 20, color: AppColors().app_primary),),
-                    );
-                  },
-                ),),
-              ),
-
-              SizedBox(height: 16),
+              // SizedBox(height: 16),
 
               Obx(()=> GridView.builder(
                 physics: NeverScrollableScrollPhysics(),

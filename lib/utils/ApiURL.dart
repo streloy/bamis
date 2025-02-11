@@ -38,6 +38,7 @@ class ApiURL {
 
   // Community
   static String community_post = '${base_url_api}community/post';
+  static String community_reaction = '${base_url_api}community/reaction';
   static String community_postdetail = '${base_url_api}community/postdetail';
   static String community_postcomments = '${base_url_api}community/postcomments';
   static String community_postcommentsubmit = '${base_url_api}community/submitpostcomments';

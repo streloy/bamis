@@ -52,6 +52,12 @@ dependencies:
   fluttertoast: ^8.2.10
   flutter_launcher_icons: ^0.14.2
   scrollable_positioned_list: ^0.3.8
+  flutter_slidable: ^3.1.2
+  flutter_html: ^3.0.0-beta.2
+  flutter_quill: ^10.8.5
+  html_editor_enhanced: ^2.6.0
+  file_picker: ^8.1.7
+  share_plus: ^10.1.4
 
 dev_dependencies:
   flutter_test:

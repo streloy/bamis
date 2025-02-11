@@ -9,6 +9,7 @@ import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/ApiURL.dart';
@@ -22,7 +23,7 @@ class Community extends StatefulWidget {
   State<Community> createState() => _CommunityState();
 }
 
-class _CommunityState extends State<Community> {
+class _CommunityState extends State<Community> with RouteAware {
   final controller = Get.put(CommunityController());
 
   ScrollController scrollController = ScrollController();
@@ -47,13 +48,69 @@ class _CommunityState extends State<Community> {
   }
 
   openDetailViewPage(dynamic item) {
-    Get.to(()=> CommunityPostDetailView(), binding: CommunityPostDetailBinding(), arguments: {"id": item['id'], "title": item['title'] }, transition: Transition.rightToLeft);
+    var result = Get.to(()=> CommunityPostDetailView(), binding: CommunityPostDetailBinding(), arguments: item, transition: Transition.rightToLeft);
+    if(result == 'update') {
+      onRefresh();
+    }
   }
 
   @override
   void dispose() {
     scrollController.dispose();
     super.dispose();
+  }
+
+  Future postReaction(type, item, index) async {
+    var like = 1;
+    var dislike = 1;
+    if(type == 'like') {
+      like = (int.parse(item['liked']) == 1) ? 0 : 1;
+      dislike = int.parse(item['disliked']);
+    } else {
+      like = int.parse(item['liked']);
+      dislike = (int.parse(item['disliked']) == 1) ? 0 : 1;
+    }
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = prefs.getString("TOKEN")!;
+    Map<String, String> requestHeaders = {
+      'Authorization': token.toString(),
+      'Accept-Language': lang.toString()
+    };
+    var params = jsonEncode({
+      "id": int.parse(item['id']),
+      "like": like,
+      "dislike": dislike
+    });
+    var response = await http.post(Uri.parse(ApiURL.community_reaction), body: params, headers: requestHeaders);
+    dynamic decode = jsonDecode(response.body);
+
+    if(response.statusCode == 200 ) {
+      setState(() {
+        if(like == 1 && type == 'like') {
+          post[index]['post_like'] = (int.parse(post[index]['post_like']) + 1).toString();
+        } else if(like == 0 && type == 'like') {
+          post[index]['post_like'] = (int.parse(post[index]['post_like']) - 1).toString();
+        }
+
+        if(dislike == 1 && type == 'dislike') {
+          post[index]['post_dislike'] = (int.parse(post[index]['post_dislike']) + 1).toString();
+        } else if(dislike == 0 && type == 'dislike') {
+          post[index]['post_dislike'] = (int.parse(post[index]['post_dislike']) - 1).toString();
+        }
+
+        post[index]['liked'] = "${like}";
+        post[index]['disliked'] = "${dislike}";
+      });
+    }
+
+    Get.snackbar(
+        "Reaction",
+        decode['message'],
+        snackPosition: SnackPosition.BOTTOM,
+        margin: EdgeInsets.all(16),
+        padding: EdgeInsets.all(16)
+    );
   }
 
   Future getPost(offset, limit) async {
@@ -71,7 +128,6 @@ class _CommunityState extends State<Community> {
 
     setState(() {
       mainpost.addAll(decode['result']);
-      //post.addAll(decode['result']);
       post = mainpost;
       post_count = int.parse(decode['count']);
     });
@@ -84,7 +140,6 @@ class _CommunityState extends State<Community> {
       getPost(0, 10);
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -169,13 +224,20 @@ class _CommunityState extends State<Community> {
                         openDetailViewPage(postData);
                       },
                       child: Container(
-                        margin: EdgeInsets.only(left: 16, right: 16, top: 16),
-                        padding: EdgeInsets.only(top: 4, bottom: 16),
+                        margin: EdgeInsets.only(left: 0, right: 0, top: 16),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(8),
-                            color: AppColors().app_primary_bg_dark),
+                            borderRadius: BorderRadius.circular(0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                blurRadius: 10,
+                                offset: Offset(0, 5),
+                              ),
+                            ],
+                            color: AppColors().app_natural_white),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ListTile(
                               leading: CircleAvatar(
@@ -186,72 +248,44 @@ class _CommunityState extends State<Community> {
                               ),
                               title: Text(postData['fullname']),
                               subtitle: Text(postData['created_at']),
-                              trailing: Icon(Icons.more_vert_outlined),
+                              trailing: IconButton(onPressed: () { Share.share(postData['url']); }, icon: Icon(Icons.share)),
                             ),
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                              child: Text(postData['title'], maxLines: 2, style: TextStyle(fontWeight: FontWeight.w700)),
+                            ),
+                            Image.network( postData['cover'], height: 200, width: double.infinity, fit: BoxFit.cover),
+                            Padding(
+                              padding: EdgeInsets.only(left: 16, top: 8, right: 16),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(postData['title'], style: TextStyle(fontWeight: FontWeight.w700)),
-                                  SizedBox(height: 8),
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.network(
-                                        postData['cover'],
-                                        height: 200,
-                                        width: double.infinity,
-                                        fit: BoxFit.cover),
-                                  ),
-                                  SizedBox(height: 8),
-                                  Row(
-                                    children: [
-                                      Text(postData['post_like'] +
-                                          " Upvote"),
-                                      Text("•", style: TextStyle(fontSize: 20)),
-                                      Text(postData['post_like'] +
-                                          " Downvote"),
-                                      Text("•", style: TextStyle(fontSize: 20)),
-                                      Text(postData['post_like'] +
-                                          " Comments"),
-                                    ],
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                  ),
-                                  SizedBox(height: 8),
-                                  Row(
-                                    children: [
-                                      TextButton(
-                                          onPressed: () {},
-                                          child: Column(
-                                            children: [
-                                              Icon(Icons.thumb_up_outlined),
-                                              Text("Upvote")
-                                            ],
-                                          )),
-                                      TextButton(
-                                          onPressed: () {},
-                                          child: Column(
-                                            children: [
-                                              Icon(Icons.thumb_down_outlined),
-                                              Text("Downvote")
-                                            ],
-                                          )),
-                                      TextButton(
-                                          onPressed: () {},
-                                          child: Column(
-                                            children: [
-                                              Icon(Icons.forum_outlined),
-                                              Text("Upvote")
-                                            ],
-                                          ))
-                                    ],
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                  ),
+                                  Text(postData['post_like'] + " Upvote", style: TextStyle(fontSize: 12)),
+                                  Text(postData['post_dislike'] + " Downvote", style: TextStyle(fontSize: 12)),
+                                  Text(postData['post_comments'] + " Comments", style: TextStyle(fontSize: 12)),
                                 ],
                               ),
-                            )
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                TextButton.icon(
+                                  onPressed: () { postReaction('like', postData, index); },
+                                  icon: postData['liked'] == '1' ? Icon(Icons.thumb_up, size: 14) : Icon(Icons.thumb_up_outlined, size: 14),
+                                  label: Text("Upvote", style: TextStyle(fontSize: 12)),
+                                ),
+                                TextButton.icon(
+                                  onPressed: () { postReaction('dislike', postData, index); },
+                                  icon: postData['disliked'] == '1' ? Icon(Icons.thumb_down, size: 14) : Icon(Icons.thumb_down_outlined, size: 14),
+                                  label: Text("Downvote", style: TextStyle(fontSize: 12)),
+                                ),
+                                TextButton.icon(
+                                  onPressed: () { openDetailViewPage(postData); },
+                                  icon: Icon(Icons.forum_outlined, size: 14),
+                                  label: Text("Comments", style: TextStyle(fontSize: 12)),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../utils/AppColors.dart';
+import '../../webview/bindings/webview_binding.dart';
+import '../../webview/views/webview_view.dart';
 import '../controllers/bulletin_national_controller.dart';
 
 class BulletinNationalView extends GetView<BulletinNationalController> {
@@ -22,8 +24,8 @@ class BulletinNationalView extends GetView<BulletinNationalController> {
             indicatorColor: Colors.amber,
             labelColor: Colors.white,
             tabs: [
-              Tab(text: "Current"),
-              Tab(text: "Archive")
+              Tab(text: "advisory_current".tr),
+              Tab(text: "advisory_archive".tr)
             ],
           ),
         ),
@@ -74,19 +76,22 @@ class BulletinNationalView extends GetView<BulletinNationalController> {
                 itemBuilder: (context, index) {
                   dynamic item =
                   controller.bulletinListArchive.value[index];
-                  return Container(
-                    margin: EdgeInsets.only(left: 16, top: 16, right: 16),
-                    decoration: BoxDecoration(
-                        color: AppColors().app_primary_bg_dark,
-                        borderRadius: BorderRadius.circular(8)
-                    ),
-                    child: ListTile(
-                      leading: Icon(Icons.file_present, size: 36),
-                      title: Text("${item['title_bn']}",
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500)),
-                      subtitle: Text("${item['publish_date']}"),
+                  return GestureDetector(
+                    onTap: () { Get.to(()=> WebviewView(), binding: WebviewBinding(), arguments: item, transition: Transition.rightToLeft ); },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 16, top: 16, right: 16),
+                      decoration: BoxDecoration(
+                          color: AppColors().app_primary_bg_dark,
+                          borderRadius: BorderRadius.circular(8)
+                      ),
+                      child: ListTile(
+                        leading: Icon(Icons.file_present, size: 36),
+                        title: Text("${item['title_bn']}",
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500)),
+                        subtitle: Text("${item['publish_date']}"),
+                      ),
                     ),
                   );
                 },

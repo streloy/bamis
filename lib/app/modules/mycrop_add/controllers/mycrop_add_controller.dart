@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../../../../utils/ApiURL.dart';
-import '../../weather_forecast/ModelLocation.dart';
 
 class MycropAddController extends GetxController {
 
@@ -54,8 +53,7 @@ class MycropAddController extends GetxController {
     locationsValue.value = locations.value[0]['id'];
   }
 
-  Future openCalender(BuildContext context) async{
-    print(selectedDate);
+  Future openCalender(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
@@ -64,7 +62,6 @@ class MycropAddController extends GetxController {
     if (picked != null && picked != selectedDate) {
       selectedDate = picked;
       plantationDateController.text = selectedDate.toString().substring(0,10);
-      print(selectedDate);
     }
   }
   
@@ -88,7 +85,6 @@ class MycropAddController extends GetxController {
       "plantation_date": "${plantationDateController.text}",
       "location_id": locationsValue.value
     });
-    print(params);
 
     var response = await http.post(Uri.parse("${ApiURL.mycrops_crops}"), body: params, headers: requestHeaders);
     dynamic decode = jsonDecode(response.body);
@@ -97,7 +93,7 @@ class MycropAddController extends GetxController {
       Fluttertoast.showToast(msg: decode['message'], toastLength: Toast.LENGTH_LONG);
     } else {
       Fluttertoast.showToast(msg: decode['message'], toastLength: Toast.LENGTH_LONG);
-      Get.back();
+      Get.back(result: 'update');
     }
   }
 

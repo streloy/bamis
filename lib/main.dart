@@ -7,14 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app/routes/app_pages.dart';
+import 'dart:io' show Platform;
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    //options: DefaultFirebaseOptions.currentPlatform,
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  await FirebaseService().initNotifications();
+  if(Platform.isAndroid) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    await FirebaseService().initNotifications();
+  }
+  await Firebase.initializeApp();
   await FirebaseService().getLocation();
 
   runApp(

@@ -80,6 +80,9 @@ class DashboardController extends GetxController {
   var notificationValue = "".obs;
   var cLocationUpazila = "".obs;
   var cLocationDistrict = "".obs;
+  var isForecastLoading = false.obs;
+
+  ItemScrollController itemScrollController = ItemScrollController();
 
   @override
   void onInit() {
@@ -90,6 +93,13 @@ class DashboardController extends GetxController {
   Future onRefresh() async {
     await getTime();
     await getSharedPrefData();
+  }
+
+  Future openModule(index) async {
+    var result = Get.toNamed(dashboardMenu[index]['page']);
+    if(result == 'update') {
+      Get.snackbar("Back Button", "Back button pressed", snackPosition: SnackPosition.BOTTOM, padding: EdgeInsets.only(bottom: 16)).show();
+    }
   }
 
   getTime() {
@@ -172,7 +182,7 @@ class DashboardController extends GetxController {
       'Accept-Language': lang.toString()
     };
     var response = await http.get(Uri.parse("${ApiURL.mycrops_mycropstage}?id=${item['id']}"), headers: requestHeaders);
-    dynamic decode = jsonDecode(response.body);
+    dynamic decode = await jsonDecode(response.body.toString());
     if(response.statusCode != 200) {
       Fluttertoast.showToast(msg: decode['message'], toastLength: Toast.LENGTH_LONG);
     }
@@ -188,7 +198,7 @@ class DashboardController extends GetxController {
       'Accept-Language': lang.toString()
     };
     var response = await http.get(Uri.parse("${ApiURL.bulltin_dashboard}"), headers: requestHeaders);
-    dynamic decode = jsonDecode(response.body);
+    dynamic decode = jsonDecode(response.body.toString());
     if(response.statusCode != 200) {
       Fluttertoast.showToast(msg: decode['message'], toastLength: Toast.LENGTH_LONG);
     }
@@ -196,6 +206,7 @@ class DashboardController extends GetxController {
   }
 
   Future getForecast(locationId) async {
+    isForecastLoading.value = true;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = await prefs.getString("TOKEN");
     var lang = Get.locale?.languageCode;
@@ -207,8 +218,7 @@ class DashboardController extends GetxController {
     var response = await http.get(Uri.parse(ApiURL.currentforecast + "?location=$locationId"), headers: requestHeaders);
     dynamic decode = jsonDecode(response.body);
     forecast.value = decode['result'];
-
-    print("${ApiURL.currentforecast}?location=${locationId}");
+    isForecastLoading.value = false;
   }
 
   Future gotoNotificationPage() async{

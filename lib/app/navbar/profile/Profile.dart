@@ -116,14 +116,14 @@ class _ProfileState extends State<Profile> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("profile_info_name".tr, textAlign: TextAlign.start, style: TextStyle(color: AppColors().app_primary_dark),),
                         Container(
+                          padding: EdgeInsets.only(top: 16),
                           width: MediaQuery.of(context).size.width,
                           child: TextField(
                             controller: controller.nameController,
                             enabled: true,
-                            decoration: const InputDecoration(
-                              hintText: "Full Name",
+                            decoration: InputDecoration(
+                              labelText: "profile_info_name".tr,
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.grey)),
                               disabledBorder: OutlineInputBorder(
@@ -137,14 +137,14 @@ class _ProfileState extends State<Profile> {
 
                         SizedBox(height: 16),
 
-                        Text("profile_info_email".tr, textAlign: TextAlign.start, style: TextStyle(color: AppColors().app_primary_dark),),
                         Container(
+                          padding: EdgeInsets.only(top: 16),
                           width: MediaQuery.of(context).size.width,
                           child: TextField(
                             controller: controller.emailController,
                             enabled: true,
-                            decoration: const InputDecoration(
-                              hintText: "Email Address",
+                            decoration: InputDecoration(
+                              labelText: "profile_info_email".tr,
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.grey)),
                               disabledBorder: OutlineInputBorder(
@@ -158,14 +158,14 @@ class _ProfileState extends State<Profile> {
 
                         SizedBox(height: 16),
 
-                        Text("profile_info_address".tr, textAlign: TextAlign.start, style: TextStyle(color: AppColors().app_primary_dark),),
                         Container(
+                          padding: EdgeInsets.only(top: 16),
                           width: MediaQuery.of(context).size.width,
                           child: TextField(
                             controller: controller.addressController,
                             enabled: true,
-                            decoration: const InputDecoration(
-                              hintText: "Address",
+                            decoration: InputDecoration(
+                              labelText: "profile_info_address".tr,
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.grey)),
                               disabledBorder: OutlineInputBorder(

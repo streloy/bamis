@@ -8,7 +8,7 @@ import '../../../../utils/ApiURL.dart';
 
 class TaskReminderController extends GetxController {
   //TODO: Implement TaskReminderController
-
+  var isLoading = false.obs;
   var tasks = [].obs;
 
   @override
@@ -19,6 +19,7 @@ class TaskReminderController extends GetxController {
   }
 
   Future getMasterInfo() async {
+    isLoading.value = true;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = await prefs.getString("TOKEN");
     var lang = Get.locale?.languageCode;
@@ -34,7 +35,7 @@ class TaskReminderController extends GetxController {
       Get.snackbar("Warning", decode['message']);
     }
     tasks.value = decode['result'];
-    print(decode);
+    isLoading.value = false;
   }
 
   Color getCardColor(String item) {

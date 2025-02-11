@@ -12,13 +12,19 @@ class WeatherForecastView extends GetView<WeatherForecastController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.back(result: 'update');
+          },
+        ),
         title: GestureDetector(
           onTap: controller.changeLocation,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Weather Forecast", style: TextStyle(fontSize: 16)),
+              Text("weather_forecast".tr, style: TextStyle(fontSize: 16)),
               Row(
                 children: [
                   Obx(() => Text(controller.locationName.value, style: TextStyle(fontSize: 12)) ),
@@ -37,7 +43,7 @@ class WeatherForecastView extends GetView<WeatherForecastController> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Obx(()=> Text("Weather Forecast For Next ${controller.forecast.value.length} Days", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500))),
+            Obx(()=> Text(controller.forecast.value.length > 0 ? controller.forecast.value[0]['header'] : "", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500))),
             Expanded(
               child: Obx(()=> ListView.builder (
                 itemCount: controller.forecast.value.length,
@@ -103,33 +109,33 @@ class WeatherForecastView extends GetView<WeatherForecastController> {
                           padding: const EdgeInsets.all(12.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Column(
                                 children: [
                                   Image.asset('assets/temp.png', height: 20),
-                                  Text("Temparature"),
-                                  Text("$tempMax-$tempMin$tempUnit", style: TextStyle(fontWeight: FontWeight.w700)),
+                                  Text("wf_temp".tr),
+                                  Text("$tempMax$tempUnit\n$tempMin$tempUnit", style: TextStyle(fontWeight: FontWeight.w700)),
                                 ],
                               ),
                               Column(
                                 children: [
                                   Image.asset('assets/rain.png', height: 20),
-                                  Text("Precipitation"),
+                                  Text("wf_rf".tr),
                                   Text("$rf$rfUnit", style: TextStyle(fontWeight: FontWeight.w700)),
                                 ],
                               ),
                               Column(
                                 children: [
                                   Image.asset('assets/rh.png', height: 20),
-                                  Text("Humidity"),
+                                  Text("wf_rh".tr),
                                   Text("$rh$rhUnit", style: TextStyle(fontWeight: FontWeight.w700)),
                                 ],
                               ),
                               Column(
                                 children: [
                                   Image.asset('assets/rain.png', height: 20),
-                                  Text("Wind Speed"),
+                                  Text("wf_wind".tr),
                                   Text("$windspd$windspdUnit", style: TextStyle(fontWeight: FontWeight.w700)),
                                 ],
                               )

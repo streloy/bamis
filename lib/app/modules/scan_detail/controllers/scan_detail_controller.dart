@@ -9,7 +9,6 @@ class ScanDetailController extends GetxController {
   void onInit() {
     data = Get.arguments;
     title.value = data['crops'][0];
-    print(data);
 
     super.onInit();
   }

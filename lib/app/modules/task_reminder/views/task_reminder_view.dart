@@ -13,14 +13,14 @@ class TaskReminderView extends GetView<TaskReminderController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Task Reminder'),
+        title: Text('task_reminder_title'.tr),
         titleSpacing: 0,
       ),
       body: Column(
         children: [
           Container(
             padding: EdgeInsets.all(16),
-            child: Text("Get your task what will help you to manage your farming", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors().app_primary)),
+            child: Text("task_reminder_promo".tr, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors().app_primary)),
           ),
 
           Flexible(
@@ -43,9 +43,9 @@ class TaskReminderView extends GetView<TaskReminderController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("${item['title']}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
-                        Text("Crop Name:" +  " ${item['crop_name']}"),
-                        Text("Plantation Date:" + " ${item['plantation_date']}"),
-                        Text("Event Duration:" + " ${item['event_start_day']} - ${item['event_end_day']}"),
+                        Text("task_reminder_crop_name".tr +  ": ${item['crop_name']}"),
+                        Text("task_reminder_pdate".tr + ": ${item['plantation_date']}"),
+                        Text("task_reminder_edate".tr + ": ${item['event_start_day']} - ${item['event_end_day']}"),
                       ],
                     ),
                   ),

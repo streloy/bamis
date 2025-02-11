@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -22,14 +23,15 @@ class CommunityPostDetailController extends GetxController {
   void onInit() {
     super.onInit();
 
-    dynamic decode = Get.arguments;
-    id.value = decode['id'];
-    title.value = decode['title'];
+    postData.value = Get.arguments;
+    id.value = postData.value['id'];
+    title.value = postData.value['title'];
 
-    getPostInfo(id.value);
+    postDetail(id.value);
+    postCommentList(id.value);
   }
 
-  Future getPostInfo(id) async{
+  Future postDetail(id) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     token = sharedPreferences.getString("TOKEN")!;
 
@@ -37,19 +39,64 @@ class CommunityPostDetailController extends GetxController {
       'Authorization': token.toString(),
       'Accept-Language': lang.toString()
     };
-
     var url = '${ApiURL.community_postdetail}?id=${id}';
     var response = await http.get(Uri.parse(url), headers: requestHeaders);
     dynamic decode = jsonDecode(response.body);
-    if(decode['result'].length < 1) {
-      return;
-    }
     postData.value = decode['result'][0];
+    print(postData.values);
+    print(postData.value['post_dislike']);
+  }
 
-    var urlcomments = '${ApiURL.community_postcomments}?id=${id}';
-    var responsecomments = await http.get(Uri.parse(urlcomments));
-    dynamic decodecomments = jsonDecode(responsecomments.body);
-    postComments.value = decodecomments['result'] ?? [];
+  Future postReaction(type, item) async {
+    var like = 1;
+    var dislike = 1;
+    if(type == 'like') {
+      like = (int.parse(item['liked']) == 1) ? 0 : 1;
+      dislike = int.parse(item['disliked']);
+    } else {
+      like = int.parse(item['liked']);
+      dislike = (int.parse(item['disliked']) == 1) ? 0 : 1;
+    }
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = prefs.getString("TOKEN")!;
+    Map<String, String> requestHeaders = {
+      'Authorization': token.toString(),
+      'Accept-Language': lang.toString()
+    };
+    var params = jsonEncode({
+      "id": int.parse(item['id']),
+      "like": like,
+      "dislike": dislike
+    });
+    var response = await http.post(Uri.parse(ApiURL.community_reaction), body: params, headers: requestHeaders);
+    dynamic decode = jsonDecode(response.body);
+
+    if(response.statusCode == 200 ) {
+      postDetail(item['id']);
+    }
+
+    Get.snackbar(
+      "Reaction",
+      decode['message'],
+      snackPosition: SnackPosition.BOTTOM,
+      margin: EdgeInsets.all(16),
+      padding: EdgeInsets.all(16)
+    );
+  }
+
+  Future postCommentList(id) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    token = sharedPreferences.getString("TOKEN")!;
+
+    Map<String, String> requestHeaders = {
+      'Authorization': token.toString(),
+      'Accept-Language': lang.toString()
+    };
+    var url = '${ApiURL.community_postcomments}?id=${id}';
+    var response = await http.get(Uri.parse(url), headers: requestHeaders);
+    dynamic decode = jsonDecode(response.body);
+    postComments.value = decode['result'];
   }
 
   Future commentSubmit() async{
@@ -69,10 +116,8 @@ class CommunityPostDetailController extends GetxController {
       "postId": '${postId}',
       "comment": "${comment}"
     });
-    print(params);
     var response = await http.post(Uri.parse(ApiURL.community_postcommentsubmit), body: params, headers: requestHeaders);
     dynamic decode = jsonDecode(response.body) ;
-    print(decode);
     if(response.statusCode != 200) {
       return Get.defaultDialog(
           title: "Alert",
@@ -81,7 +126,8 @@ class CommunityPostDetailController extends GetxController {
       );
     }
     commentController.text = "";
-    getPostInfo(postId);
+    postCommentList(postId);
+    FocusManager.instance.primaryFocus?.unfocus();
   }
 
 }

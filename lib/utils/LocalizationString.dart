@@ -45,6 +45,9 @@ class LocalizationString extends Translations {
       'dashboard_sidebar_contact_us': "Contact Us",
       'dashboard_sidebar_faq': "FAQ",
       'dashboard_sidebar_logout': "Logout",
+      'dashboard_snack_one_title': "Warning",
+      'dashboard_snack_one_message': "This is stage is started yet. Please wait till this stage will appear.",
+      'learn_more': "Learn more >",
 
       'weather_forecast': 'Weather Forecast',
       'wf_title': 'Weather Forecast',
@@ -107,21 +110,48 @@ class LocalizationString extends Translations {
       'add_mycrop_select_location': "Select Location",
       'add_mycrop_select_plantation_date': "Select Plantation Date",
       'add_mycrop_submit': "Add New Crop",
+      'add_mycrop_delete': "Delete",
 
-      'crop_advisory_title': "Crop Advisory",
-      'crop_advisory_promo': "Select particular crop to get specific advisory",
-      'crop_advisory_stage_title': "Crop Stages",
-      'crop_advisory_stage_promo': "Stage-by-stage recommendation for",
-      'crop_disease_title': "Crop Disease",
-      'crop_disease_promo': "Select particular crop to get specific disease advisory",
-      'crop_disease_stage_title': "Crop Disease",
-      'crop_disease_stage_promo': "Stage-by-stage recommendation for",
+      'mycrop_advisory_title': "Crop Advisory",
+      'mycrop_advisory_promo': "Select particular crop to get specific advisory",
+      'mycrop_advisory_stage_title': "Crop Stages",
+      'mycrop_advisory_stage_promo': "Stage-by-stage recommendation for",
+      'mycrop_disease_title': "Crop Disease",
+      'mycrop_disease_promo': "Select particular crop to get specific disease advisory",
+      'mycrop_disease_stage_title': "Crop Disease",
+      'mycrop_disease_stage_promo': "Stage-by-stage recommendation for",
 
       'community_title': "Community",
       'community_promot': "Welcome to BAMIS community",
       'community_post_add_title': "Add new community post",
 
-      'agrihub_get_cultivation_tips': "Get Cultivation Tips"
+      'agrihub_get_cultivation_tips': "Get Cultivation Tips",
+
+      'pda_title': 'Pest & Disease Information',
+      'pda_select_crop': 'Select crop',
+      'pda_view_all': 'View All',
+      'pda_scientific_name': 'Scientific name',
+      'pda_pathogen_name': 'Pathogen name',
+      'pda_symptoms': 'Symptoms',
+      'pda_preventive_measure': 'Preventive measure',
+      'pda_organic_control': 'Organic control',
+      'pda_chemical_control': 'Chemical control',
+      'pda_what_caused_it': 'What caused_it',
+
+      'notification_title': "Notifications",
+
+      'task_reminder_title': "Task Reminder",
+      'task_reminder_promo': "Get your task what will help you to manage your farming",
+      'task_reminder_crop_name': "Crop Name",
+      'task_reminder_pdate': "Plantation Date",
+      'task_reminder_edate': "Event Duration",
+
+      'advisory_title': "Advisory Bulletin",
+      'advisory_promo': "To get updated ,explore the bulletins.You will get bulletins by different category",
+      'advisory_current': "Current",
+      'advisory_archive': "Archive",
+      'advisory_select_district': "Select District"
+
     },
     'bn_BD': {
       'title': 'বামিস',
@@ -164,6 +194,9 @@ class LocalizationString extends Translations {
       'dashboard_sidebar_contact_us': "যোগাযোগ করুণ",
       'dashboard_sidebar_faq': "এফএকিউ ",
       'dashboard_sidebar_logout': "লগ আউট",
+      'dashboard_snack_one_title': "সতর্কতা",
+      'dashboard_snack_one_message': "এই পর্যায়টি এখনও শুরু হয়নি। এই পর্যায়টি প্রদর্শিত হওয়া পর্যন্ত অপেক্ষা করুন।",
+      'learn_more': "বিস্তারিত জানুন >",
 
 
       'weather_forecast': 'আবহাওয়া পূর্বাভাস',
@@ -227,6 +260,7 @@ class LocalizationString extends Translations {
       'add_mycrop_select_location': "স্থান নির্বাচন করুণ",
       'add_mycrop_select_plantation_date': "ফসল লাগানোর তারিখ নির্বাচন করুণ",
       'add_mycrop_submit': "নতুন ফসল যুক্ত করুণ",
+      'add_mycrop_delete': "মুছে ফেলুন",
 
       'mycrop_advisory_title': "ফসল পরামর্শ",
       'mycrop_advisory_promo': "নির্দিষ্ট পরামর্শ পেতে নির্দিষ্ট ফসল নির্বাচন করুন",
@@ -241,7 +275,32 @@ class LocalizationString extends Translations {
       'community_promot': "BAMIS কমিউনিটিতে স্বাগতম",
       'community_post_add_title': "নতুন কমিউনিটি পোস্ট যুক্ত করুণ",
 
-      'agrihub_get_cultivation_tips': "চাষের পরামর্শ পেতে ক্লিক করুণ"
+      'agrihub_get_cultivation_tips': "চাষের পরামর্শ পেতে ক্লিক করুণ",
+
+      'pda_title': 'পোকামাকড় ও রোগের তথ্য',
+      'pda_select_crop': 'ফসল নির্বাচন করুন',
+      'pda_view_all': 'সবগুলো দেখুন',
+      'pda_scientific_name': 'বৈজ্ঞানিক নাম',
+      'pda_pathogen_name': 'জীবাণুর নাম',
+      'pda_symptoms': 'লক্ষণ',
+      'pda_preventive_measure': 'প্রতিরোধমূলক ব্যবস্থা',
+      'pda_organic_control': 'জৈব নিয়ন্ত্রণ',
+      'pda_chemical_control': 'রাসায়নিক নিয়ন্ত্রণ',
+      'pda_what_caused_it': 'এটার কারণ কী?',
+
+      'notification_title': "বিজ্ঞপ্তি",
+
+      'task_reminder_title': "টাস্ক রিমাইন্ডার",
+      'task_reminder_promo': "তোমার কৃষিকাজ পরিচালনা করতে সাহায্য করবে এমন কাজগুলো দেয়া হলো।",
+      'task_reminder_crop_name': "ফলসের নাম",
+      'task_reminder_pdate': "রোপণের তারিখ",
+      'task_reminder_edate': "কাজের সময়কাল",
+
+      'advisory_title': "অ্যাডভাইসরি বুলেটিন",
+      'advisory_promo': "আপডেট পেতে, বুলেটিনগুলি অনুসন্ধান করুন। আপনি বিভিন্ন বিভাগ অনুসারে বুলেটিন পেতে পারেন।",
+      'advisory_current': "চলমান",
+      'advisory_archive': "সংরক্ষণকৃত",
+      'advisory_select_district': "জেলা নির্বাচন করুণ"
     }
   };
 }

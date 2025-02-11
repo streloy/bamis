@@ -11,16 +11,15 @@ class BulletinsView extends GetView<BulletinsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Advisory Bulletins'),
+        title: Text('advisory_title'.tr),
         titleSpacing: 0,
       ),
       body: Column(
         children: [
           Container(
             padding: EdgeInsets.all(16),
-            child: Text(
-              "To get updated ,explore the bulletins.You will get bulletins by different category",
-              maxLines: 2,
+            child: Text("advisory_promo".tr,
+              maxLines: 3,
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,

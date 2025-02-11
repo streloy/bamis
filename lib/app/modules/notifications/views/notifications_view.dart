@@ -11,7 +11,7 @@ class NotificationsView extends GetView<NotificationsController> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Notifications'),
+          title: Text("notification_title".tr),
           titleSpacing: 0,
         ),
         body: Obx(()=> ListView.builder(
@@ -27,8 +27,12 @@ class NotificationsView extends GetView<NotificationsController> {
               child: GestureDetector(
                 onTap: () { controller.updateSeen(item); },
                 child: ListTile(
-                  title: Text(toBeginningOfSentenceCase("${item['title']}"), style: TextStyle(fontWeight: FontWeight.w700)),
-                  subtitle: Text(toBeginningOfSentenceCase("${item['body']}")),
+                  titleAlignment: ListTileTitleAlignment.top,
+                  leading: ClipOval(
+                    child: Image.network("https://bamisapp.bdservers.site/assets/auth/profile.jpg", fit: BoxFit.cover),
+                  ),
+                  title: Text(toBeginningOfSentenceCase("${item['title']}"), maxLines: 2, style: TextStyle(fontWeight: FontWeight.w700)),
+                  subtitle: Text(toBeginningOfSentenceCase("${item['body']}"), maxLines: 2,),
                 ),
               ),
             );

@@ -1,8 +1,8 @@
 import 'package:bamis/utils/ApiURL.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
+import 'package:flutter_html/flutter_html.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../../../utils/AppColors.dart';
 import '../controllers/community_post_detail_controller.dart';
 
@@ -41,7 +41,7 @@ class CommunityPostDetailView extends GetView<CommunityPostDetailController> {
                         ),
                         title: Text(controller.postData.value['fullname'] ?? ""),
                         subtitle: Text(controller.postData.value['created_at'] ?? ""),
-                        trailing: Icon(Icons.more_vert_outlined),
+                        trailing: IconButton(onPressed: () { Share.share(controller.postData.value['url']); }, icon: Icon(Icons.share)),
                       ),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 16),
@@ -56,51 +56,39 @@ class CommunityPostDetailView extends GetView<CommunityPostDetailController> {
                                   width: double.infinity,
                                   fit: BoxFit.cover),
                             ),
+                            SizedBox(height: 16),
+                            Text(controller.postData.value['title'] ?? "", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
                             SizedBox(height: 8),
-                            Text(controller.postData.value['title'] ?? "",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w700)),
                             Text(controller.postData.value['description'] ?? ""),
-                            SizedBox(height: 8),
+                            SizedBox(height: 16),
                             Row(
-                              children: [
-                                Text('${controller.postData.value['post_like'] ?? ''} Upvote'),
-                                Text("•", style: TextStyle(fontSize: 20)),
-                                Text('${controller.postData.value['post_dislike'] ?? ''} Downvote'),
-                                Text("•", style: TextStyle(fontSize: 20)),
-                                Text('${controller.postData.value['post_comments'] ?? ''} Comments'),
-                              ],
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(controller.postData.value['post_like'].toString() + " Upvote", style: TextStyle(fontSize: 12)),
+                                Text(controller.postData.value['post_dislike'].toString() + " Downvote", style: TextStyle(fontSize: 12)),
+                                Text(controller.postData.value['post_comments'].toString() + " Comments", style: TextStyle(fontSize: 12)),
+                              ],
                             ),
                             SizedBox(height: 8),
                             Row(
-                              children: [
-                                TextButton(
-                                    onPressed: () {},
-                                    child: Column(
-                                      children: [
-                                        Icon(Icons.thumb_up_outlined),
-                                        Text("Upvote")
-                                      ],
-                                    )),
-                                TextButton(
-                                    onPressed: () {},
-                                    child: Column(
-                                      children: [
-                                        Icon(Icons.thumb_down_outlined),
-                                        Text("Downvote")
-                                      ],
-                                    )),
-                                TextButton(
-                                    onPressed: () {},
-                                    child: Column(
-                                      children: [
-                                        Icon(Icons.forum_outlined),
-                                        Text("Comments")
-                                      ],
-                                    ))
-                              ],
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Obx(()=> TextButton.icon(
+                                  onPressed: () { controller.postReaction('like', controller.postData.value); },
+                                  icon: controller.postData.value['liked'] == '1' ? Icon(Icons.thumb_up, size: 14) : Icon(Icons.thumb_up_outlined, size: 14),
+                                  label: Text("Upvote", style: TextStyle(fontSize: 12)),
+                                )),
+                                Obx(()=> TextButton.icon(
+                                  onPressed: () { controller.postReaction('dislike', controller.postData.value); },
+                                  icon: controller.postData.value['disliked'] == '1' ? Icon(Icons.thumb_down, size: 14) : Icon(Icons.thumb_down_outlined, size: 14),
+                                  label: Text("Downvote", style: TextStyle(fontSize: 12)),
+                                )),
+                                // TextButton.icon(
+                                //   onPressed: () { },
+                                //   icon: Icon(Icons.forum_outlined, size: 14),
+                                //   label: Text("Comments", style: TextStyle(fontSize: 12)),
+                                // ),
+                              ],
                             ),
 
                             SizedBox(height: 8),
@@ -123,7 +111,7 @@ class CommunityPostDetailView extends GetView<CommunityPostDetailController> {
                                         NetworkImage(postCommnet['photo'] ?? ApiURL.placeholder_auth),
                                         backgroundColor: Colors.transparent,
                                       ),
-                                      title: Text(postCommnet['fullname'] ?? ""),
+                                      title: Text(!postCommnet['fullname'].toString().isEmpty ? postCommnet['fullname'] : postCommnet['mobile']),
                                       subtitle: Text(postCommnet['created_at'] ?? ""),
                                       contentPadding: EdgeInsets.all(0),
                                     ),

@@ -28,6 +28,7 @@ class NotificationsController extends GetxController {
     var response = await http.get(Uri.parse(ApiURL.notification_notifications), headers: requestHeaders);
     dynamic decode = jsonDecode(response.body);
     notificationList.value = decode['result'];
+    print(notificationList.value);
   }
 
   Future updateSeen(dynamic item) async {

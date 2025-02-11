@@ -35,7 +35,6 @@ class ScanController extends GetxController {
     var url = "${ApiURL.analysis_croplist}";
     var response = await http.get(Uri.parse(url), headers: requestHeaders);
     dynamic decode = jsonDecode(response.body);
-    print(decode);
     cropList.value = decode['result'];
     cropValue.value = cropList.value[0]['name_short'];
   }
@@ -53,7 +52,6 @@ class ScanController extends GetxController {
   Future selectImageFromCamera() async{
     final returnImage = await ImagePicker().pickImage(source: ImageSource.camera);
     selectedImage.value = returnImage!.path;
-    print(selectedImage.value);
   }
 
 

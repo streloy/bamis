@@ -84,8 +84,6 @@ class _ScanState extends State<Scan> {
     var res = await http.Response.fromStream(response);
     dynamic decode = jsonDecode(res.body);
     setState(() { isLoading = false; });
-
-    print(res.statusCode);
     if(res.statusCode != 200) {
       showDialog(
           context: context,
@@ -96,8 +94,7 @@ class _ScanState extends State<Scan> {
           )
       );
     } else {
-      print(decode);
-      Get.to(ScanDetailView(), binding: ScanDetailBinding(), arguments: decode, transition: Transition.rightToLeft);
+      Get.to(()=> ScanDetailView(), binding: ScanDetailBinding(), arguments: decode, transition: Transition.rightToLeft);
     }
 
   }

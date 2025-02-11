@@ -16,10 +16,10 @@ class HomeView extends GetView<HomeController> {
         backgroundColor: const Color(0xFF015205),
         foregroundColor: Colors.white,
         onPressed: () {
-          Get.to(Scan());
+          Get.to(()=> Scan());
           //controller.onItemTapped(4);
         },
-        tooltip: "Scan",
+        tooltip: "scan".tr,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         child: const Icon(Icons.camera),
       ),

@@ -1,10 +1,6 @@
 import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
-import '../../scan_detail/bindings/scan_detail_binding.dart';
-import '../../scan_detail/views/scan_detail_view.dart';
 import '../controllers/pest_disease_alerts_controller.dart';
 
 class PestDiseaseAlertsView extends GetView<PestDiseaseAlertsController> {
@@ -14,7 +10,7 @@ class PestDiseaseAlertsView extends GetView<PestDiseaseAlertsController> {
     return Scaffold(
       appBar: AppBar(
         // leading: Icon(Icons.pest_control),
-        title: Text("title".tr),
+        title: Text("pda_title".tr),
         titleSpacing: 0,
       ),
       body: Column(
@@ -34,7 +30,7 @@ class PestDiseaseAlertsView extends GetView<PestDiseaseAlertsController> {
                 );
               }).toList(),
               decoration: InputDecoration(
-                  labelText: "select_crop".tr,
+                  labelText: "pda_select_crop".tr,
                   border: OutlineInputBorder()
               ),
             ),)
@@ -52,7 +48,7 @@ class PestDiseaseAlertsView extends GetView<PestDiseaseAlertsController> {
                   children: [
                     ListTile(
                       title: Text("${disease['stage']}", style: TextStyle(fontWeight: FontWeight.w700, color: AppColors().app_primary)),
-                      trailing: TextButton(onPressed: () { print(disease); }, child: Text("See all")),
+                      trailing: TextButton(onPressed: () { print(disease); }, child: Text("pda_view_all".tr)),
                     ),
                     Container(
                       height: 230,

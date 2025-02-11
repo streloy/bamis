@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../webview/bindings/webview_binding.dart';
+import '../../webview/views/webview_view.dart';
 import '../controllers/bulletin_district_controller.dart';
 
 class BulletinDistrictView extends GetView<BulletinDistrictController> {
@@ -21,7 +23,7 @@ class BulletinDistrictView extends GetView<BulletinDistrictController> {
               indicatorWeight: 4,
               indicatorColor: Colors.amber,
               labelColor: Colors.white,
-              tabs: [Tab(text: "Current"), Tab(text: "Archive")],
+              tabs: [Tab(text: "advisory_current".tr), Tab(text: "advisory_archive".tr)],
             ),
           ),
           body: TabBarView(
@@ -31,10 +33,10 @@ class BulletinDistrictView extends GetView<BulletinDistrictController> {
                 children: [
                   Container(
                       margin: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 0),
-                      child: Text("Select District", style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16))
+                      child: Text("advisory_select_district".tr, style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16))
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -66,19 +68,22 @@ class BulletinDistrictView extends GetView<BulletinDistrictController> {
                           itemBuilder: (context, index) {
                             dynamic item =
                             controller.bulletinListCurrent.value[index];
-                            return Container(
-                              margin: EdgeInsets.only(left: 16, top: 16, right: 16),
-                              decoration: BoxDecoration(
-                                  color: AppColors().app_primary_bg_dark,
-                                  borderRadius: BorderRadius.circular(8)
-                              ),
-                              child: ListTile(
-                                leading: Icon(Icons.file_present, size: 36),
-                                title: Text("${item['title_bn']}",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w700)),
-                                subtitle: Text("${item['publish_date']}"),
+                            return GestureDetector(
+                              onTap: () { Get.to(()=> WebviewView(), binding: WebviewBinding(), arguments: item, transition: Transition.rightToLeft ); },
+                              child: Container(
+                                margin: EdgeInsets.only(left: 16, top: 16, right: 16),
+                                decoration: BoxDecoration(
+                                    color: AppColors().app_primary_bg_dark,
+                                    borderRadius: BorderRadius.circular(8)
+                                ),
+                                child: ListTile(
+                                  leading: Icon(Icons.file_present, size: 36),
+                                  title: Text("${item['title_bn']}",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w700)),
+                                  subtitle: Text("${item['publish_date']}"),
+                                ),
                               ),
                             );
                           },
@@ -141,19 +146,22 @@ class BulletinDistrictView extends GetView<BulletinDistrictController> {
                         itemBuilder: (context, index) {
                           dynamic item =
                           controller.bulletinListArchive.value[index];
-                          return Container(
-                            margin: EdgeInsets.only(left: 16, top: 16, right: 16),
-                            decoration: BoxDecoration(
-                              color: AppColors().app_primary_bg_dark,
-                              borderRadius: BorderRadius.circular(8)
-                            ),
-                            child: ListTile(
-                              leading: Icon(Icons.file_present, size: 36),
-                              title: Text("${item['title_bn']}",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700)),
-                              subtitle: Text("${item['publish_date']}"),
+                          return GestureDetector(
+                            onTap: () { Get.to(()=> WebviewView(), binding: WebviewBinding(), arguments: item, transition: Transition.rightToLeft ); },
+                            child: Container(
+                              margin: EdgeInsets.only(left: 16, top: 16, right: 16),
+                              decoration: BoxDecoration(
+                                color: AppColors().app_primary_bg_dark,
+                                borderRadius: BorderRadius.circular(8)
+                              ),
+                              child: ListTile(
+                                leading: Icon(Icons.file_present, size: 36),
+                                title: Text("${item['title_bn']}",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w700)),
+                                subtitle: Text("${item['publish_date']}"),
+                              ),
                             ),
                           );
                         },

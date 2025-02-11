@@ -65,6 +65,7 @@ class WeatherForecastController extends GetxController {
     var response = await http.get(Uri.parse(ApiURL.dailyforecast + "?location=$locationId"), headers: requestHeaders);
     dynamic decode = jsonDecode(response.body);
     forecast.value = decode['result'];
+
     return decode['result'];
   }
 
