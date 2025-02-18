@@ -95,7 +95,9 @@ class WeatherForecastView extends GetView<WeatherForecastController> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Image.network(icon, height: 36),
-                                  Text(type),
+                                  Container(
+                                    width: 150,
+                                      child: Text(type, overflow: TextOverflow.visible, maxLines: 2,textAlign: TextAlign.end,)),
                                 ],
                               )
                             ],
