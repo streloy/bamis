@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:bamis/utils/NotifiationService.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -13,6 +14,8 @@ import 'ApiURL.dart';
 
 class FirebaseService {
   final _firebaseMessaging = FirebaseMessaging.instance;
+
+
 
   Future<void> initNotifications() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -28,11 +31,17 @@ class FirebaseService {
       print(message?.notification?.body);
     });
 
-    FirebaseMessaging.onMessage.listen((message) {
-      print('PUSH LISTEN');
-      print(message.notification!.title);
-      print(message.notification!.body);
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+      print(message.toMap());
+      var title = message.notification!.title;
+      var body = message.notification!.body;
+      var data = message.data;
+
+      //await NotificationService().initNotification();
+      //NotificationService().showNotification(1, title, body);
     });
+
+
   }
 
   Future<void> getLocation() async {
@@ -68,13 +77,6 @@ class FirebaseService {
       prefs.setString("LOCATION_UPAZILA", decode['result']['upazila']);
       prefs.setString("LOCATION_DISTRICT", decode['result']['district']);
     } catch (e) {
-      Get.snackbar(
-        "Error",
-        e.toString(),
-        snackPosition: SnackPosition.BOTTOM,
-        margin: EdgeInsets.all(16),
-        padding: EdgeInsets.all(16),
-      );
       print(e.toString());
     }
   }
