@@ -81,7 +81,9 @@ class ApiURL {
   static String sidebar_faq = '${base_url}sidebar/faq';
 
   //
-  static String placeholder_auth = "https://bamisapp.bdservers.site/assets/auth/profile.jpg";
-  static String placeholder_community_cover = "https://bamisapp.bdservers.site/assets/community/default.png";
+  static String placeholder_auth = "${base_url}assets/auth/profile.jpg";
+  static String placeholder_community_cover = "${base_url}assets/community/default.png";
 
+  // Bamis Portal URL Api
+  static String bamis_portal_url = "${base_url_api}auth/bamis";
 }

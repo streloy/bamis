@@ -20,6 +20,7 @@ class LocalizationString extends Translations {
       'dashboard_take_a_look': 'Take a look',
       'dashboard_my_crops': 'MY CROPS',
       'dashboard_view_all': 'View All',
+      'dashboard_bamis_portal': 'Bamis\nPortal',
       'dashboard_weather_forecast': 'Weather\nForecast',
       'dashboard_weather_alert': 'Weather\nAlert',
       'dashboard_flood_forecast': 'Flood\nForecast',
@@ -150,8 +151,9 @@ class LocalizationString extends Translations {
       'advisory_promo': "To get updated ,explore the bulletins.You will get bulletins by different category",
       'advisory_current': "Current",
       'advisory_archive': "Archive",
-      'advisory_select_district': "Select District"
+      'advisory_select_district': "Select District",
 
+      'bamis_portal_title': "Bamis Portal"
     },
     'bn_BD': {
       'title': 'বামিস',
@@ -169,6 +171,7 @@ class LocalizationString extends Translations {
       'dashboard_take_a_look': 'একবার দেখে নিন',
       'dashboard_my_crops': 'আমার ফসল',
       'dashboard_view_all': 'সবগুলো দেখুন',
+      'dashboard_bamis_portal': 'বামিস\nপোর্টাল',
       'dashboard_weather_forecast': 'আবহাওয়া\nপূর্বাভাস',
       'dashboard_weather_alert': 'আবহাওয়া\nসতর্কবার্তা',
       'dashboard_flood_forecast': 'বন্যা\nপূর্বাভাস',
@@ -300,7 +303,9 @@ class LocalizationString extends Translations {
       'advisory_promo': "আপডেট পেতে, বুলেটিনগুলি অনুসন্ধান করুন। আপনি বিভিন্ন বিভাগ অনুসারে বুলেটিন পেতে পারেন।",
       'advisory_current': "চলমান",
       'advisory_archive': "সংরক্ষণকৃত",
-      'advisory_select_district': "জেলা নির্বাচন করুণ"
+      'advisory_select_district': "জেলা নির্বাচন করুণ",
+
+      'bamis_portal_title': "বামিস পোর্টাল"
     }
   };
 }

@@ -4,6 +4,8 @@ import '../modules/all_module/bindings/all_module_binding.dart';
 import '../modules/all_module/views/all_module_view.dart';
 import '../modules/articles/bindings/articles_binding.dart';
 import '../modules/articles/views/articles_view.dart';
+import '../modules/bamis_portal/bindings/bamis_portal_binding.dart';
+import '../modules/bamis_portal/views/bamis_portal_view.dart';
 import '../modules/bulletin_district/bindings/bulletin_district_binding.dart';
 import '../modules/bulletin_district/views/bulletin_district_view.dart';
 import '../modules/bulletin_national/bindings/bulletin_national_binding.dart';
@@ -253,6 +255,11 @@ class AppPages {
       name: _Paths.TASK_REMINDER_DETAIL,
       page: () => const TaskReminderDetailView(),
       binding: TaskReminderDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.BAMIS_PORTAL,
+      page: () => const BamisPortalView(),
+      binding: BamisPortalBinding(),
     ),
   ];
 }

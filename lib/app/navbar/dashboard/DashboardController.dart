@@ -13,6 +13,10 @@ class DashboardController extends GetxController {
 
   final List<dynamic> dashboardMenu = [
     {
+      "name": "dashboard_bamis_portal",
+      "image": "bamis_portal.png",
+      "page": "bamis-portal"
+    },{
       "name": "dashboard_weather_forecast",
       "image": "weather_forecast.png",
       "page": "weather-forecast"
