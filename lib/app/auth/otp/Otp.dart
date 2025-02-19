@@ -134,14 +134,14 @@ class _OtpState extends State<Otp> {
               SizedBox(height: 24),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 32),
-                child: Obx(()=> Row(
+                child: Obx(()=> Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Wait ${controller.second.value} secconds to send new code."),
+                    Text("Wait ${controller.second.value} seconds to send new code."),
                     controller.second == 0 ?
                     InkWell(
                       onTap: () { controller.resendOTP(); },
-                      child: Text("RESEND CODE", style: TextStyle(fontWeight: FontWeight.w700)),
+                      child: Text("RESEND CODE", style: TextStyle(fontWeight: FontWeight.w700, color: Colors.blue)),
                     ) : Text("RESEND CODE")
                   ],
                 )),

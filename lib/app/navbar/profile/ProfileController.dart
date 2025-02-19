@@ -3,17 +3,18 @@ import 'dart:io';
 import 'package:bamis/app/auth/mobile/Mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../../../utils/ApiURL.dart';
+import '../../../utils/UserService.dart';
 
 class ProfileController extends GetxController with GetSingleTickerProviderStateMixin {
 
   late TabController tabController = TabController(length: 3, vsync: this);
 
+  final userService = UserService(); //User service for replacement of Shared pref
+
   Future logout() async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var response = await http.post(ApiURL.fcm, headers: { HttpHeaders.authorizationHeader: '${prefs.getString('TOKEN')}' } );
+    var response = await http.post(ApiURL.fcm, headers: { HttpHeaders.authorizationHeader: '${userService.userToken}' } );
     dynamic decode = jsonDecode(response.body) ;
 
     Get.defaultDialog(
@@ -21,13 +22,7 @@ class ProfileController extends GetxController with GetSingleTickerProviderState
         middleText: decode['message'],
         textCancel: 'OK',
         onCancel: () async {
-          await prefs.remove("TOKEN");
-          await prefs.remove("ID");
-          await prefs.remove("NAME");
-          await prefs.remove("EMAIL");
-          await prefs.remove("MOBILE");
-          await prefs.remove("ADDRESS");
-          await prefs.remove("PHOTO");
+          await userService.clearUserData();
           Get.offAll(Mobile(), transition: Transition.upToDown);
         }
     );
@@ -50,13 +45,13 @@ class ProfileController extends GetxController with GetSingleTickerProviderState
   }
 
   Future getSharedPrefData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    id.value = (await prefs.getString("ID"))!;
-    name.value = (await prefs.getString("NAME"))!;
-    mobile.value = (await prefs.getString("MOBILE"))!;
-    email.value = (await prefs.getString("EMAIL"))!;
-    address.value = (await prefs.getString("ADDRESS"))!;
-    photo.value = ApiURL.base_url_image + (await prefs.getString("PHOTO"))!;
+    id.value = userService.userId ?? '';
+    name.value = userService.userName ?? '';
+    mobile.value = userService.userMobile ?? '';
+    email.value = userService.userEmail ?? '';
+    address.value = userService.userAddress ?? '';
+    photo.value = ApiURL.base_url_image + (userService.userPhoto ?? '');
+
 
     nameController.text = name.value;
     emailController.text = email.value;
@@ -80,11 +75,12 @@ class ProfileController extends GetxController with GetSingleTickerProviderState
     dynamic decode = jsonDecode(response.body) ;
 
     if(response.statusCode == 200) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('NAME', nameController.text);
-      prefs.setString('EMAIL', emailController.text);
-      prefs.setString('ADDRESS', addressController.text);
-      name.value = nameController.text;
+
+      await userService.updateUserData(
+          nameController.text,
+          emailController.text,
+          addressController.text
+      );
     }
 
     return Get.defaultDialog(
