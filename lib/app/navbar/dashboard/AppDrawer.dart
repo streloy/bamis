@@ -4,10 +4,10 @@ import 'package:bamis/app/modules/webview/bindings/webview_binding.dart';
 import 'package:bamis/app/modules/webview/views/webview_view.dart';
 import 'package:bamis/utils/ApiURL.dart';
 import 'package:bamis/utils/AppColors.dart';
+import 'package:bamis/utils/UserPrefService.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../auth/mobile/Mobile.dart';
 
@@ -21,6 +21,8 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
+  final userPrefService = UserPrefService();
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -80,8 +82,7 @@ class _AppDrawerState extends State<AppDrawer> {
           Divider(),
           GestureDetector(
             onTap: () async {
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-              var response = await http.post(ApiURL.fcm, headers: { HttpHeaders.authorizationHeader: '${prefs.getString('TOKEN')}' } );
+              var response = await http.post(ApiURL.fcm, headers: { HttpHeaders.authorizationHeader: '${userPrefService.userToken ?? ''}' } );
               dynamic decode = jsonDecode(response.body) ;
 
               Get.defaultDialog(
@@ -89,13 +90,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   middleText: decode['message'],
                   textCancel: 'OK',
                   onCancel: () async {
-                    await prefs.remove("TOKEN");
-                    await prefs.remove("ID");
-                    await prefs.remove("NAME");
-                    await prefs.remove("EMAIL");
-                    await prefs.remove("MOBILE");
-                    await prefs.remove("ADDRESS");
-                    await prefs.remove("PHOTO");
+                    userPrefService.clearUserData();
                     Get.offAll(Mobile(), transition: Transition.upToDown);
                   }
               );

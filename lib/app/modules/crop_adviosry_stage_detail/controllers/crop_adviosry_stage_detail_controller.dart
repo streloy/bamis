@@ -1,8 +1,8 @@
 import 'dart:convert';
 
+import 'package:bamis/utils/UserPrefService.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../../utils/ApiURL.dart';
@@ -22,8 +22,7 @@ class CropAdviosryStageDetailController extends GetxController {
   }
 
   Future getMyCropStageDetail(dynamic item) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = await prefs.getString("TOKEN");
+    var token = await UserPrefService().userToken ?? '';
     var lang = Get.locale?.languageCode;
 
     Map<String, String> requestHeaders = {

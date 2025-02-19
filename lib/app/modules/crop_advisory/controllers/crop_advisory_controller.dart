@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:bamis/utils/AppColors.dart';
+import 'package:bamis/utils/UserPrefService.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../../utils/ApiURL.dart';
@@ -17,6 +17,7 @@ class CropAdvisoryController extends GetxController {
 
   var isupdate = "";
   var crops = [].obs;
+  final userPrefService = UserPrefService();
 
   @override
   void onInit() {
@@ -33,8 +34,7 @@ class CropAdvisoryController extends GetxController {
   }
 
   Future getMasterInfo() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = await prefs.getString("TOKEN");
+    var token = userPrefService.userToken;
     var lang = Get.locale?.languageCode;
 
     Map<String, String> requestHeaders = {
@@ -51,8 +51,7 @@ class CropAdvisoryController extends GetxController {
   }
 
   Future deleteMyCrop(crop_id) async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = await prefs.getString("TOKEN");
+    var token = userPrefService.userToken;
     var lang = Get.locale?.languageCode;
 
     Map<String, String> requestHeaders = {

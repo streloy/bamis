@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:bamis/app/modules/weather_forecast/ModelLocation.dart';
 import 'package:bamis/utils/ApiURL.dart';
+import 'package:bamis/utils/UserPrefService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../utils/AppColors.dart';
 
@@ -18,6 +18,7 @@ class WeatherForecastController extends GetxController {
   var locationName = "".obs;
   List<ModelLocation> locations = [];
   dynamic forecast = [].obs;
+  final userPrefService = UserPrefService();
 
   @override
   void onInit() {
@@ -37,9 +38,8 @@ class WeatherForecastController extends GetxController {
   }
 
   Future getCurrentLocation() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    locationId.value = int.parse(prefs.getString("LOCATION_ID")!);
-    locationName.value = prefs.getString("LOCATION_NAME")!;
+    locationId.value = int.parse(userPrefService.locationId ?? '');
+    locationName.value = userPrefService.locationName ?? '';
     getForecast(locationId.value);
   }
 
@@ -54,8 +54,7 @@ class WeatherForecastController extends GetxController {
   }
 
   Future getForecast(locationId) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = await prefs.getString("TOKEN");
+    var token = userPrefService.userToken ?? '';
     var lang = Get.locale?.languageCode;
 
     Map<String, String> requestHeaders = {

@@ -6,11 +6,11 @@ import 'package:bamis/app/modules/community_post_my/bindings/community_post_my_b
 import 'package:bamis/app/modules/community_post_my/views/community_post_my_view.dart';
 import 'package:bamis/app/navbar/community/CommunityController.dart';
 import 'package:bamis/utils/AppColors.dart';
+import 'package:bamis/utils/UserPrefService.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:share_plus/share_plus.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/ApiURL.dart';
 import '../../modules/community_post_detail/bindings/community_post_detail_binding.dart';
@@ -25,7 +25,7 @@ class Community extends StatefulWidget {
 
 class _CommunityState extends State<Community> with RouteAware {
   final controller = Get.put(CommunityController());
-
+  final userPrefService = UserPrefService();
   ScrollController scrollController = ScrollController();
   List<dynamic> mainpost = [];
   List<dynamic> post = [];
@@ -71,8 +71,7 @@ class _CommunityState extends State<Community> with RouteAware {
       dislike = (int.parse(item['disliked']) == 1) ? 0 : 1;
     }
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    token = prefs.getString("TOKEN")!;
+    token = userPrefService.userToken ?? '';
     Map<String, String> requestHeaders = {
       'Authorization': token.toString(),
       'Accept-Language': lang.toString()
@@ -114,8 +113,7 @@ class _CommunityState extends State<Community> with RouteAware {
   }
 
   Future getPost(offset, limit) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    token = sharedPreferences.getString("TOKEN")!;
+    token = userPrefService.userToken ?? '';
 
     Map<String, String> requestHeaders = {
       'Authorization': token.toString(),

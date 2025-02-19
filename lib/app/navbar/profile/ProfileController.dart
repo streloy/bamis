@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../../../utils/ApiURL.dart';
-import '../../../utils/UserService.dart';
+import '../../../utils/UserPrefService.dart';
 
 class ProfileController extends GetxController with GetSingleTickerProviderStateMixin {
 
   late TabController tabController = TabController(length: 3, vsync: this);
 
-  final userService = UserService(); //User service for replacement of Shared pref
+  final userService = UserPrefService(); //User service for replacement of Shared pref
 
   Future logout() async{
     var response = await http.post(ApiURL.fcm, headers: { HttpHeaders.authorizationHeader: '${userService.userToken}' } );

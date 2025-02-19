@@ -2,15 +2,16 @@ import 'dart:convert';
 import 'dart:ffi';
 import 'dart:ui';
 import 'package:bamis/utils/ApiURL.dart';
+import 'package:bamis/utils/UserPrefService.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 
 class DashboardController extends GetxController {
 
+  final userPrefService = UserPrefService();
   final List<dynamic> dashboardMenu = [
     {
       "name": "dashboard_weather_forecast",
@@ -74,7 +75,7 @@ class DashboardController extends GetxController {
   var currentLocationName = "".obs;
   dynamic forecast = [].obs;
   dynamic notification = [].obs;
-  var mycrops = [].obs;
+  dynamic mycrops = [].obs;
   dynamic mycropsstage = [].obs;
   dynamic bulletins = [].obs;
   var notificationValue = "".obs;
@@ -122,23 +123,22 @@ class DashboardController extends GetxController {
   }
 
   Future getSharedPrefData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    fullname.value = await prefs.getString("NAME") ?? "";
-    mobile.value = await prefs.getString("MOBILE") ?? "";
-    currentLocationId.value = await prefs.getString("LOCATION_ID")!;
-    currentLocationName.value = await prefs.getString("LOCATION_NAME")!;
-    cLocationUpazila.value = await prefs.getString("LOCATION_UPAZILA")!;
-    cLocationDistrict.value = await prefs.getString("LOCATION_DISTRICT")!;
-    photo.value = ApiURL.base_url_image + (await prefs.getString("PHOTO"))!;
+    fullname.value = userPrefService.userName ?? "";
+    mobile.value = userPrefService.userMobile ?? "";
+    currentLocationId.value = userPrefService.locationId ?? '';
+    currentLocationName.value = userPrefService.locationName ?? '';
+    cLocationUpazila.value = userPrefService.locationUpazila ?? '';
+    cLocationDistrict.value = userPrefService.locationDistrict ?? '';
+    photo.value = ApiURL.base_url_image + (userPrefService.userPhoto ?? '');
 
     getForecast(currentLocationId.value);
-    getNotifications(prefs);
-    getMyCrops(prefs);
-    getBulletins(prefs);
+    getNotifications();
+    getMyCrops();
+    getBulletins();
   }
 
-  Future getNotifications(SharedPreferences prefs) async {
-    var token = await prefs.getString("TOKEN");
+  Future getNotifications() async {
+    var token = userPrefService.userToken ?? '';
     var lang = Get.locale?.languageCode;
 
     Map<String, String> requestHeaders = {
@@ -148,7 +148,7 @@ class DashboardController extends GetxController {
 
     var response = await http.get(Uri.parse(ApiURL.notification_notifications), headers: requestHeaders);
     dynamic decode = jsonDecode(response.body);
-    notification.value = decode['result'];
+    notification.value = decode['result'] ?? [];
     var seen = 0;
     notification.value.forEach((item){
       item['seen'] == "1" ? seen++ : seen = seen;
@@ -156,8 +156,8 @@ class DashboardController extends GetxController {
     notificationValue.value = "${notification.value.length - seen}";
   }
 
-  Future getMyCrops(SharedPreferences prefs) async {
-    var token = await prefs.getString("TOKEN");
+  Future getMyCrops() async {
+    var token = userPrefService.userToken ?? '';
     var lang = Get.locale?.languageCode;
 
     Map<String, String> requestHeaders = {
@@ -165,16 +165,15 @@ class DashboardController extends GetxController {
       'Accept-Language': lang.toString()
     };
     var response = await http.get(Uri.parse(ApiURL.mycrops_crops), headers: requestHeaders);
-    dynamic decode = jsonDecode(response.body);
-    mycrops.value = decode['result'];
+    dynamic decode = jsonDecode(response.body) ?? [];
+    mycrops.value = decode['result'] ?? [];
     if(mycrops.value.length > 0) {
       getMyCropStage(mycrops.value[0]);
     }
   }
 
   Future getMyCropStage(dynamic item) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = await prefs.getString("TOKEN");
+    var token = userPrefService.userToken ?? '';
     var lang = Get.locale?.languageCode;
 
     Map<String, String> requestHeaders = {
@@ -189,8 +188,8 @@ class DashboardController extends GetxController {
     mycropsstage.value = decode['result'];
   }
 
-  Future getBulletins(SharedPreferences prefs) async {
-    var token = await prefs.getString("TOKEN");
+  Future getBulletins() async {
+    var token = userPrefService.userToken ?? '';
     var lang = Get.locale?.languageCode;
 
     Map<String, String> requestHeaders = {
@@ -207,8 +206,7 @@ class DashboardController extends GetxController {
 
   Future getForecast(locationId) async {
     isForecastLoading.value = true;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = await prefs.getString("TOKEN");
+    var token = userPrefService.userToken ?? '';
     var lang = Get.locale?.languageCode;
 
     Map<String, String> requestHeaders = {

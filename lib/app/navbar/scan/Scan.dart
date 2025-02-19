@@ -6,11 +6,11 @@ import 'package:bamis/app/modules/scan_detail/views/scan_detail_view.dart';
 import 'package:bamis/app/navbar/scan/ScanController.dart';
 import 'package:bamis/utils/ApiURL.dart';
 import 'package:bamis/utils/AppColors.dart';
+import 'package:bamis/utils/UserPrefService.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Scan extends StatefulWidget {
   const Scan({super.key});
@@ -53,8 +53,8 @@ class _ScanState extends State<Scan> {
   }
 
   Future getAnalysiscCroplist() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    token = sharedPreferences.getString("TOKEN")!;
+
+    token = await UserPrefService().userToken ?? '';
 
     Map<String, String> requestHeaders = {
       'Authorization': token.toString(),

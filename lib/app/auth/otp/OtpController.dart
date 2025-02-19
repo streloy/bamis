@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../../../utils/ApiURL.dart';
+import '../../../utils/UserPrefService.dart';
 import '../../modules/home/bindings/home_binding.dart';
 import '../../modules/home/views/home_view.dart';
 
@@ -18,6 +18,8 @@ class OtpController extends GetxController {
   final TextEditingController otp2 = TextEditingController();
   final TextEditingController otp3 = TextEditingController();
   final TextEditingController otp4 = TextEditingController();
+
+  final userService = UserPrefService();
 
   late Timer timer;
   var second = 0.obs;
@@ -70,18 +72,19 @@ class OtpController extends GetxController {
       );
     }
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('TOKEN', decode['token']);
-    prefs.setString('ID', decode['result']['id']);
-    prefs.setString('NAME', decode['result']['fullname']);
-    prefs.setString('EMAIL', decode['result']['email']);
-    prefs.setString('MOBILE', decode['result']['mobile']);
-    prefs.setString('ADDRESS', decode['result']['address']);
-    prefs.setString('PHOTO', decode['result']['photo']);
+    await userService.saveUserData(
+        decode['token'],
+        decode['result']['id'],
+        decode['result']['fullname'],
+        decode['result']['email'],
+        decode['result']['mobile'],
+        decode['result']['address'],
+        decode['result']['photo']
+    );
 
     // FCM INSERT
     var body = jsonEncode({
-      "fcm": prefs.getString("FCM"),
+      "fcm": userService.fcmToken,
       "device": "android"
     });
     await http.post(ApiURL.fcm, body: body, headers: { HttpHeaders.authorizationHeader: '${decode['token']}' } );

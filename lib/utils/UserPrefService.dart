@@ -1,10 +1,10 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class UserService {
+class UserPrefService {
   // Singleton instance
-  static final UserService _instance = UserService._internal();
-  factory UserService() => _instance;
-  UserService._internal();
+  static final UserPrefService _instance = UserPrefService._internal();
+  factory UserPrefService() => _instance;
+  UserPrefService._internal();
 
   static const String _keyUserToken = 'TOKEN';
   static const String _keyUserId = 'ID';
@@ -13,6 +13,13 @@ class UserService {
   static const String _keyUserMobile = 'MOBILE';
   static const String _keyUserAddress = 'ADDRESS';
   static const String _keyUserPhoto = 'PHOTO';
+  static const String _keyFcmToken = 'FCM';
+  static const String _keyLat = 'LAT';
+  static const String _keyLon = 'LON';
+  static const String _keyLocationId = 'LOCATION_ID';
+  static const String _keyLocationName = 'LOCATION_NAME';
+  static const String _keyLocationUpazila = 'LOCATION_UPAZILA';
+  static const String _keyLocationDistrict = 'LOCATION_DISTRICT';
 
   SharedPreferences? _prefs;
 
@@ -37,6 +44,29 @@ class UserService {
     await _prefs?.setString(_keyUserMobile, mobile);
     await _prefs?.setString(_keyUserAddress, address);
     await _prefs?.setString(_keyUserPhoto, photo);
+  }
+
+  // Save firebase data
+  Future<void> saveFireBaseData(
+      String fcmToken
+      ) async {
+    await _prefs?.setString(_keyFcmToken, fcmToken);
+  }
+
+  Future<void> saveLocationData(
+      String lat,
+      String lon,
+      String locationId,
+      String locationName,
+      String locationUpazila,
+      String locationDistrict,
+      ) async {
+    await _prefs?.setString(_keyLat, lat);
+    await _prefs?.setString(_keyLon, lon);
+    await _prefs?.setString(_keyLocationId, locationId);
+    await _prefs?.setString(_keyLocationName, locationName);
+    await _prefs?.setString(_keyLocationUpazila, locationUpazila);
+    await _prefs?.setString(_keyLocationDistrict, locationDistrict);
   }
 
   // Update user data
@@ -71,6 +101,27 @@ class UserService {
 
   // Get user photo
   String? get userPhoto => _prefs?.getString(_keyUserPhoto);
+
+  // Get user fcm
+  String? get fcmToken => _prefs?.getString(_keyFcmToken);
+
+  // Get user lat
+  String? get lat => _prefs?.getString(_keyLat);
+
+  // Get user lon
+  String? get lon => _prefs?.getString(_keyLon);
+
+  // Get user locationId
+  String? get locationId => _prefs?.getString(_keyLocationId);
+
+  // Get user locationName
+  String? get locationName => _prefs?.getString(_keyLocationName);
+
+  // Get user locationUpazila
+  String? get locationUpazila => _prefs?.getString(_keyLocationUpazila);
+
+  // Get user locationDistrict
+  String? get locationDistrict => _prefs?.getString(_keyLocationDistrict);
 
 
   // Clear user data (logout)

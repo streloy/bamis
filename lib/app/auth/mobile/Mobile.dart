@@ -38,6 +38,7 @@ class _MobileState extends State<Mobile> {
                       label: Text("Enter Mobile Number"),
                       border: OutlineInputBorder()
                   ),
+                  keyboardType: TextInputType.number,
                 ),
               ),
               SizedBox(height: 16),

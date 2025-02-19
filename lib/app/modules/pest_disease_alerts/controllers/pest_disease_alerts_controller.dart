@@ -1,8 +1,8 @@
 import 'dart:convert';
 
+import 'package:bamis/utils/UserPrefService.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../utils/ApiURL.dart';
 import '../../pest_disease_alert_detail/bindings/pest_disease_alert_detail_binding.dart';
@@ -25,8 +25,8 @@ class PestDiseaseAlertsController extends GetxController {
   }
 
   Future getInitialData() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    token = sharedPreferences.getString("TOKEN")!;
+
+    token = await UserPrefService().userToken ?? '';
 
     Map<String, String> requestHeaders = {
       'Authorization': token.toString(),

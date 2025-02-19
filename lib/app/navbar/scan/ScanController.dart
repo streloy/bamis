@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:bamis/utils/UserPrefService.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/ApiURL.dart';
 import 'package:http/http.dart' as http;
@@ -23,8 +23,7 @@ class ScanController extends GetxController {
   }
 
   Future getAnalysiscCroplist() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getString("TOKEN");
+    var token = await UserPrefService().userToken ?? '';
     var lang = Get.locale?.languageCode;
 
     Map<String, String> requestHeaders = {

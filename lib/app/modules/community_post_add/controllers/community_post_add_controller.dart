@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:bamis/utils/AppColors.dart';
+import 'package:bamis/utils/UserPrefService.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../utils/ApiURL.dart';
 
@@ -43,8 +43,7 @@ class CommunityPostAddController extends GetxController {
   }
 
   Future submitCommunityPost() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    token = sharedPreferences.getString("TOKEN")!;
+    token = await UserPrefService().userToken ?? '';
 
     if(postTitleController.text.isEmpty || postTagController.text.isEmpty || postDetailController.text.isEmpty || isSelected == false) {
       Get.snackbar("Warning", "Input field can not be empty!", backgroundColor: AppColors().app_alert_severe, snackPosition: SnackPosition.BOTTOM, margin: EdgeInsets.only(bottom: 16, left: 16, right: 16));

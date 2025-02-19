@@ -1,8 +1,7 @@
 import 'dart:convert';
 
+import 'package:bamis/utils/UserPrefService.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,6 +17,7 @@ class CommunityPostDetailController extends GetxController {
   var token = "";
   var lang = Get.locale?.languageCode;
   TextEditingController commentController = TextEditingController();
+  final userPrefService = UserPrefService();
 
   @override
   void onInit() {
@@ -32,8 +32,7 @@ class CommunityPostDetailController extends GetxController {
   }
 
   Future postDetail(id) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    token = sharedPreferences.getString("TOKEN")!;
+    token = userPrefService.userToken ?? '';
 
     Map<String, String> requestHeaders = {
       'Authorization': token.toString(),
@@ -58,8 +57,7 @@ class CommunityPostDetailController extends GetxController {
       dislike = (int.parse(item['disliked']) == 1) ? 0 : 1;
     }
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    token = prefs.getString("TOKEN")!;
+    token = userPrefService.userToken ?? '';
     Map<String, String> requestHeaders = {
       'Authorization': token.toString(),
       'Accept-Language': lang.toString()
@@ -86,8 +84,7 @@ class CommunityPostDetailController extends GetxController {
   }
 
   Future postCommentList(id) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    token = sharedPreferences.getString("TOKEN")!;
+    token = userPrefService.userToken ?? '';
 
     Map<String, String> requestHeaders = {
       'Authorization': token.toString(),
@@ -100,15 +97,14 @@ class CommunityPostDetailController extends GetxController {
   }
 
   Future commentSubmit() async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    token = prefs.getString("TOKEN")!;
+    token = await UserPrefService().userToken ?? '';
 
     Map<String, String> requestHeaders = {
       'Authorization': token.toString(),
       'Accept-Language': lang.toString()
     };
 
-    var authId = prefs.getString("ID");
+    var authId = userPrefService.userId;
     var postId = id.value;
     var comment = commentController.text;
     var params = jsonEncode({

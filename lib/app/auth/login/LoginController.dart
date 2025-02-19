@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../../utils/UserPrefService.dart';
 
 class LoginController extends GetxController {
 
@@ -37,15 +37,15 @@ class LoginController extends GetxController {
       );
     }
 
-
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    prefs.setString('TOKEN', decode['token']);
-    prefs.setString('ID', decode['result']['id']);
-    prefs.setString('NAME', decode['result']['fullname']);
-    prefs.setString('EMAIL', decode['result']['email']);
-    prefs.setString('MOBILE', decode['result']['mobile']);
-    prefs.setString('PHOTO', decode['result']['photo']);
+    await UserPrefService().saveUserData(
+        decode['token'],
+        decode['result']['id'],
+        decode['result']['fullname'],
+        decode['result']['email'],
+        decode['result']['mobile'],
+        decode['result']['address'],
+        decode['result']['photo']
+    );
 
     Get.offAll(HomeView(), transition: Transition.downToUp, binding: HomeBinding());
   }

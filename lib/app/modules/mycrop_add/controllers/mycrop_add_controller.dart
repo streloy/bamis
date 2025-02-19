@@ -1,14 +1,15 @@
 import 'dart:convert';
+import 'package:bamis/utils/UserPrefService.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../../../../utils/ApiURL.dart';
 
 class MycropAddController extends GetxController {
 
+  final userPrefService = UserPrefService();
   var crops = [].obs;
   var cropsValue = "".obs;
   var locations = [].obs;
@@ -27,8 +28,7 @@ class MycropAddController extends GetxController {
   }
 
   Future getMasterInfo() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = await prefs.getString("TOKEN");
+    var token = userPrefService.userToken ?? '';
     var lang = Get.locale?.languageCode;
 
     Map<String, String> requestHeaders = {
@@ -71,8 +71,7 @@ class MycropAddController extends GetxController {
       Fluttertoast.showToast(msg: "Input field can not be empty!");
     }
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = await prefs.getString("TOKEN");
+    var token = userPrefService.userToken ?? '';
     var lang = Get.locale?.languageCode;
 
     Map<String, String> requestHeaders = {

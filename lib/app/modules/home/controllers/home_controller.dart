@@ -9,10 +9,11 @@ import 'package:bamis/app/navbar/dashboard/Dashboard.dart';
 import 'package:bamis/app/navbar/profile/Profile.dart';
 import 'package:bamis/app/navbar/scan/Scan.dart';
 import 'package:bamis/utils/ApiURL.dart';
+import 'package:bamis/utils/UserPrefService.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController
@@ -27,6 +28,7 @@ class HomeController extends GetxController {
     Profile(),
     Scan()
   ];
+  final userPrefService = UserPrefService();
 
   @override
   void onInit() {
@@ -56,15 +58,15 @@ class HomeController extends GetxController {
 
   Future checkLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString("TOKEN");
-    if(prefs.getString("TOKEN") == null || prefs.getString("TOKEN") == "") {
+    print('shakil token: ${userPrefService.userToken}');
+    if(userPrefService.userToken == null || userPrefService.userToken == "") {
       Get.offAll(Mobile(), transition: Transition.downToUp);
     } else {
       var body = jsonEncode({
-        "fcm": prefs.getString("FCM"),
+        "fcm": userPrefService.fcmToken,
         "device": "android"
       });
-      var response = await http.post(ApiURL.fcm, body: body, headers: { HttpHeaders.authorizationHeader: '${prefs.getString("TOKEN")}' } );
+      var response = await http.post(ApiURL.fcm, body: body, headers: { HttpHeaders.authorizationHeader: '${userPrefService.userToken}' } );
     }
   }
 

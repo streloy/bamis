@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../../../utils/ApiURL.dart';
-import '../../../utils/UserService.dart';
+import '../../../utils/UserPrefService.dart';
 import '../../modules/home/bindings/home_binding.dart';
 import '../../modules/home/views/home_view.dart';
 
@@ -41,7 +41,7 @@ class MobileController extends GetxController{
           textCancel: 'Ok'
       );
     }
-    await UserService().saveUserData(
+    await UserPrefService().saveUserData(
         decode['token'],
         decode['result']['id'],
         decode['result']['fullname'],

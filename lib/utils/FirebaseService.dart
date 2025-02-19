@@ -6,11 +6,11 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:location/location.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 
 import 'ApiURL.dart';
+import 'UserPrefService.dart';
 
 class FirebaseService {
   final _firebaseMessaging = FirebaseMessaging.instance;
@@ -18,12 +18,13 @@ class FirebaseService {
 
 
   Future<void> initNotifications() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
     await _firebaseMessaging.requestPermission();
     final fcmToken = await _firebaseMessaging.getToken();
 
     print(fcmToken);
-    prefs.setString("FCM", fcmToken.toString());
+    await UserPrefService().saveFireBaseData(
+      fcmToken.toString()
+    );
 
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       print('PUSH MESSAGE');
@@ -45,7 +46,6 @@ class FirebaseService {
   }
 
   Future<void> getLocation() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
     Location location = new Location();
     bool _serviceEnabled = await location.serviceEnabled();;
     PermissionStatus _permissionGranted = await location.hasPermission();
@@ -66,16 +66,18 @@ class FirebaseService {
     //location.enableBackgroundMode(enable: true);
     var position = await location.getLocation();
     print(position);
-    prefs.setString("LAT", position.latitude.toString());
-    prefs.setString("LON", position.longitude.toString());
 
     try {
       var response = await http.get(Uri.parse(ApiURL.location_latlon + "?lat=" + position.latitude.toString() + "&lon=" + position.longitude.toString()));
       var decode = jsonDecode(response.body);
-      prefs.setString("LOCATION_ID", decode['result']['id']);
-      prefs.setString("LOCATION_NAME", decode['result']['name']);
-      prefs.setString("LOCATION_UPAZILA", decode['result']['upazila']);
-      prefs.setString("LOCATION_DISTRICT", decode['result']['district']);
+      await UserPrefService().saveLocationData(
+          position.latitude.toString(),
+          position.longitude.toString(),
+          decode['result']['id'],
+          decode['result']['name'],
+          decode['result']['upazila'],
+          decode['result']['district']
+      );
     } catch (e) {
       print(e.toString());
     }
