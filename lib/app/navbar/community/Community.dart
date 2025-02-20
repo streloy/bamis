@@ -13,6 +13,7 @@ import 'package:http/http.dart' as http;
 import 'package:share_plus/share_plus.dart';
 
 import '../../../utils/ApiURL.dart';
+import '../../../utils/connectivity_service.dart';
 import '../../modules/community_post_detail/bindings/community_post_detail_binding.dart';
 import '../../modules/community_post_detail/views/community_post_detail_view.dart';
 
@@ -24,6 +25,7 @@ class Community extends StatefulWidget {
 }
 
 class _CommunityState extends State<Community> with RouteAware {
+  final NetworkController networkController = Get.put(NetworkController());
   final controller = Get.put(CommunityController());
   final userPrefService = UserPrefService();
   ScrollController scrollController = ScrollController();
@@ -141,7 +143,8 @@ class _CommunityState extends State<Community> with RouteAware {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return networkController.isNetworkWorking.value ?
+    Scaffold(
       appBar: AppBar(
         leading: Icon(Icons.forum_rounded),
         titleSpacing: 0,
@@ -304,6 +307,21 @@ class _CommunityState extends State<Community> with RouteAware {
           ],
         ),
       ),
+    ):
+    Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Center(child: Image.asset('assets/no_internet.png', width: 150,)),
+        const SizedBox(height: 20),
+        Center(
+          child: ElevatedButton(
+            onPressed: (){
+              getPost(0,10);
+            },
+            child: const Text('Reload'),
+          ),
+        ),
+      ],
     );
   }
 }

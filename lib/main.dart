@@ -5,23 +5,38 @@ import 'package:bamis/utils/LocalizationString.dart';
 import 'package:bamis/utils/NotifiationService.dart';
 import 'package:bamis/utils/UserPrefService.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'app/routes/app_pages.dart';
 import 'dart:io' show Platform;
 
-void main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if(Platform.isAndroid) {
-    await UserPrefService().init(); // Initialize the service
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-    await FirebaseService().initNotifications();
+
+  try {
+    // Firebase Initialization for Android, iOS, and Web
+    if (kIsWeb || Platform.isAndroid || Platform.isIOS) {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    }
+
+    // User Preferences Initialization
+    await UserPrefService().init();
+
+    // Firebase Notification Initialization (Only for Android)
+    if (Platform.isAndroid) {
+      await FirebaseService().initNotifications();
+    }
+
+    // Location fetching
+    await FirebaseService().getLocation();
+
+  } catch (e, stack) {
+    print('🔥 Firebase Initialization Error: $e');
+    print(stack);
   }
-  await UserPrefService().init(); // Initialize the service IOS
-  await Firebase.initializeApp();
-  await FirebaseService().getLocation();
 
   runApp(
     GetMaterialApp(
@@ -29,9 +44,9 @@ void main() async{
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
-      theme: new AppTheme().setTheme(),
+      theme: AppTheme().setTheme(),
       translations: LocalizationString(),
-      locale: Locale('bn', 'BD'),
+      locale: const Locale('bn', 'BD'),
     ),
   );
 }
