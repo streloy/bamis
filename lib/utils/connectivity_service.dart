@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class NetworkController extends GetxController {
-  var isNetworkWorking = false.obs;
+  var isNetworkWorking = true.obs;
 
   @override
   void onInit() {

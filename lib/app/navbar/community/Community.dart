@@ -188,18 +188,28 @@ class _CommunityState extends State<Community> with RouteAware {
                         hintText: 'Search...',
                         border: InputBorder.none,
                         prefixIcon: Icon(Icons.search),
-                        suffixIcon: IconButton(onPressed: () {
-                          setState(() {
-                            searchController.text = "";
-                          });
-                        }, icon: Icon(Icons.cancel))
+                        suffixIcon: searchController.text.isNotEmpty
+                            ? IconButton(
+                          onPressed: () {
+                            setState(() {
+                              searchController.clear();
+                              post = mainpost; // Reset the list when cleared
+                            });
+                          },
+                          icon: Icon(Icons.cancel),
+                        )
+                            : null,
                       ),
                       onChanged: (text) {
                         setState(() {
-                          post = mainpost.where((item) =>item['title'].toLowerCase().contains(text.toLowerCase())).toList();
+                          post = mainpost
+                              .where((item) =>
+                              item['title'].toLowerCase().contains(text.toLowerCase()))
+                              .toList();
                         });
                       },
                     ),
+
                   ),
                 ),
               ],

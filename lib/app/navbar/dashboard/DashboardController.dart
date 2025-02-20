@@ -147,7 +147,7 @@ class DashboardController extends GetxController {
     };
 
     var response = await http.get(Uri.parse(ApiURL.notification_notifications), headers: requestHeaders);
-    dynamic decode = jsonDecode(response.body);
+    dynamic decode = jsonDecode(response.body) ?? [];
     notification.value = decode['result'] ?? [];
     var seen = 0;
     notification.value.forEach((item){
