@@ -19,7 +19,7 @@ class PestDiseaseAlertsView extends GetView<PestDiseaseAlertsController> {
             margin: EdgeInsets.only(left: 16, right: 16, top: 26, bottom: 16),
             child: Obx(()=> DropdownButtonFormField(
               value: controller.cropValue.value,
-              onChanged: (dynamic? value) {
+              onChanged: (dynamic value) {
                 controller.cropValue.value = value;
                 controller.changeCrop(value);
               },

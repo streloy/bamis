@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../utils/AppColors.dart';
-import '../../weather_forecast/ModelLocation.dart';
 import '../controllers/mycrop_add_controller.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
@@ -30,7 +29,7 @@ class MycropAddView extends GetView<MycropAddController> {
                 margin: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
                 child: Obx(()=> DropdownButtonFormField(
                   value: controller.cropsValue.value,
-                  onChanged: (dynamic? value) {
+                  onChanged: (dynamic value) {
                     controller.cropsValue.value = value;
                   },
                   items: controller.crops.value.map<DropdownMenuItem<dynamic>>((dynamic value) {

@@ -1,10 +1,7 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_quill/flutter_quill.dart';
 
 import 'package:get/get.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
 
 import '../../../../utils/AppColors.dart';
 import '../controllers/community_post_add_controller.dart';
@@ -31,7 +28,7 @@ class CommunityPostAddView extends GetView<CommunityPostAddController> {
                   child: controller.isSelected.value != false ?
                   ClipRRect(
                     borderRadius: BorderRadius.circular(4),
-                    child: Image.file(controller.selectedFile.value!, fit: BoxFit.cover, height: 200, width: double.infinity,),
+                    child: Image.file(controller.selectedFile.value, fit: BoxFit.cover, height: 200, width: double.infinity,),
                   ) :
                   Container( padding: EdgeInsets.all(16), decoration: BoxDecoration(border: Border.all(color: AppColors().app_primary), borderRadius: BorderRadius.circular(4), ) ,child: Center(child: Text("select_photo".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700))))
               )),

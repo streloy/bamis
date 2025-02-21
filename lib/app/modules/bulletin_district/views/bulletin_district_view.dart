@@ -48,7 +48,7 @@ class BulletinDistrictView extends GetView<BulletinDistrictController> {
                           isExpanded: true,
                           hint: Text("Select Crop Type"),
                           value: controller.bulletinLocationValue.value ?? "",
-                          onChanged: (dynamic? value) {
+                          onChanged: (dynamic value) {
                             controller.changeLocation(value);
                           },
                           items: controller.bulletinLocation.map<DropdownMenuItem<dynamic>>((dynamic value) {
@@ -126,7 +126,7 @@ class BulletinDistrictView extends GetView<BulletinDistrictController> {
                           isExpanded: true,
                           hint: Text("Select Crop Type"),
                           value: controller.bulletinLocationValue.value,
-                          onChanged: (dynamic? value) {
+                          onChanged: (dynamic value) {
                             controller.changeLocation(value);
                           },
                           items: controller.bulletinLocation.map<DropdownMenuItem<dynamic>>((dynamic value) {

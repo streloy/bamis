@@ -65,7 +65,7 @@ class _AgrihubState extends State<Agrihub> {
                                   isExpanded: true,
                                   hint: Text("Select Crop Type"),
                                   value: controller.tabOneCropTypeValue.value.isNotEmpty ? controller.tabOneCropTypeValue.value : null,
-                                  onChanged: (dynamic? value) {
+                                  onChanged: (dynamic value) {
                                     controller.getCropName(value);
                                   },
                                   items: controller.tabOneCropType.map<DropdownMenuItem<dynamic>>((dynamic value) {
@@ -92,7 +92,7 @@ class _AgrihubState extends State<Agrihub> {
                                   hint: Text("Select Crop Name"),
                                   isExpanded: true,
                                   value: controller.tabOneCropNameValue.value.isNotEmpty ? controller.tabOneCropNameValue.value : [],
-                                  onChanged: (dynamic? value) {
+                                  onChanged: (dynamic value) {
                                     controller.getCropVariety(value);
                                   },
                                   items: controller.tabOneCropName.map<DropdownMenuItem<dynamic>>((dynamic value) {
@@ -119,7 +119,7 @@ class _AgrihubState extends State<Agrihub> {
                                   hint: Text("Select Crop Variety"),
                                   isExpanded: true,
                                   value: controller.tabOneCropVarietyValue.value.isNotEmpty ? controller.tabOneCropVarietyValue.value : [null],
-                                  onChanged: (dynamic? value) {
+                                  onChanged: (dynamic value) {
                                     controller.setCropVariety(value);
                                   },
                                   items: controller.tabOneCropVariety.map<DropdownMenuItem<dynamic>>((dynamic value) {

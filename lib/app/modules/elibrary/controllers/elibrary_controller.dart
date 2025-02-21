@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:bamis/app/modules/elibrary/bindings/elibrary_binding.dart';
-import 'package:bamis/app/modules/elibrary/views/elibrary_view.dart';
 import 'package:bamis/app/modules/pdfview/bindings/pdfview_binding.dart';
 import 'package:bamis/app/modules/pdfview/views/pdfview_view.dart';
 import 'package:bamis/utils/ApiURL.dart';

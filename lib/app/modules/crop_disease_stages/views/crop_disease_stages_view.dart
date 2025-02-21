@@ -1,5 +1,3 @@
-import 'package:bamis/app/modules/crop_adviosry_stage_detail/bindings/crop_adviosry_stage_detail_binding.dart';
-import 'package:bamis/app/modules/crop_adviosry_stage_detail/views/crop_adviosry_stage_detail_view.dart';
 import 'package:bamis/app/modules/crop_disease_stages_detail/bindings/crop_disease_stages_detail_binding.dart';
 import 'package:bamis/app/modules/crop_disease_stages_detail/views/crop_disease_stages_detail_view.dart';
 import 'package:flutter/material.dart';

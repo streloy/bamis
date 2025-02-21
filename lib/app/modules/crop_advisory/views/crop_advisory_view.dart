@@ -1,5 +1,3 @@
-import 'package:bamis/app/modules/mycrop_add/bindings/mycrop_add_binding.dart';
-import 'package:bamis/app/modules/mycrop_add/views/mycrop_add_view.dart';
 import 'package:bamis/app/modules/crop_adviosry_stages/views/crop_adviosry_stages_view.dart';
 import 'package:bamis/app/modules/crop_adviosry_stages/bindings/crop_adviosry_stages_binding.dart';
 import 'package:bamis/utils/AppColors.dart';

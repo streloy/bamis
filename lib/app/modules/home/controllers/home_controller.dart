@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:bamis/app/auth/login/Login.dart';
 import 'package:bamis/app/auth/mobile/Mobile.dart';
 import 'package:bamis/app/navbar/community/Community.dart';
 import 'package:bamis/app/navbar/agrihub/Agrihub.dart';

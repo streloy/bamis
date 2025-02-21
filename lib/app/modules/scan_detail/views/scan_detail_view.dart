@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
-import 'package:intl/intl.dart';
 import '../controllers/scan_detail_controller.dart';
 
 class ScanDetailView extends GetView<ScanDetailController> {

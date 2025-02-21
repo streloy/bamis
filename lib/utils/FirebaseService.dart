@@ -1,14 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:bamis/utils/NotifiationService.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:get/get.dart';
 
 import 'ApiURL.dart';
 

@@ -115,7 +115,7 @@ class _ScanState extends State<Scan> {
             Container(
               child: DropdownButtonFormField(
                 value: cropValue,
-                onChanged: (dynamic? value) {
+                onChanged: (dynamic value) {
                   setState(() {
                     cropValue = value;
                   });

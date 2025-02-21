@@ -13,7 +13,7 @@ class WeatherAlertController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    webViewController?..setNavigationDelegate(NavigationDelegate(
+    webViewController..setNavigationDelegate(NavigationDelegate(
       onPageStarted: (url) { isPageLoading.value = 0; print('Progress : ${isPageLoading.value}'); },
       onProgress: (int progress) { isPageLoading.value = progress; print('Progress : ${isPageLoading.value}'); },
       onPageFinished: (url) { isPageLoading.value = 100; print('Progress : ${isPageLoading.value}'); }

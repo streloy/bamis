@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:bamis/app/modules/weather_forecast/ModelLocation.dart';
 import 'package:bamis/utils/ApiURL.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';

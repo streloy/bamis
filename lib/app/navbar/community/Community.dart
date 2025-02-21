@@ -300,6 +300,7 @@ class _CommunityState extends State<Community> with RouteAware {
                       );
                     }
                   }
+                  return null;
                 },
               ),
             ),

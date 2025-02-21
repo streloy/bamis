@@ -1,7 +1,5 @@
 import 'dart:convert';
-import 'dart:ui';
 
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';

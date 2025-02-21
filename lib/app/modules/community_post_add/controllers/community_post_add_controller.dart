@@ -31,14 +31,14 @@ class CommunityPostAddController extends GetxController {
   Future selectImageFromGallery() async{
     final returnImage = await ImagePicker().pickImage(source: ImageSource.gallery);
     file.value = returnImage!;
-    selectedFile.value = File(returnImage!.path);
+    selectedFile.value = File(returnImage.path);
     isSelected.value = true;
   }
 
   Future selectImageFromCamera() async{
     final returnImage = await ImagePicker().pickImage(source: ImageSource.camera);
     file.value = returnImage!;
-    selectedFile.value = File(returnImage!.path);
+    selectedFile.value = File(returnImage.path);
     isSelected.value = true;
   }
 
@@ -53,7 +53,7 @@ class CommunityPostAddController extends GetxController {
 
     var url = "${ApiURL.community_postadd}";
     var request = await http.MultipartRequest('POST', Uri.parse(url));
-    request.files.add( await http.MultipartFile.fromPath('image', selectedFile.value!.path));
+    request.files.add( await http.MultipartFile.fromPath('image', selectedFile.value.path));
     request.fields['title'] = postTitleController.text;
     request.fields['description'] = postDetailController.text;
     request.fields['tag'] = postTagController.text;

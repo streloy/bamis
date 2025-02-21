@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../../../../utils/AppColors.dart';
-import '../bindings/crop_adviosry_stages_binding.dart';
 import '../controllers/crop_adviosry_stages_controller.dart';
 
 class CropAdviosryStagesView extends GetView<CropAdviosryStagesController> {

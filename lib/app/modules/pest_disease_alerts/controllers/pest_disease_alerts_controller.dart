@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../utils/ApiURL.dart';
-import '../../pest_disease_alert_detail/bindings/pest_disease_alert_detail_binding.dart';
 
 class PestDiseaseAlertsController extends GetxController {
   //TODO: Implement PestDiseaseAlertsController
