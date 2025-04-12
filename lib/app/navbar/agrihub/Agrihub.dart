@@ -23,7 +23,7 @@ class _AgrihubState extends State<Agrihub> {
           appBar: AppBar(
             leading: Icon(Icons.grass_outlined),
             titleSpacing: 0,
-            title: Text("Agri-Hub", style: TextStyle(fontWeight: FontWeight.w700)),
+            title: Text("agrihub_title".tr, style: TextStyle(fontWeight: FontWeight.w700)),
           ),
           body: RefreshIndicator(
             onRefresh: () => controller.refresh(value:true),
@@ -36,8 +36,8 @@ class _AgrihubState extends State<Agrihub> {
                     indicatorWeight: 4,
                     indicatorSize: TabBarIndicatorSize.tab,
                     tabs: [
-                      Tab(text: "Cultivation"),
-                      Tab(text: "Other Technology"),
+                      Tab(text: "agrihub_cultivation".tr),
+                      Tab(text: "agrihub_other_technology".tr),
                     ]
                   ),
                 ),
@@ -49,10 +49,10 @@ class _AgrihubState extends State<Agrihub> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Select Crop type, crop name, & variety to get  Cultivation tips", style: TextStyle(color: AppColors().app_primary, fontSize: 16, fontWeight: FontWeight.w500)),
+                            Text("agrihub_get_cultivation_tips".tr, style: TextStyle(color: AppColors().app_primary, fontSize: 16, fontWeight: FontWeight.w500)),
                             SizedBox(height: 16),
 
-                            Text('Crop Type', style: TextStyle(fontSize: 12)),
+                            Text("agrihub_crop_type".tr, style: TextStyle(fontSize: 12)),
                             SizedBox(height: 4),
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 8),
@@ -63,7 +63,7 @@ class _AgrihubState extends State<Agrihub> {
                               child: DropdownButtonHideUnderline(
                                 child: Obx(()=> DropdownButton(
                                   isExpanded: true,
-                                  hint: Text("Select Crop Type"),
+                                  hint: Text("agrihub_select_crop_type".tr),
                                   value: controller.tabOneCropTypeValue.value.isNotEmpty ? controller.tabOneCropTypeValue.value : null,
                                   onChanged: (dynamic value) {
                                     controller.getCropName(value);
@@ -79,7 +79,7 @@ class _AgrihubState extends State<Agrihub> {
                             ),
 
                             SizedBox(height: 16),
-                            Text('Crop Name', style: TextStyle(fontSize: 12)),
+                            Text("agrihub_crop_name".tr, style: TextStyle(fontSize: 12)),
                             SizedBox(height: 4),
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 8),
@@ -89,7 +89,7 @@ class _AgrihubState extends State<Agrihub> {
                               ),
                               child: DropdownButtonHideUnderline(
                                 child: Obx(()=> DropdownButton(
-                                  hint: Text("Select Crop Name"),
+                                  hint: Text("agrihub_select_crop_name".tr),
                                   isExpanded: true,
                                   value: controller.tabOneCropNameValue.value.isNotEmpty ? controller.tabOneCropNameValue.value : [],
                                   onChanged: (dynamic value) {
@@ -106,7 +106,7 @@ class _AgrihubState extends State<Agrihub> {
                             ),
 
                             SizedBox(height: 16),
-                            Text('Crop Variety', style: TextStyle(fontSize: 12)),
+                            Text("agrihub_crop_variety".tr, style: TextStyle(fontSize: 12)),
                             SizedBox(height: 4),
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 8),
@@ -116,7 +116,7 @@ class _AgrihubState extends State<Agrihub> {
                               ),
                               child: DropdownButtonHideUnderline(
                                 child: Obx(()=> DropdownButton(
-                                  hint: Text("Select Crop Variety"),
+                                  hint: Text("agrihub_select_crop_variety".tr),
                                   isExpanded: true,
                                   value: controller.tabOneCropVarietyValue.value.isNotEmpty ? controller.tabOneCropVarietyValue.value : [null],
                                   onChanged: (dynamic value) {
@@ -151,7 +151,7 @@ class _AgrihubState extends State<Agrihub> {
                           ],
                         ),
                       ),
-                      Center(child: Text("Profile Page")),
+                      Center(child: Text("agrihub_other_technology".tr)),
                     ],
                   ),
                 ),

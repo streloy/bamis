@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:bamis/app/modules/important_video/bindings/important_video_binding.dart';
+import 'package:bamis/app/modules/important_video/views/important_video_view.dart';
 import 'package:bamis/app/modules/webview/bindings/webview_binding.dart';
 import 'package:bamis/app/modules/webview/views/webview_view.dart';
 import 'package:bamis/utils/ApiURL.dart';
@@ -49,36 +51,47 @@ class _AppDrawerState extends State<AppDrawer> {
           ListTile(
             leading: Icon(Icons.video_file_outlined),
             title: Text("dashboard_sidebar_important_video".tr),
-            onTap: () { Get.toNamed('important-video'); },
+            onTap: () {
+              Get.to(()=> ImportantVideoView(), binding: ImportantVideoBinding(), transition: Transition.rightToLeft);
+            },
           ),
-          GestureDetector(
+          ListTile(
+            leading: Icon(Icons.contact_support_outlined),
+            title: Text("dashboard_sidebar_about_us".tr),
+            onTap: () {
+              var item = {
+                "title": "dashboard_sidebar_about_us".tr,
+                "url": ApiURL().getAboutUsUrl()
+              };
+              Get.to(()=> WebviewView(), binding: WebviewBinding(), arguments: item, transition: Transition.rightToLeft);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.support_agent_outlined),
+            title: Text("dashboard_sidebar_contact_us".tr),
             onTap: () {
               var item = {
                 "title": "dashboard_sidebar_contact_us".tr,
-                "url": ApiURL.sidebar_contact_us
+                "url": ApiURL().getContactUsUrl()
               };
               Get.to(()=> WebviewView(), binding: WebviewBinding(), arguments: item, transition: Transition.rightToLeft);
             },
-            child: ListTile(
-              leading: Icon(Icons.support_agent_outlined),
-              title: Text("dashboard_sidebar_contact_us".tr),
-            ),
           ),
-          GestureDetector(
+          ListTile(
+            leading: Icon(Icons.forum_outlined),
+            title: Text("dashboard_sidebar_faq".tr),
             onTap: () {
               var item = {
                 "title": "dashboard_sidebar_faq".tr,
-                "url": ApiURL.sidebar_faq
+                "url": ApiURL().getFAQUrl()
               };
               Get.to(()=> WebviewView(), binding: WebviewBinding(), arguments: item, transition: Transition.rightToLeft);
             },
-            child: ListTile(
-              leading: Icon(Icons.forum_outlined),
-              title: Text("dashboard_sidebar_faq".tr),
-            ),
           ),
           Divider(),
-          GestureDetector(
+          ListTile(
+            leading: Icon(Icons.logout_outlined),
+            title: Text("dashboard_sidebar_logout".tr),
             onTap: () async {
               SharedPreferences prefs = await SharedPreferences.getInstance();
               var response = await http.post(ApiURL.fcm, headers: { HttpHeaders.authorizationHeader: '${prefs.getString('TOKEN')}' } );
@@ -100,10 +113,6 @@ class _AppDrawerState extends State<AppDrawer> {
                   }
               );
             },
-            child: ListTile(
-              leading: Icon(Icons.logout_outlined),
-              title: Text("dashboard_sidebar_logout".tr),
-            ),
           )
         ],
       ),

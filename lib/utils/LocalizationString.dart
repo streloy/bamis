@@ -44,6 +44,7 @@ class LocalizationString extends Translations {
       'dashboard_time_good_night': "Good Night",
       'dashboard_sidebar_important_video': "Important Videos",
       'dashboard_sidebar_contact_us': "Contact Us",
+      'dashboard_sidebar_about_us': "About us",
       'dashboard_sidebar_faq': "FAQ",
       'dashboard_sidebar_logout': "Logout",
       'dashboard_snack_one_title': "Warning",
@@ -78,7 +79,9 @@ class LocalizationString extends Translations {
       'elibrary_title': 'Online Library',
 
       'scan': 'Scan',
-      'title': 'Disease Detection',
+      'scan_warning': "Warning",
+      'scan_ok': "OK",
+      'scan_title': 'Disease Detection',
       'wait': 'Please wait...',
       'select_crop': 'Select Crop',
       'select_photo': 'No photo selected, Please select or capture one phone!',
@@ -126,7 +129,16 @@ class LocalizationString extends Translations {
       'community_promot': "Welcome to BAMIS community",
       'community_post_add_title': "Add new community post",
 
+      'agrihub_title': "Agrihub",
       'agrihub_get_cultivation_tips': "Get Cultivation Tips",
+      'agrihub_cultivation': "Cultivation",
+      'agrihub_other_technology': "Other Technology",
+      'agrihub_crop_type': "Crop Type",
+      'agrihub_crop_name': "Crop Name",
+      'agrihub_crop_variety': "Crop Variety",
+      'agrihub_select_crop_type': "Select Crop Type",
+      'agrihub_select_crop_name': "Select Crop Name",
+      'agrihub_select_crop_variety': "Select Crop Type",
 
       'pda_title': 'Pest & Disease Information',
       'pda_select_crop': 'Select crop',
@@ -153,7 +165,9 @@ class LocalizationString extends Translations {
       'advisory_archive': "Archive",
       'advisory_select_district': "Select District",
 
-      'bamis_portal_title': "Bamis Portal"
+      'bamis_portal_title': "Bamis Portal",
+
+      'important_video': "Important Video"
     },
     'bn_BD': {
       'title': 'বামিস',
@@ -179,7 +193,7 @@ class LocalizationString extends Translations {
       'dashboard_pest_disease': 'রোগের\nসতর্কতা',
       'dashboard_pest_disease_information': 'রোগের\nতথ্য',
       'dashboard_task_reminder': 'টাস্ক\nরিমাইন্ডার',
-      'dashboard_advisory_bulletin': 'এডভাইজারি\nবুলেটিন',
+      'dashboard_advisory_bulletin': 'পরামর্শ\nবুলেটিন',
       'dashboard_online_library': 'অনলাইন\nলাইব্রেরি',
       'dashboard_farm_metrics': 'ফার্ম\nমেট্রিক্স',
       'dashboard_stage_status': 'ধাপের অবস্থা',
@@ -194,6 +208,7 @@ class LocalizationString extends Translations {
       'dashboard_time_good_evening': "শুভ সন্ধা",
       'dashboard_time_good_night': "শুভ রাত্রি",
       'dashboard_sidebar_important_video': "গুরুত্বপূর্ণ ভিডিও",
+      'dashboard_sidebar_about_us': "আমাদের সম্পর্কে",
       'dashboard_sidebar_contact_us': "যোগাযোগ করুণ",
       'dashboard_sidebar_faq': "এফএকিউ ",
       'dashboard_sidebar_logout': "লগ আউট",
@@ -230,7 +245,9 @@ class LocalizationString extends Translations {
       'elibrary_title': 'অনলাইন লাইব্রেরি',
 
       'scan': 'স্ক্যান করুন',
-      'title': 'রোগ নির্ণয় করুন',
+      'scan_warning': "সতর্কীকরণ",
+      'scan_ok': "ওকে",
+      'scan_title': 'রোগ নির্ণয় করুন',
       'wait': 'অনুগ্রহ পূর্বক অপেক্ষা করুন...',
       'select_crop': 'ফসল নির্বাচন করুন',
       'select_photo': 'কোন ছবি নির্বাচন করা হয়নি, অনুগ্রহ করে একটি ছবি ক্যামেরা অথবা গ্যালারি থেকে নির্বাচন করুন!',
@@ -278,7 +295,16 @@ class LocalizationString extends Translations {
       'community_promot': "BAMIS কমিউনিটিতে স্বাগতম",
       'community_post_add_title': "নতুন কমিউনিটি পোস্ট যুক্ত করুণ",
 
+      'agrihub_title': "এগ্রিহাব",
       'agrihub_get_cultivation_tips': "চাষের পরামর্শ পেতে ক্লিক করুণ",
+      'agrihub_cultivation': "চাষাবাদ",
+      'agrihub_other_technology': "অন্যান্য প্রযুক্তি",
+      'agrihub_crop_type': "ফসলের ধরন",
+      'agrihub_crop_name': "ফসলের নাম",
+      'agrihub_crop_variety': "ফসলের জাত",
+      'agrihub_select_crop_type': "ফসলের ধরন নির্বাচন করুণ",
+      'agrihub_select_crop_name': "ফসলের নাম নির্বাচন করুণ",
+      'agrihub_select_crop_variety': "ফসলের জাত নির্বাচন করুণ",
 
       'pda_title': 'পোকামাকড় ও রোগের তথ্য',
       'pda_select_crop': 'ফসল নির্বাচন করুন',
@@ -305,7 +331,9 @@ class LocalizationString extends Translations {
       'advisory_archive': "সংরক্ষণকৃত",
       'advisory_select_district': "জেলা নির্বাচন করুণ",
 
-      'bamis_portal_title': "বামিস পোর্টাল"
+      'bamis_portal_title': "বামিস পোর্টাল",
+
+      'important_video': "গুরুত্বপূর্ণ ভিডিও"
     }
   };
 }

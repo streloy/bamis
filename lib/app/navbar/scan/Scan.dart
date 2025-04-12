@@ -88,9 +88,9 @@ class _ScanState extends State<Scan> {
       showDialog(
           context: context,
           builder: (context)=> AlertDialog(
-            title: Text("Warning!"),
+            title: Text("scan_warning".tr),
             content: Text(decode['message']),
-            actions: <Widget>[ TextButton( child: Text('OK'), onPressed: () { Navigator.of(context).pop(); }, ), ],
+            actions: <Widget>[ TextButton( child: Text("scan_ok".tr), onPressed: () { Navigator.of(context).pop(); }, ), ],
           )
       );
     } else {
@@ -104,7 +104,7 @@ class _ScanState extends State<Scan> {
     return Scaffold(
       appBar: AppBar(
         // leading: Icon(Icons.pest_control),
-        title: Text("title".tr),
+        title: Text("scan_title".tr),
         titleSpacing: 0,
       ),
       body: Padding(

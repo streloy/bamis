@@ -17,6 +17,7 @@ class WeatherForecastController extends GetxController {
   var locationName = "".obs;
   List<ModelLocation> locations = [];
   dynamic forecast = [].obs;
+  var isLoading = false.obs;
 
   @override
   void onInit() {
@@ -53,6 +54,7 @@ class WeatherForecastController extends GetxController {
   }
 
   Future getForecast(locationId) async {
+    isLoading.value = true;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = await prefs.getString("TOKEN");
     var lang = Get.locale?.languageCode;
@@ -62,9 +64,11 @@ class WeatherForecastController extends GetxController {
       'Accept-Language': lang.toString()
     };
     var response = await http.get(Uri.parse(ApiURL.dailyforecast + "?location=$locationId"), headers: requestHeaders);
+    print(response);
     dynamic decode = jsonDecode(response.body);
     forecast.value = decode['result'];
 
+    isLoading.value = false;
     return decode['result'];
   }
 

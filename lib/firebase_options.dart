@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -32,15 +29,9 @@ class DefaultFirebaseOptions {
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -67,6 +58,36 @@ class DefaultFirebaseOptions {
     messagingSenderId: '240502408472',
     projectId: 'bamis-app-28485',
     storageBucket: 'bamis-app-28485.firebasestorage.app',
+    iosBundleId: 'bd.gov.bamis',
+  );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyDBxt2OZLB1enZ_-iCbp-zW940mL_8PBGE',
+    appId: '1:240502408472:web:67599acc0fa7622db90a6d',
+    messagingSenderId: '240502408472',
+    projectId: 'bamis-app-28485',
+    authDomain: 'bamis-app-28485.firebaseapp.com',
+    storageBucket: 'bamis-app-28485.firebasestorage.app',
+    measurementId: 'G-MVG5BL16R3',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyB_HbwFemqRIekGNO-ngnG2r57vyHSuMoY',
+    appId: '1:240502408472:ios:b51d20894c76a6c2b90a6d',
+    messagingSenderId: '240502408472',
+    projectId: 'bamis-app-28485',
+    storageBucket: 'bamis-app-28485.firebasestorage.app',
+    iosBundleId: 'bd.gov.bamis',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyDBxt2OZLB1enZ_-iCbp-zW940mL_8PBGE',
+    appId: '1:240502408472:web:a9fa8f3c3ab8e5a9b90a6d',
+    messagingSenderId: '240502408472',
+    projectId: 'bamis-app-28485',
+    authDomain: 'bamis-app-28485.firebaseapp.com',
+    storageBucket: 'bamis-app-28485.firebasestorage.app',
+    measurementId: 'G-XJDJ21XGCG',
   );
 
 }

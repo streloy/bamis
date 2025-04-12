@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 
 class ApiURL {
   static String base_url = "https://bamisapp.bdservers.site/";
@@ -77,6 +78,7 @@ class ApiURL {
   static String mycrops_taskreminder = '${base_url_api}mycrop/taskreminder';
 
   // Sidebar
+  static String sidebar_about_us = '${base_url}sidebar/about_us';
   static String sidebar_contact_us = '${base_url}sidebar/contact_us';
   static String sidebar_faq = '${base_url}sidebar/faq';
 
@@ -86,4 +88,17 @@ class ApiURL {
 
   // Bamis Portal URL Api
   static String bamis_portal_url = "${base_url_api}auth/bamis";
+
+  getAboutUsUrl() {
+    var lang = Get.locale!.languageCode;
+    return "${sidebar_about_us}?lang=${lang}";
+  }
+  getContactUsUrl() {
+    var lang = Get.locale!.languageCode;
+    return "${sidebar_contact_us}?lang=${lang}";
+  }
+  getFAQUrl() {
+    var lang = Get.locale!.languageCode;
+    return "${sidebar_faq}?lang=${lang}";
+  }
 }

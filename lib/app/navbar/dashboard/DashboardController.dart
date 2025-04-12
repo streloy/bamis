@@ -10,11 +10,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 class DashboardController extends GetxController {
 
   final List<dynamic> dashboardMenu = [
+    // {
+    //   "name": "dashboard_bamis_portal",
+    //   "image": "bamis_portal.png",
+    //   "page": "bamis-portal"
+    // },
     {
-      "name": "dashboard_bamis_portal",
-      "image": "bamis_portal.png",
-      "page": "bamis-portal"
-    },{
       "name": "dashboard_weather_forecast",
       "image": "weather_forecast.png",
       "page": "weather-forecast"
@@ -125,6 +126,22 @@ class DashboardController extends GetxController {
 
   Future getSharedPrefData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    var token = await prefs.getString("TOKEN");
+    var lang = Get.locale?.languageCode;
+    Map<String, String> requestHeaders = {
+      'Authorization': token.toString(),
+      'Accept-Language': lang.toString()
+    };
+    var lat = await prefs.getString("LAT");
+    var lon = await prefs.getString("LON");
+    var response = await http.get(Uri.parse(ApiURL.location_latlon + "?lat=${lat}&lon=${lon}"), headers: requestHeaders);
+    var decode = jsonDecode(response.body);
+    prefs.setString("LOCATION_ID", decode['result']['id']);
+    prefs.setString("LOCATION_NAME", decode['result']['name']);
+    prefs.setString("LOCATION_UPAZILA", decode['result']['upazila']);
+    prefs.setString("LOCATION_DISTRICT", decode['result']['district']);
+
     fullname.value = await prefs.getString("NAME") ?? "";
     mobile.value = await prefs.getString("MOBILE") ?? "";
     currentLocationId.value = await prefs.getString("LOCATION_ID")!;
@@ -237,6 +254,43 @@ class DashboardController extends GetxController {
     } else {
       return Color(0xFFB2B2B2);
     }
+  }
+
+  changeLanguage(String data){
+    if(Get.locale!.countryCode == "BD") {
+      data = data.replaceAll("0", "০");
+      data = data.replaceAll("1", "১");
+      data = data.replaceAll("2", "২");
+      data = data.replaceAll("3", "৩");
+      data = data.replaceAll("4", "৪");
+      data = data.replaceAll("5", "৫");
+      data = data.replaceAll("6", "৬");
+      data = data.replaceAll("7", "৭");
+      data = data.replaceAll("8", "৮");
+      data = data.replaceAll("9", "৯");
+
+      data = data.replaceAll("completed", "সম্পন্ন");
+      data = data.replaceAll("ongoing", "চলতি");
+      data = data.replaceAll("upcoming", "আসন্ন");
+
+      data = data.replaceAll("January", "জানুয়ারি");
+      data = data.replaceAll("February", "ফেব্রুয়ারি");
+      data = data.replaceAll("March", "মার্চ");
+      data = data.replaceAll("April", "এপ্রিল");
+      data = data.replaceAll("May", "মে");
+      data = data.replaceAll("June", "জুন");
+      data = data.replaceAll("July", "জুলাই");
+      data = data.replaceAll("August", "আগস্ট");
+      data = data.replaceAll("September", "সেপ্টেম্বর");
+      data = data.replaceAll("October", "অক্টোবর");
+      data = data.replaceAll("November", "নভেম্বর");
+      data = data.replaceAll("December", "ডিসেম্বার");
+
+      return data;
+    } else {
+      return data;
+    }
+
   }
 
 }

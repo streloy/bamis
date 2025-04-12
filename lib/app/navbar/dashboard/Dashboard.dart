@@ -465,9 +465,9 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text("dashboard_stage_status".tr + ": ${item['current_status']}", style: TextStyle(color: AppColors().app_primary)),
-                                        Text("dashboard_plantation".tr + ": ${item['plantationDate']}", style: TextStyle(color: AppColors().app_primary)),
-                                        Text("dashboard_stage_duration".tr + ": ${item['stage_start']} - ${item['stage_end']}", style: TextStyle(color: AppColors().app_primary)),
+                                        Text("dashboard_stage_status".tr + ": ${ controller.changeLanguage(item['current_status']) }", style: TextStyle(color: AppColors().app_primary)),
+                                        Text("dashboard_plantation".tr + ": ${ controller.changeLanguage(item['plantationDate']) }", style: TextStyle(color: AppColors().app_primary)),
+                                        Text("dashboard_stage_duration".tr + ": ${ controller.changeLanguage(item['stage_start']) } - ${ controller.changeLanguage(item['stage_end']) }", style: TextStyle(color: AppColors().app_primary)),
                                       ],
                                     )
                                   ],
@@ -520,7 +520,7 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("${item['publish_date']}", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+                                  Text("${ controller.changeLanguage(item['publish_date']) }", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
                                   Text("${item['title']}", maxLines: 3),
                                   SizedBox(height: 16),
                                   GestureDetector(

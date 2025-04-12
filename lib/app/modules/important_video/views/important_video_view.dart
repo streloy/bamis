@@ -11,11 +11,10 @@ class ImportantVideoView extends GetView<ImportantVideoController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Important Video'),
+        title: Text("important_video".tr),
         titleSpacing: 0,
       ),
       body: Container(
-        margin: EdgeInsets.only(bottom: 16),
         child: Obx(()=>
           controller.videoList.value.length > 0 ? ListView.builder(
             itemCount: controller.videoList.value.length,
@@ -24,17 +23,16 @@ class ImportantVideoView extends GetView<ImportantVideoController> {
               return GestureDetector(
                 onTap: () { print(item); controller.openYoutube(item); },
                 child: Container(
-                  margin: EdgeInsets.only(left: 16, top: 16, right: 16),
-                  padding: EdgeInsets.all(16),
+                  margin: EdgeInsets.only(bottom: 12),
+                  padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
                   decoration: BoxDecoration(
                       color: AppColors().app_primary_bg_dark,
-                      borderRadius: BorderRadius.circular(8)
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(0),
                         child: Image.network(item['cover']),
                       ),
                       SizedBox(height: 16),

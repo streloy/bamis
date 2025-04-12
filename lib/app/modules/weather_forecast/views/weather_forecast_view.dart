@@ -45,7 +45,7 @@ class WeatherForecastView extends GetView<WeatherForecastController> {
           children: [
             Obx(()=> Text(controller.forecast.value.length > 0 ? controller.forecast.value[0]['header'] : "", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500))),
             Expanded(
-              child: Obx(()=> ListView.builder (
+              child: Obx(()=> controller.isLoading.value == true ? Center(child: CircularProgressIndicator()) : ListView.builder (
                 itemCount: controller.forecast.value.length,
                 itemBuilder: (context, data) {
                   dynamic item = controller.forecast.value[data];

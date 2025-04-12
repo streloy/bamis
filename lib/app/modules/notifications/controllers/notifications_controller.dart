@@ -9,6 +9,7 @@ import '../../../../utils/ApiURL.dart';
 class NotificationsController extends GetxController {
   //TODO: Implement NotificationsController
   var notificationList = [].obs;
+  var isLoading = false.obs;
 
   @override
   void onInit() {
@@ -18,6 +19,7 @@ class NotificationsController extends GetxController {
   }
 
   Future getNotifications() async {
+    isLoading.value = true;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var id = prefs.getString("ID");
     var token = prefs.getString("TOKEN");
@@ -28,7 +30,7 @@ class NotificationsController extends GetxController {
     var response = await http.get(Uri.parse(ApiURL.notification_notifications), headers: requestHeaders);
     dynamic decode = jsonDecode(response.body);
     notificationList.value = decode['result'];
-    print(notificationList.value);
+    isLoading.value = false;
   }
 
   Future updateSeen(dynamic item) async {
