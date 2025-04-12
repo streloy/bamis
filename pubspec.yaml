@@ -20,6 +20,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ^3.5.3
+#  sdk: ">=2.19.6 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -41,24 +42,24 @@ dependencies:
   firebase_core: ^3.6.0
   firebase_messaging: ^15.2.3
   geolocator: ^13.0.1
-  location: ^6.0.2
-  flutter_native_splash: ^2.4.1
+  location: ^8.0.0
+  flutter_native_splash: ^2.4.6
   shared_preferences: ^2.3.2
   flutter_typeahead: ^5.2.0
-  syncfusion_flutter_pdfviewer: ^27.2.4
+  syncfusion_flutter_pdfviewer: ^29.1.37
   youtube_player_flutter: ^9.1.1
   image_picker: ^1.1.2
   insta_image_viewer: ^1.0.4
   fluttertoast: ^8.2.10
   flutter_launcher_icons: ^0.14.2
   scrollable_positioned_list: ^0.3.8
-  flutter_slidable: ^3.1.2
+  flutter_slidable: ^4.0.0
   flutter_html: ^3.0.0-beta.2
-  flutter_quill: ^10.8.5
+  flutter_quill: ^11.2.0
   html_editor_enhanced: ^2.6.0
   file_picker: ^8.1.7
   share_plus: ^10.1.4
-  flutter_local_notifications: ^18.0.1
+  flutter_local_notifications: ^19.0.0
   firebase_analytics: ^11.4.5
 
 dev_dependencies:
@@ -75,8 +76,8 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: false
-  image_path: "assets/icon.png"
-  adaptive_icon_foreground: "assets/icon.png"
+  image_path: "assets/splash.png"
+  adaptive_icon_foreground: "assets/splash.png"
   adaptive_icon_background: "#5F8F3C"
   remove_alpha_ios: true
   min_sdk_android: 21
