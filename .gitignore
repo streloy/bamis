@@ -51,4 +51,5 @@ linux
 macos
 web
 windows
+test
 lib/firebase_options.dart
