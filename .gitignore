@@ -51,3 +51,4 @@ linux
 macos
 web
 windows
+lib/firebase_options.dart
