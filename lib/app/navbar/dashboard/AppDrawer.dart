@@ -1,17 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:bamis/app/modules/important_video/bindings/important_video_binding.dart';
-import 'package:bamis/app/modules/important_video/views/important_video_view.dart';
-import 'package:bamis/app/modules/webview/bindings/webview_binding.dart';
-import 'package:bamis/app/modules/webview/views/webview_view.dart';
-import 'package:bamis/utils/ApiURL.dart';
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../utils/ApiURL.dart';
+import '../../../utils/AppColors.dart';
 import '../../auth/mobile/Mobile.dart';
+import '../../modules/important_video/bindings/important_video_binding.dart';
+import '../../modules/important_video/views/important_video_view.dart';
+import '../../modules/webview/bindings/webview_binding.dart';
+import '../../modules/webview/views/webview_view.dart';
 
 class AppDrawer extends StatefulWidget {
   // const AppDrawer({super.key});

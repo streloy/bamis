@@ -1,10 +1,10 @@
-import 'package:bamis/app/modules/community_post_detail/bindings/community_post_detail_binding.dart';
-import 'package:bamis/app/modules/community_post_detail/views/community_post_detail_view.dart';
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../../utils/AppColors.dart';
+import '../../community_post_detail/bindings/community_post_detail_binding.dart';
+import '../../community_post_detail/views/community_post_detail_view.dart';
 import '../controllers/community_post_my_controller.dart';
 
 class CommunityPostMyView extends GetView<CommunityPostMyController> {

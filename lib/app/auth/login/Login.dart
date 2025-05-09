@@ -1,7 +1,8 @@
-import 'package:bamis/app/auth/login/LoginController.dart';
-import 'package:bamis/app/auth/register/Register.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../register/Register.dart';
+import 'LoginController.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});

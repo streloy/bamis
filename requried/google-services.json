@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "240502408472",
+    "project_id": "bamis-app-28485",
+    "storage_bucket": "bamis-app-28485.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240502408472:android:b7e32ed4556e7805b90a6d",
+        "android_client_info": {
+          "package_name": "bd.gov.bamis.bamisportal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "240502408472-onilqtavlr0i7c708uua6em13fl6hkc0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7WLV-FpSPAcD9tggwH7Q3uAmqY-Kuz7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "240502408472-onilqtavlr0i7c708uua6em13fl6hkc0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240502408472:android:5d5daa8dd3fc75b7b90a6d",
+        "android_client_info": {
+          "package_name": "bd.gov.bamis.bamisportal.bamis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "240502408472-onilqtavlr0i7c708uua6em13fl6hkc0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7WLV-FpSPAcD9tggwH7Q3uAmqY-Kuz7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "240502408472-onilqtavlr0i7c708uua6em13fl6hkc0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

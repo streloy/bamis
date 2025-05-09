@@ -1,9 +1,9 @@
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../../../utils/AppColors.dart';
 import '../controllers/weather_alert_controller.dart';
 
 class WeatherAlertView extends GetView<WeatherAlertController> {

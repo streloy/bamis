@@ -1,17 +1,18 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:bamis/app/auth/mobile/Mobile.dart';
-import 'package:bamis/app/navbar/community/Community.dart';
-import 'package:bamis/app/navbar/agrihub/Agrihub.dart';
-import 'package:bamis/app/navbar/dashboard/Dashboard.dart';
-import 'package:bamis/app/navbar/profile/Profile.dart';
-import 'package:bamis/app/navbar/scan/Scan.dart';
-import 'package:bamis/utils/ApiURL.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+
+import '../../../../utils/ApiURL.dart';
+import '../../../auth/mobile/Mobile.dart';
+import '../../../navbar/agrihub/Agrihub.dart';
+import '../../../navbar/community/Community.dart';
+import '../../../navbar/dashboard/Dashboard.dart';
+import '../../../navbar/profile/Profile.dart';
+import '../../../navbar/scan/Scan.dart';
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController

@@ -1,6 +1,7 @@
-import 'package:bamis/utils/ApiURL.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+import '../../../../utils/ApiURL.dart';
 
 class WeatherAlertController extends GetxController {
   //TODO: Implement WeatherAlertController

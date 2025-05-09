@@ -1,6 +1,7 @@
-import 'package:bamis/app/auth/login/Login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../login/Login.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});

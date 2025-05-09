@@ -1,16 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:bamis/app/modules/scan_detail/bindings/scan_detail_binding.dart';
-import 'package:bamis/app/modules/scan_detail/views/scan_detail_view.dart';
-import 'package:bamis/app/navbar/scan/ScanController.dart';
-import 'package:bamis/utils/ApiURL.dart';
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../utils/ApiURL.dart';
+import '../../../utils/AppColors.dart';
+import '../../modules/scan_detail/bindings/scan_detail_binding.dart';
+import '../../modules/scan_detail/views/scan_detail_view.dart';
+import 'ScanController.dart';
 
 class Scan extends StatefulWidget {
   const Scan({super.key});

@@ -1,7 +1,7 @@
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../../../../utils/AppColors.dart';
 import '../controllers/notifications_controller.dart';
 
 class NotificationsView extends GetView<NotificationsController> {

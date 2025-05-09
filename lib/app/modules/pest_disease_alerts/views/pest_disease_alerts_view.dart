@@ -1,6 +1,6 @@
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../utils/AppColors.dart';
 import '../controllers/pest_disease_alerts_controller.dart';
 
 class PestDiseaseAlertsView extends GetView<PestDiseaseAlertsController> {

@@ -1,5 +1,6 @@
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
+
+import 'AppColors.dart';
 
 class AppTheme {
   static const appColor = AppColors();

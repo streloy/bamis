@@ -1,7 +1,8 @@
-import 'package:bamis/app/navbar/profile/ProfileController.dart';
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../utils/AppColors.dart';
+import 'ProfileController.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});

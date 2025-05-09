@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:bamis/app/auth/mobile/Mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../../../utils/ApiURL.dart';
+import '../../auth/mobile/Mobile.dart';
 
 class ProfileController extends GetxController with GetSingleTickerProviderStateMixin {
 

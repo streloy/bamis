@@ -1,10 +1,10 @@
-import 'package:bamis/app/modules/task_reminder_detail/bindings/task_reminder_detail_binding.dart';
-import 'package:bamis/app/modules/task_reminder_detail/views/task_reminder_detail_view.dart';
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../../utils/AppColors.dart';
+import '../../task_reminder_detail/bindings/task_reminder_detail_binding.dart';
+import '../../task_reminder_detail/views/task_reminder_detail_view.dart';
 import '../controllers/task_reminder_controller.dart';
 
 class TaskReminderView extends GetView<TaskReminderController> {

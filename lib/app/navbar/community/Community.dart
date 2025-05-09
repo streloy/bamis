@@ -1,11 +1,5 @@
 import 'dart:convert';
 
-import 'package:bamis/app/modules/community_post_add/bindings/community_post_add_binding.dart';
-import 'package:bamis/app/modules/community_post_add/views/community_post_add_view.dart';
-import 'package:bamis/app/modules/community_post_my/bindings/community_post_my_binding.dart';
-import 'package:bamis/app/modules/community_post_my/views/community_post_my_view.dart';
-import 'package:bamis/app/navbar/community/CommunityController.dart';
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -13,8 +7,14 @@ import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/ApiURL.dart';
+import '../../../utils/AppColors.dart';
+import '../../modules/community_post_add/bindings/community_post_add_binding.dart';
+import '../../modules/community_post_add/views/community_post_add_view.dart';
 import '../../modules/community_post_detail/bindings/community_post_detail_binding.dart';
 import '../../modules/community_post_detail/views/community_post_detail_view.dart';
+import '../../modules/community_post_my/bindings/community_post_my_binding.dart';
+import '../../modules/community_post_my/views/community_post_my_view.dart';
+import 'CommunityController.dart';
 
 class Community extends StatefulWidget {
   const Community({super.key});

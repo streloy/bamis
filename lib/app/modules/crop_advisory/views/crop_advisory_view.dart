@@ -1,11 +1,11 @@
-import 'package:bamis/app/modules/crop_adviosry_stages/views/crop_adviosry_stages_view.dart';
-import 'package:bamis/app/modules/crop_adviosry_stages/bindings/crop_adviosry_stages_binding.dart';
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'package:get/get.dart';
 
+import '../../../../utils/AppColors.dart';
+import '../../crop_adviosry_stages/bindings/crop_adviosry_stages_binding.dart';
+import '../../crop_adviosry_stages/views/crop_adviosry_stages_view.dart';
 import '../controllers/crop_advisory_controller.dart';
 
 class CropAdvisoryView extends GetView<CropAdvisoryController> {

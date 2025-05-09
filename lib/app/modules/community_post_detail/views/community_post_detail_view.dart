@@ -1,7 +1,7 @@
-import 'package:bamis/utils/ApiURL.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
+import '../../../../utils/ApiURL.dart';
 import '../../../../utils/AppColors.dart';
 import '../controllers/community_post_detail_controller.dart';
 

@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:bamis/app/modules/community_post_detail/bindings/community_post_detail_binding.dart';
-import 'package:bamis/app/modules/community_post_detail/views/community_post_detail_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../utils/ApiURL.dart';
+import '../../modules/community_post_detail/bindings/community_post_detail_binding.dart';
+import '../../modules/community_post_detail/views/community_post_detail_view.dart';
 
 class CommunityController extends GetxController {
   ScrollController scrollController = ScrollController();

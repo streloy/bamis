@@ -1,18 +1,3 @@
-import 'package:bamis/app/modules/all_module/bindings/all_module_binding.dart';
-import 'package:bamis/app/modules/all_module/views/all_module_view.dart';
-import 'package:bamis/app/modules/bulletins/bindings/bulletins_binding.dart';
-import 'package:bamis/app/modules/bulletins/views/bulletins_view.dart';
-import 'package:bamis/app/modules/crop_advisory/bindings/crop_advisory_binding.dart';
-import 'package:bamis/app/modules/crop_advisory/views/crop_advisory_view.dart';
-import 'package:bamis/app/modules/mycrop_add/bindings/mycrop_add_binding.dart';
-import 'package:bamis/app/modules/mycrop_add/views/mycrop_add_view.dart';
-import 'package:bamis/app/modules/notifications/bindings/notifications_binding.dart';
-import 'package:bamis/app/modules/notifications/views/notifications_view.dart';
-import 'package:bamis/app/modules/webview/bindings/webview_binding.dart';
-import 'package:bamis/app/modules/webview/views/webview_view.dart';
-import 'package:bamis/app/navbar/dashboard/AppDrawer.dart';
-import 'package:bamis/app/navbar/dashboard/DashboardController.dart';
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -20,8 +5,23 @@ import 'package:get/get.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../../utils/ApiURL.dart';
+import '../../../utils/AppColors.dart';
+import '../../modules/all_module/bindings/all_module_binding.dart';
+import '../../modules/all_module/views/all_module_view.dart';
+import '../../modules/bulletins/bindings/bulletins_binding.dart';
+import '../../modules/bulletins/views/bulletins_view.dart';
 import '../../modules/crop_adviosry_stage_detail/bindings/crop_adviosry_stage_detail_binding.dart';
 import '../../modules/crop_adviosry_stage_detail/views/crop_adviosry_stage_detail_view.dart';
+import '../../modules/crop_advisory/bindings/crop_advisory_binding.dart';
+import '../../modules/crop_advisory/views/crop_advisory_view.dart';
+import '../../modules/mycrop_add/bindings/mycrop_add_binding.dart';
+import '../../modules/mycrop_add/views/mycrop_add_view.dart';
+import '../../modules/notifications/bindings/notifications_binding.dart';
+import '../../modules/notifications/views/notifications_view.dart';
+import '../../modules/webview/bindings/webview_binding.dart';
+import '../../modules/webview/views/webview_view.dart';
+import 'AppDrawer.dart';
+import 'DashboardController.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});

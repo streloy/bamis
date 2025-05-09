@@ -1,12 +1,13 @@
-import 'package:bamis/firebase_options.dart';
-import 'package:bamis/utils/AppTheme.dart';
-import 'package:bamis/utils/FirebaseService.dart';
-import 'package:bamis/utils/LocalizationString.dart';
+import 'package:bamisportal/utils/AppTheme.dart';
+import 'package:bamisportal/utils/FirebaseService.dart';
+import 'package:bamisportal/utils/LocalizationString.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'app/routes/app_pages.dart';
 import 'dart:io' show Platform;
+
+import 'firebase_options.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

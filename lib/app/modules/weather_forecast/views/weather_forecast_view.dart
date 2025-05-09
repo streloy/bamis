@@ -1,9 +1,9 @@
-import 'package:bamis/utils/ApiURL.dart';
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../../utils/ApiURL.dart';
+import '../../../../utils/AppColors.dart';
 import '../controllers/weather_forecast_controller.dart';
 
 class WeatherForecastView extends GetView<WeatherForecastController> {

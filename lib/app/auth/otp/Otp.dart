@@ -1,8 +1,9 @@
-import 'package:bamis/app/auth/otp/OtpController.dart';
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+
+import '../../../utils/AppColors.dart';
+import 'OtpController.dart';
 
 class Otp extends StatefulWidget {
   const Otp({super.key});

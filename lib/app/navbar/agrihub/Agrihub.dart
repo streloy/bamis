@@ -1,7 +1,8 @@
-import 'package:bamis/app/navbar/agrihub/AgrihubController.dart';
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../utils/AppColors.dart';
+import 'AgrihubController.dart';
 
 class Agrihub extends StatefulWidget {
   const Agrihub({super.key});

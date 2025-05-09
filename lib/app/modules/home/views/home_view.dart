@@ -1,8 +1,8 @@
-import 'package:bamis/app/navbar/scan/Scan.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../navbar/scan/Scan.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {

@@ -1,8 +1,8 @@
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../../utils/AppColors.dart';
 import '../../webview/bindings/webview_binding.dart';
 import '../../webview/views/webview_view.dart';
 import '../controllers/bulletin_district_controller.dart';

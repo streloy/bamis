@@ -1,11 +1,12 @@
 import 'dart:convert';
-import 'package:bamis/utils/ApiURL.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../../../utils/ApiURL.dart';
 
 class DashboardController extends GetxController {
 
@@ -149,7 +150,7 @@ class DashboardController extends GetxController {
     currentLocationName.value = await prefs.getString("LOCATION_NAME")!;
     cLocationUpazila.value = await prefs.getString("LOCATION_UPAZILA")!;
     cLocationDistrict.value = await prefs.getString("LOCATION_DISTRICT")!;
-    photo.value = ApiURL.base_url_image + (await prefs.getString("PHOTO"))!;
+    photo.value = ApiURL.base_url_image + (await prefs.getString("PHOTO") ?? "") ?? "";
 
     getForecast(currentLocationId.value);
     getNotifications(prefs);
@@ -167,13 +168,15 @@ class DashboardController extends GetxController {
     };
 
     var response = await http.get(Uri.parse(ApiURL.notification_notifications), headers: requestHeaders);
-    dynamic decode = jsonDecode(response.body);
-    notification.value = decode['result'];
-    var seen = 0;
-    notification.value.forEach((item){
-      item['seen'] == "1" ? seen++ : seen = seen;
-    });
-    notificationValue.value = "${notification.value.length - seen}";
+    if(response.statusCode == 200) {
+      dynamic decode = jsonDecode(response.body);
+      notification.value = decode['result'] ?? "";
+      var seen = 0;
+      notification.value.forEach((item){
+        item['seen'] == "1" ? seen++ : seen = seen;
+      });
+      notificationValue.value = "${notification.value.length - seen}";
+    }
   }
 
   Future getMyCrops(SharedPreferences prefs) async {
@@ -185,11 +188,16 @@ class DashboardController extends GetxController {
       'Accept-Language': lang.toString()
     };
     var response = await http.get(Uri.parse(ApiURL.mycrops_crops), headers: requestHeaders);
-    dynamic decode = jsonDecode(response.body);
-    mycrops.value = decode['result'];
-    if(mycrops.length > 0) {
-      getMyCropStage(mycrops[0]);
+    if(response.statusCode == 200) {
+      dynamic decode = jsonDecode(response.body);
+      mycrops.value = decode['result'];
+      if(mycrops.length > 0) {
+        getMyCropStage(mycrops[0]);
+      }
     }
+
+
+
   }
 
   Future getMyCropStage(dynamic item) async {
@@ -219,9 +227,7 @@ class DashboardController extends GetxController {
     };
     var response = await http.get(Uri.parse("${ApiURL.bulltin_dashboard}"), headers: requestHeaders);
     dynamic decode = jsonDecode(response.body.toString());
-    if(response.statusCode != 200) {
-      Fluttertoast.showToast(msg: decode['message'], toastLength: Toast.LENGTH_LONG);
-    }
+    Fluttertoast.showToast(msg: decode['message'], toastLength: Toast.LENGTH_LONG);
     bulletins.value = decode['result'];
   }
 

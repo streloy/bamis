@@ -1,5 +1,3 @@
-import 'package:bamis/app/modules/crop_disease_stages_detail/bindings/crop_disease_stages_detail_binding.dart';
-import 'package:bamis/app/modules/crop_disease_stages_detail/views/crop_disease_stages_detail_view.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -8,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../../../../utils/AppColors.dart';
+import '../../crop_disease_stages_detail/bindings/crop_disease_stages_detail_binding.dart';
+import '../../crop_disease_stages_detail/views/crop_disease_stages_detail_view.dart';
 import '../controllers/crop_disease_stages_controller.dart';
 
 class CropDiseaseStagesView extends GetView<CropDiseaseStagesController> {

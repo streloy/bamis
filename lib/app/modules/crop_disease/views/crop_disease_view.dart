@@ -1,12 +1,12 @@
-import 'package:bamis/app/modules/crop_disease_stages/bindings/crop_disease_stages_binding.dart';
-import 'package:bamis/app/modules/crop_disease_stages/views/crop_disease_stages_view.dart';
-import 'package:bamis/app/modules/mycrop_add/bindings/mycrop_add_binding.dart';
-import 'package:bamis/app/modules/mycrop_add/views/mycrop_add_view.dart';
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../../utils/AppColors.dart';
+import '../../crop_disease_stages/bindings/crop_disease_stages_binding.dart';
+import '../../crop_disease_stages/views/crop_disease_stages_view.dart';
+import '../../mycrop_add/bindings/mycrop_add_binding.dart';
+import '../../mycrop_add/views/mycrop_add_view.dart';
 import '../controllers/crop_disease_controller.dart';
 
 class CropDiseaseView extends GetView<CropDiseaseController> {

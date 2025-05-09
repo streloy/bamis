@@ -1,10 +1,11 @@
 import 'dart:convert';
 
-import 'package:bamis/app/modules/pdfview/bindings/pdfview_binding.dart';
-import 'package:bamis/app/modules/pdfview/views/pdfview_view.dart';
-import 'package:bamis/utils/ApiURL.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+
+import '../../../../utils/ApiURL.dart';
+import '../../pdfview/bindings/pdfview_binding.dart';
+import '../../pdfview/views/pdfview_view.dart';
 
 class ElibraryController extends GetxController {
   var tags = [].obs;

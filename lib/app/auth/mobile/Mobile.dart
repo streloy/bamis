@@ -1,7 +1,8 @@
-import 'package:bamis/app/auth/mobile/MobileController.dart';
-import 'package:bamis/utils/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../utils/AppColors.dart';
+import 'MobileController.dart';
 
 class Mobile extends StatefulWidget {
   const Mobile({super.key});
