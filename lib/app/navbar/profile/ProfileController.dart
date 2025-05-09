@@ -46,6 +46,7 @@ class ProfileController extends GetxController with GetSingleTickerProviderState
 
   @override
   void onInit() {
+    super.onInit();
     getSharedPrefData();
   }
 

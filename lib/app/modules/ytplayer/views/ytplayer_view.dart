@@ -23,7 +23,6 @@ class YtplayerView extends GetView<YtplayerController> {
               showVideoProgressIndicator: true,
             ),
           );
-          break;
         case Orientation.landscape:
           return Scaffold(
               resizeToAvoidBottomInset: true,
@@ -32,7 +31,6 @@ class YtplayerView extends GetView<YtplayerController> {
                 showVideoProgressIndicator: true,
               ),
           );
-          break;
       }
     });
   }

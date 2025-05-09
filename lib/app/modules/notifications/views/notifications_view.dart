@@ -15,9 +15,9 @@ class NotificationsView extends GetView<NotificationsController> {
           titleSpacing: 0,
         ),
         body: Obx(()=> controller.isLoading.value == true ? Center(child: CircularProgressIndicator()) : ListView.builder(
-          itemCount: controller.notificationList.value.length,
+          itemCount: controller.notificationList.length,
           itemBuilder: (context, index) {
-            dynamic item = controller.notificationList.value[index];
+            dynamic item = controller.notificationList[index];
             return Container(
               margin: EdgeInsets.only(left: 16, right: 16, top: 16),
               decoration: BoxDecoration(

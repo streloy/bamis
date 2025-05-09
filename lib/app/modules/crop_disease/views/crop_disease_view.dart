@@ -41,14 +41,14 @@ class CropDiseaseView extends GetView<CropDiseaseController> {
             Flexible(
                 flex: 1,
                 child: Obx(()=>
-                  controller.crops.value.length > 0 ?
+                  controller.crops.length > 0 ?
                   Padding(
                     padding: EdgeInsets.all(16),
                     child: GridView.builder(
-                      itemCount: controller.crops.value.length,
+                      itemCount: controller.crops.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisExtent: 200, mainAxisSpacing: 16, crossAxisSpacing: 16),
                       itemBuilder: (context, index) {
-                        dynamic item = controller.crops.value[index];
+                        dynamic item = controller.crops[index];
                         return GestureDetector(
                           onTap: () { Get.to(()=> CropDiseaseStagesView(), binding: CropDiseaseStagesBinding(), arguments: item, transition: Transition.rightToLeft); },
                           child: Container(

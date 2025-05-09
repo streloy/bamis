@@ -38,7 +38,6 @@ class CropDiseaseStagesDetailController extends GetxController {
       Fluttertoast.showToast(msg: decode['message'], toastLength: Toast.LENGTH_LONG);
     }
     stagedetail.value = decode['result'];
-    print(stagedetail.value);
   }
 
 

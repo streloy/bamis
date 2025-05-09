@@ -40,9 +40,9 @@ class CropDiseaseStagesView extends GetView<CropDiseaseStagesController> {
                 child: Obx(()=> Padding(
                   padding: EdgeInsets.all(16),
                   child: ScrollablePositionedList.builder(
-                    itemCount: controller.mycropsstage.value.length,
+                    itemCount: controller.mycropsstage.length,
                     itemBuilder: (context, index) {
-                      dynamic item = controller.mycropsstage.value[index];
+                      dynamic item = controller.mycropsstage[index];
                       return GestureDetector(
                           onTap: () {
                             if(item['current_status'] != 'upcoming') {

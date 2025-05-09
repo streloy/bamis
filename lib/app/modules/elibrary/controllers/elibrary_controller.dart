@@ -27,12 +27,10 @@ class ElibraryController extends GetxController {
     var responsetag = await http.get(ApiURL.elibrary_tags);
     dynamic decodeTag = jsonDecode(responsetag.body);
     tags.value = decodeTag['result'];
-    print(tags.value);
 
     var response = await http.get(ApiURL.elibrary_books);
     dynamic decode = jsonDecode(response.body);
     books.value = decode['result'];
-    print(books.value);
   }
   
   loadPDF(item) {

@@ -30,8 +30,8 @@ class BulletinDistrictController extends GetxController {
     var response = await http.get(Uri.parse(url));
     dynamic decode = jsonDecode(response.body);
     bulletinLocation.value = decode['result'];
-    bulletinLocationValue.value = bulletinLocation.value[0]['id'];
-    getBulletinList(bulletinLocation.value[0]['id']);
+    bulletinLocationValue.value = bulletinLocation[0]['id'];
+    getBulletinList(bulletinLocation[0]['id']);
   }
 
   Future getBulletinList(id) async {

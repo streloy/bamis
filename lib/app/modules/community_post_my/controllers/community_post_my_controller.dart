@@ -32,6 +32,5 @@ class CommunityPostMyController extends GetxController {
     var response = await http.get(Uri.parse(url), headers: requestHeaders);
     dynamic decode = jsonDecode(response.body);
     post.value = decode['result'];
-    print(post.value);
   }
 }

@@ -29,9 +29,9 @@ class FirebaseService {
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       print(message.toMap());
-      var title = message.notification!.title;
-      var body = message.notification!.body;
-      var data = message.data;
+      // var title = message.notification!.title;
+      // var body = message.notification!.body;
+      // var data = message.data;
 
       //await NotificationService().initNotification();
       //NotificationService().showNotification(1, title, body);

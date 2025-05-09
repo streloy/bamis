@@ -25,11 +25,11 @@ class TaskReminderView extends GetView<TaskReminderController> {
 
           Flexible(
             flex: 1,
-            child: Obx(()=> controller.tasks.value.length > 0 ?
+            child: Obx(()=> controller.tasks.length > 0 ?
             ListView.builder(
-              itemCount: controller.tasks.value.length,
+              itemCount: controller.tasks.length,
               itemBuilder: (context, index) {
-                dynamic item = controller.tasks.value[index];
+                dynamic item = controller.tasks[index];
                 return GestureDetector(
                   onTap: () { Get.to(()=> TaskReminderDetailView(), binding: TaskReminderDetailBinding(), arguments: item, transition: Transition.rightToLeft); },
                   child: Container(

@@ -47,7 +47,7 @@ class CropAdvisoryView extends GetView<CropAdvisoryController> {
           Flexible(
             flex: 1,
             child: Obx(()=>
-              controller.crops.value.length > 0 ?
+              controller.crops.length > 0 ?
               Padding(
                 padding: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 16),
                 // child: GridView.builder(
@@ -75,9 +75,9 @@ class CropAdvisoryView extends GetView<CropAdvisoryController> {
                 //   },
                 // ),
                 child: ListView.builder(
-                  itemCount: controller.crops.value.length,
+                  itemCount: controller.crops.length,
                   itemBuilder: (context, index) {
-                    dynamic item = controller.crops.value[index];
+                    dynamic item = controller.crops[index];
                     return Container(
                       margin: EdgeInsets.only(bottom: 16),
                       decoration: BoxDecoration(

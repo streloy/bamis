@@ -35,6 +35,7 @@ class _DashboardState extends State<Dashboard> with RouteAware{
 
   @override
   void initState() {
+    super.initState();
     controller.getSharedPrefData();
   }
 
@@ -130,7 +131,7 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            Text(controller.currentLocationName.value ?? "", style: TextStyle(color: Colors.white)),
+                                            Text(controller.currentLocationName.value, style: TextStyle(color: Colors.white)),
                                             Text(controller.forecast.value.length > 0 ? "${controller.forecast.value[0]?['weekday']}, ${controller.forecast.value[0]?['date']}" : "", style: TextStyle(color: Colors.white)),
                                           ],
                                         ),
@@ -368,12 +369,12 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                           },
                         ),
                         ListView.builder(
-                          itemCount: controller.mycrops.value.length,
+                          itemCount: controller.mycrops.length,
                           physics: ScrollPhysics(),
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            dynamic item = controller.mycrops.value[index];
+                            dynamic item = controller.mycrops[index];
                             return GestureDetector(
                               onTap: () { controller.getMyCropStage(item); },
                               child: Container(
@@ -395,7 +396,7 @@ class _DashboardState extends State<Dashboard> with RouteAware{
                           },
                         ),
 
-                        controller.mycrops.value.length < 1 ? Container(
+                        controller.mycrops.length < 1 ? Container(
                           margin: EdgeInsets.only(right: 8),
                           padding: EdgeInsets.symmetric(horizontal: 6),
                           decoration: BoxDecoration(
@@ -415,7 +416,7 @@ class _DashboardState extends State<Dashboard> with RouteAware{
 
                 SizedBox(height: 16),
 
-                Obx(()=> controller.mycrops.value.length > 0 ?
+                Obx(()=> controller.mycrops.length > 0 ?
                 Container(
                     height: 180,
                     width: double.infinity,

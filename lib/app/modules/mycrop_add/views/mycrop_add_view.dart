@@ -32,7 +32,7 @@ class MycropAddView extends GetView<MycropAddController> {
                   onChanged: (dynamic value) {
                     controller.cropsValue.value = value;
                   },
-                  items: controller.crops.value.map<DropdownMenuItem<dynamic>>((dynamic value) {
+                  items: controller.crops.map<DropdownMenuItem<dynamic>>((dynamic value) {
                     return DropdownMenuItem<String>(
                       value: value['value'],
                       child: Text(value['name']),
@@ -48,7 +48,7 @@ class MycropAddView extends GetView<MycropAddController> {
             Container(
               margin: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
               child: TypeAheadField<dynamic>(
-                suggestionsCallback: (search) => controller.locations.value.where((location) => location['location'].toLowerCase().contains(search.toLowerCase())).toList(),
+                suggestionsCallback: (search) => controller.locations.where((location) => location['location'].toLowerCase().contains(search.toLowerCase())).toList(),
                 builder: (context, controller, focusNode) {
                   return TextField(
                       controller: controller,

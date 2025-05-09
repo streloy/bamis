@@ -17,9 +17,9 @@ class CommunityPostMyView extends GetView<CommunityPostMyController> {
         titleSpacing: 0,
       ),
       body: Obx(()=> ListView.builder(
-        itemCount: controller.post.value.length,
+        itemCount: controller.post.length,
         itemBuilder: (context, index) {
-          dynamic item = controller.post.value[index];
+          dynamic item = controller.post[index];
           return GestureDetector(
             onTap: () { Get.to(()=> CommunityPostDetailView(), binding: CommunityPostDetailBinding(), arguments: item, transition: Transition.rightToLeft); },
             child: Container(

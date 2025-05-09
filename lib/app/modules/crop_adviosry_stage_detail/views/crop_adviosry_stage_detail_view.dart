@@ -15,7 +15,7 @@ class CropAdviosryStageDetailView extends GetView<CropAdviosryStageDetailControl
       ),
       body: Obx(()=> ListView(
         children: [
-          controller.stagedetail.value.length == 0 ?
+          controller.stagedetail.length == 0 ?
           Padding(
             padding: EdgeInsets.all(16),
             child: Column(
@@ -31,9 +31,9 @@ class CropAdviosryStageDetailView extends GetView<CropAdviosryStageDetailControl
           ListView.builder(
             physics: ScrollPhysics(),
             shrinkWrap: true,
-            itemCount: controller.stagedetail.value.length,
+            itemCount: controller.stagedetail.length,
             itemBuilder: (context, index) {
-              dynamic item = controller.stagedetail.value[index];
+              dynamic item = controller.stagedetail[index];
               return Padding(
                 padding: EdgeInsets.all(16),
                 child: Column(

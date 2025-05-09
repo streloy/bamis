@@ -38,8 +38,8 @@ class AgrihubController extends GetxController with GetSingleTickerProviderState
     var response = await http.post(Uri.parse("${ApiURL.agrihub_crop_name}${type}"));
     dynamic decode = jsonDecode(response.body);
     tabOneCropName.value = decode['result'];
-    if(tabOneCropName.value.length > 0) {
-      tabOneCropNameValue.value = tabOneCropName.value[0]['crop_name'];
+    if(tabOneCropName.length > 0) {
+      tabOneCropNameValue.value = tabOneCropName[0]['crop_name'];
     } else {
       tabOneCropNameValue.value = "";
     }
@@ -52,8 +52,8 @@ class AgrihubController extends GetxController with GetSingleTickerProviderState
     tabOneCropVariety.value = decode['result'];
     print(decode);
 
-    if(tabOneCropVariety.value.length > 0) {
-      tabOneCropVarietyValue.value = tabOneCropVariety.value[0]['crop_variety'];
+    if(tabOneCropVariety.length > 0) {
+      tabOneCropVarietyValue.value = tabOneCropVariety[0]['crop_variety'];
     } else {
       tabOneCropVarietyValue.value = "";
     }

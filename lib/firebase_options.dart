@@ -24,10 +24,10 @@ class DefaultFirebaseOptions {
         return android;
       case TargetPlatform.iOS:
         return ios;
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        // throw UnsupportedError(
+        //   'DefaultFirebaseOptions have not been configured for ios - '
+        //   'you can reconfigure this by running the FlutterFire CLI again.',
+        // );
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
@@ -46,7 +46,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyB7WLV-FpSPAcD9tggwH7Q3uAmqY-Kuz7Q',
-    appId: '1:240502408472:android:87bec3358e6bd16fb90a6d',
+    appId: '1:240502408472:android:5d5daa8dd3fc75b7b90a6d',
     messagingSenderId: '240502408472',
     projectId: 'bamis-app-28485',
     storageBucket: 'bamis-app-28485.firebasestorage.app',
@@ -54,21 +54,21 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyB_HbwFemqRIekGNO-ngnG2r57vyHSuMoY',
-    appId: '1:240502408472:ios:b51d20894c76a6c2b90a6d',
+    appId: '1:240502408472:ios:3f4fed9dbd6dcd8fb90a6d',
     messagingSenderId: '240502408472',
     projectId: 'bamis-app-28485',
     storageBucket: 'bamis-app-28485.firebasestorage.app',
-    iosBundleId: 'bd.gov.bamis',
+    iosBundleId: 'com.example.bamis',
   );
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyDBxt2OZLB1enZ_-iCbp-zW940mL_8PBGE',
-    appId: '1:240502408472:web:67599acc0fa7622db90a6d',
+    appId: '1:240502408472:web:3df143e96d4f9e7db90a6d',
     messagingSenderId: '240502408472',
     projectId: 'bamis-app-28485',
     authDomain: 'bamis-app-28485.firebaseapp.com',
     storageBucket: 'bamis-app-28485.firebasestorage.app',
-    measurementId: 'G-MVG5BL16R3',
+    measurementId: 'G-JWE2GHTF4E',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(

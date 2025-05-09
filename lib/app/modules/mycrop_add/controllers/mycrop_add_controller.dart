@@ -41,7 +41,7 @@ class MycropAddController extends GetxController {
       Fluttertoast.showToast(msg: decode['message'], toastLength: Toast.LENGTH_LONG);
     }
     crops.value = decode['result'];
-    cropsValue.value = crops.value[0]['value'];
+    cropsValue.value = crops[0]['value'];
 
     var response_location = await http.get(Uri.parse("${ApiURL.mycrops_locations}"), headers: requestHeaders);
     dynamic decode_location = jsonDecode(response_location.body);
@@ -49,7 +49,7 @@ class MycropAddController extends GetxController {
       Fluttertoast.showToast(msg: decode_location['message'], toastLength: Toast.LENGTH_LONG);
     }
     locations.value = decode_location['result'];
-    locationsValue.value = locations.value[0]['id'];
+    locationsValue.value = locations[0]['id'];
   }
 
   Future openCalender(BuildContext context) async {

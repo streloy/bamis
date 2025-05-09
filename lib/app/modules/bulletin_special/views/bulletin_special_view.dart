@@ -30,12 +30,12 @@ class BulletinSpecialView extends GetView<BulletinSpecialController> {
           body: TabBarView(
             children: [
               Obx(()=>
-                  controller.bulletinListCurrent.value.length > 0 ? ListView.builder(
+                  controller.bulletinListCurrent.length > 0 ? ListView.builder(
                     itemCount:
-                    controller.bulletinListCurrent.value.length,
+                    controller.bulletinListCurrent.length,
                     itemBuilder: (context, index) {
                       dynamic item =
-                      controller.bulletinListCurrent.value[index];
+                      controller.bulletinListCurrent[index];
                       return Container(
                         margin: EdgeInsets.only(left: 16, top: 16, right: 16),
                         decoration: BoxDecoration(
@@ -68,12 +68,12 @@ class BulletinSpecialView extends GetView<BulletinSpecialController> {
               ),
 
               Obx(()=>
-                controller.bulletinListArchive.value.length > 0 ? ListView.builder(
+                controller.bulletinListArchive.length > 0 ? ListView.builder(
                   itemCount:
-                  controller.bulletinListArchive.value.length,
+                  controller.bulletinListArchive.length,
                   itemBuilder: (context, index) {
                     dynamic item =
-                    controller.bulletinListArchive.value[index];
+                    controller.bulletinListArchive[index];
                     return GestureDetector(
                       onTap: () { Get.to(()=> WebviewView(), binding: WebviewBinding(), arguments: item, transition: Transition.rightToLeft ); },
                       child: Container(

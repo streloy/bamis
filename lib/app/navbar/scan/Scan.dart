@@ -33,6 +33,7 @@ class _ScanState extends State<Scan> {
 
   @override
   void initState() {
+    super.initState();
     getAnalysiscCroplist();
   }
 

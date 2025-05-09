@@ -89,6 +89,7 @@ class DashboardController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
     getTime();
     getSharedPrefData();
   }
@@ -186,8 +187,8 @@ class DashboardController extends GetxController {
     var response = await http.get(Uri.parse(ApiURL.mycrops_crops), headers: requestHeaders);
     dynamic decode = jsonDecode(response.body);
     mycrops.value = decode['result'];
-    if(mycrops.value.length > 0) {
-      getMyCropStage(mycrops.value[0]);
+    if(mycrops.length > 0) {
+      getMyCropStage(mycrops[0]);
     }
   }
 

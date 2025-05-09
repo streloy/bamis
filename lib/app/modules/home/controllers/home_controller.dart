@@ -55,7 +55,7 @@ class HomeController extends GetxController {
 
   Future checkLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString("TOKEN");
+    // var token = prefs.getString("TOKEN");
     if(prefs.getString("TOKEN") == null || prefs.getString("TOKEN") == "") {
       Get.offAll(Mobile(), transition: Transition.downToUp);
     } else {
@@ -63,7 +63,7 @@ class HomeController extends GetxController {
         "fcm": prefs.getString("FCM"),
         "device": "android"
       });
-      var response = await http.post(ApiURL.fcm, body: body, headers: { HttpHeaders.authorizationHeader: '${prefs.getString("TOKEN")}' } );
+      await http.post(ApiURL.fcm, body: body, headers: { HttpHeaders.authorizationHeader: '${prefs.getString("TOKEN")}' } );
     }
   }
 

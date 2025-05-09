@@ -16,6 +16,7 @@ class CommunityController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
     // getPost(0, 10);
     // scrollController.addListener((){
     //   if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
@@ -35,7 +36,7 @@ class CommunityController extends GetxController {
     var url = '${ApiURL.community_post}?offset=${offset}&limit=${limit}';
     var response = await http.get(Uri.parse(url));
     dynamic decode = jsonDecode(response.body);
-    post.value.addAll(decode['result']);
+    post.addAll(decode['result']);
     post_count.value = int.parse(decode['count']);
   }
 

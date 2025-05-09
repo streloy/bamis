@@ -35,12 +35,12 @@ class CommunityPostDetailView extends GetView<CommunityPostDetailController> {
                         leading: CircleAvatar(
                           radius: 24.0,
                           backgroundImage:
-                          NetworkImage(controller.postData.value['photo'] ?? ApiURL.placeholder_auth),
+                          NetworkImage(controller.postData['photo'] ?? ApiURL.placeholder_auth),
                           backgroundColor: Colors.transparent,
                         ),
-                        title: Text(controller.postData.value['fullname'] ?? ""),
-                        subtitle: Text(controller.postData.value['created_at'] ?? ""),
-                        trailing: IconButton(onPressed: () { Share.share(controller.postData.value['url']); }, icon: Icon(Icons.share)),
+                        title: Text(controller.postData['fullname'] ?? ""),
+                        subtitle: Text(controller.postData['created_at'] ?? ""),
+                        trailing: IconButton(onPressed: () { Share.share(controller.postData['url']); }, icon: Icon(Icons.share)),
                       ),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 16),
@@ -50,22 +50,22 @@ class CommunityPostDetailView extends GetView<CommunityPostDetailController> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(8),
                               child: Image.network(
-                                  controller.postData.value['cover']  ?? ApiURL.placeholder_community_cover,
+                                  controller.postData['cover']  ?? ApiURL.placeholder_community_cover,
                                   height: 200,
                                   width: double.infinity,
                                   fit: BoxFit.cover),
                             ),
                             SizedBox(height: 16),
-                            Text(controller.postData.value['title'] ?? "", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+                            Text(controller.postData['title'] ?? "", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
                             SizedBox(height: 8),
-                            Text(controller.postData.value['description'] ?? ""),
+                            Text(controller.postData['description'] ?? ""),
                             SizedBox(height: 16),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(controller.postData.value['post_like'].toString() + " Upvote", style: TextStyle(fontSize: 12)),
-                                Text(controller.postData.value['post_dislike'].toString() + " Downvote", style: TextStyle(fontSize: 12)),
-                                Text(controller.postData.value['post_comments'].toString() + " Comments", style: TextStyle(fontSize: 12)),
+                                Text(controller.postData['post_like'].toString() + " Upvote", style: TextStyle(fontSize: 12)),
+                                Text(controller.postData['post_dislike'].toString() + " Downvote", style: TextStyle(fontSize: 12)),
+                                Text(controller.postData['post_comments'].toString() + " Comments", style: TextStyle(fontSize: 12)),
                               ],
                             ),
                             SizedBox(height: 8),
@@ -73,13 +73,13 @@ class CommunityPostDetailView extends GetView<CommunityPostDetailController> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Obx(()=> TextButton.icon(
-                                  onPressed: () { controller.postReaction('like', controller.postData.value); },
-                                  icon: controller.postData.value['liked'] == '1' ? Icon(Icons.thumb_up, size: 14) : Icon(Icons.thumb_up_outlined, size: 14),
+                                  onPressed: () { controller.postReaction('like', controller.postData); },
+                                  icon: controller.postData['liked'] == '1' ? Icon(Icons.thumb_up, size: 14) : Icon(Icons.thumb_up_outlined, size: 14),
                                   label: Text("Upvote", style: TextStyle(fontSize: 12)),
                                 )),
                                 Obx(()=> TextButton.icon(
-                                  onPressed: () { controller.postReaction('dislike', controller.postData.value); },
-                                  icon: controller.postData.value['disliked'] == '1' ? Icon(Icons.thumb_down, size: 14) : Icon(Icons.thumb_down_outlined, size: 14),
+                                  onPressed: () { controller.postReaction('dislike', controller.postData); },
+                                  icon: controller.postData['disliked'] == '1' ? Icon(Icons.thumb_down, size: 14) : Icon(Icons.thumb_down_outlined, size: 14),
                                   label: Text("Downvote", style: TextStyle(fontSize: 12)),
                                 )),
                                 // TextButton.icon(
@@ -97,9 +97,9 @@ class CommunityPostDetailView extends GetView<CommunityPostDetailController> {
                               padding: EdgeInsets.zero,
                               physics: ScrollPhysics(),
                               shrinkWrap: true,
-                              itemCount: controller.postComments.value.length,
+                              itemCount: controller.postComments.length,
                               itemBuilder: (context, index) {
-                                dynamic postCommnet = controller.postComments.value[index];
+                                dynamic postCommnet = controller.postComments[index];
                                 return Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [

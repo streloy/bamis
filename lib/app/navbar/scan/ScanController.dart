@@ -36,7 +36,7 @@ class ScanController extends GetxController {
     var response = await http.get(Uri.parse(url), headers: requestHeaders);
     dynamic decode = jsonDecode(response.body);
     cropList.value = decode['result'];
-    cropValue.value = cropList.value[0]['name_short'];
+    cropValue.value = cropList[0]['name_short'];
   }
 
   changeCrop(crop) {

@@ -16,10 +16,10 @@ class ImportantVideoView extends GetView<ImportantVideoController> {
       ),
       body: Container(
         child: Obx(()=>
-          controller.videoList.value.length > 0 ? ListView.builder(
-            itemCount: controller.videoList.value.length,
+          controller.videoList.length > 0 ? ListView.builder(
+            itemCount: controller.videoList.length,
             itemBuilder: (context, index) {
-              dynamic item = controller.videoList.value[index];
+              dynamic item = controller.videoList[index];
               return GestureDetector(
                 onTap: () { print(item); controller.openYoutube(item); },
                 child: Container(

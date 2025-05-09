@@ -23,7 +23,7 @@ class PestDiseaseAlertsView extends GetView<PestDiseaseAlertsController> {
                 controller.cropValue.value = value;
                 controller.changeCrop(value);
               },
-              items: controller.cropList.value.map<DropdownMenuItem<dynamic>>((dynamic value) {
+              items: controller.cropList.map<DropdownMenuItem<dynamic>>((dynamic value) {
                 return DropdownMenuItem<String>(
                   value: value['value'],
                   child: Text(value['name']),
@@ -38,10 +38,10 @@ class PestDiseaseAlertsView extends GetView<PestDiseaseAlertsController> {
 
           Expanded(
             child: Obx(()=> ListView.builder(
-              itemCount: controller.diseaseList.value.length,
+              itemCount: controller.diseaseList.length,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
-                dynamic disease = controller.diseaseList.value[index];
+                dynamic disease = controller.diseaseList[index];
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -23,8 +23,8 @@ class CommunityPostDetailController extends GetxController {
     super.onInit();
 
     postData.value = Get.arguments;
-    id.value = postData.value['id'];
-    title.value = postData.value['title'];
+    id.value = postData['id'];
+    title.value = postData['title'];
 
     postDetail(id.value);
     postCommentList(id.value);
@@ -43,7 +43,7 @@ class CommunityPostDetailController extends GetxController {
     dynamic decode = jsonDecode(response.body);
     postData.value = decode['result'][0];
     print(postData.values);
-    print(postData.value['post_dislike']);
+    print(postData['post_dislike']);
   }
 
   Future postReaction(type, item) async {

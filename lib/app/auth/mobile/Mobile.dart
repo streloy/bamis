@@ -24,7 +24,7 @@ class _MobileState extends State<Mobile> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset( 'assets/ic_dae.png', height: 96 ),
+              Image.asset( 'assets/icon.png', height: 96 ),
               SizedBox(height: 16),
               Text("LOGIN TO BAMIS", style: TextStyle( fontSize: 20, fontWeight: FontWeight.w500, color: AppColors().app_primary ) ),
               Text("Please Enter the mobile number to login", style: TextStyle( color: AppColors().app_primary_dark ) ),

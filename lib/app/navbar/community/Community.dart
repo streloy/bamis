@@ -230,7 +230,7 @@ class _CommunityState extends State<Community> with RouteAware {
                             borderRadius: BorderRadius.circular(0),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
+                                color: Colors.grey,
                                 blurRadius: 10,
                                 offset: Offset(0, 5),
                               ),
